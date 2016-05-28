@@ -9,7 +9,7 @@ public class LoginController {
 	
 	@RequestMapping("/home")
 	public ModelAndView getHomePage(){
-		ModelAndView model = new ModelAndView("home");
+		ModelAndView model = new ModelAndView("pages/home");
 		return model;
 	}
 }
