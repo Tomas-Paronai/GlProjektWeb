@@ -22,14 +22,18 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 	
-	<!-- Initialization for data source 
+	<!-- Initialization for data source -->
    <bean id="dataSource" 
       class="org.springframework.jdbc.datasource.DriverManagerDataSource">
       <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-      <property name="url" value="jdbc:mysql://192.168.22.69:3306/itbank14"/>
-      <property name="username" value="parohy"/>
-      <property name="password" value="banka"/>
-   </bean>-->
+      <property name="url" value="jdbc:mysql://localhost:3306/employees"/>
+      <property name="username" value="root"/>
+      <property name="password" value=""/>
+   </bean>
+   
+   <bean id="employeeDAO" class="com.emporganizer.dao.employee.EmployeeDAOImpl">
+   	  <property name="dataSource" ref="dataSource"/>
+   </bean>
    
    <mvc:resources mapping="/resources/**" location="/resources/" />
    <mvc:annotation-driven />
