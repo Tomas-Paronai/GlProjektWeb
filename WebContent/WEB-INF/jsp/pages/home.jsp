@@ -15,14 +15,24 @@
 <spring:url value="/resources/js/jquery-2.2.4.min.js" var="lib"/>
 <script type="text/javascript" src="${lib}"></script>
 
+<spring:url value="/resources/js/tabs.js" var="tabsjs"/>
+<script type="text/javascript" src="${tabsjs}"></script>
+
 <spring:url value="/resources/asset/icon/" var="iconPath"/>
 </head>
 <body>
 
-	
-	<spring:url value="/resources/js/tableNavigation.js" var="tableScript"/>
+<div class="container">
+
+	<ul class="tabs">
+		<li class="tab-link current" data-tab="tab-1">Employees</li>
+		<li class="tab-link" data-tab="tab-2">Actions</li>
+	</ul>
+
+	<div id="tab-1" class="tab-content current">
+		<spring:url value="/resources/js/tableNavigation.js" var="tableScript"/>
 	<script type="text/javascript" src="${tableScript}"></script>
-	<table>
+	<table id="employeesTab">
 		<tr>
 			<th>Name</th>
 			<th>Email</th>
@@ -44,7 +54,7 @@
 	
 	
 	<div class="detail">
-		<table>		
+		<table id="detailInfo">		
 			<!-- ADDRESS -->
 			<tr>
 				<td class="category" colspan="2">Address</td>
@@ -89,5 +99,15 @@
 			
 		</table>
 	</div>		
+	
+	</div>
+	<div id="tab-2" class="tab-content">
+		 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+	</div>
+
+</div><!-- container -->
+
+	
+	
 </body>
 </html>
