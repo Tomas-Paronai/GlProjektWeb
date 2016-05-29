@@ -1,0 +1,7 @@
+.detail{
+	display: none;
+}
+
+.detail:FIRST-CHILD {
+	display: block;
+}

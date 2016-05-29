@@ -8,8 +8,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Employee Organizer</title>
+
+<spring:url value="/resources/css/home.css" var="homeStyle"/>
+<link rel="stylesheet" type="text/css" href="${homeStyle}"/>
+
+<spring:url value="/resources/js/jquery-2.2.4.min.js" var="lib"/>
+<script type="text/javascript" src="${lib}"></script>
 </head>
 <body>
+
+	
+	<spring:url value="/resources/js/tableNavigation.js" var="tableScript"/>
+	<script type="text/javascript" src="${tableScript}"></script>
 	<table>
 		<tr>
 			<th>Name</th>
@@ -31,7 +41,7 @@
 	<c:forEach items="${employees}" var="curEmployee">
 	<c:set var="address" value="${curEmployee.address}"/>
 	<c:set var="detail" value="${curEmployee.detail}"/>
-	<div class="detail ${index}">
+	<div class="detail">
 		<table>
 		
 			<!-- ADDRESS -->
