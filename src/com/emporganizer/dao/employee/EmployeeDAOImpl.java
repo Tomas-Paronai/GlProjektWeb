@@ -1,13 +1,17 @@
 package com.emporganizer.dao.employee;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 
 import com.emporganizer.models.employee.Employee;
+import com.emporganizer.models.employee.EmployeePresent;
 
 public class EmployeeDAOImpl implements EmployeeDAO{
 	
@@ -36,6 +40,19 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 		}
 		
 		return employees;
+	}
+	
+	@Override
+	public List<EmployeePresent> getPresentEmployees() {
+		String sql = "SELECT `EmployeeID`,`Check_time` FROM work_shift WHERE `Type`='IN'";
+		return jdbc.query(sql, new RowMapper<EmployeePresent>(){
+
+			@Override
+			public EmployeePresent mapRow(ResultSet rs, int rowNum) throws SQLException {
+				return new EmployeePresent(rs.getInt("EmployeeID"),rs.getTimestamp("Check_time"));
+			}
+			
+		});
 	}
 	
 	@Override
@@ -75,4 +92,6 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 	private void loadShifts(Employee employee){
 		employee.setPastShifts(shiftDAO.getShifts(employee.getId()));
 	}
+
+	
 }

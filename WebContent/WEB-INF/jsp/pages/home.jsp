@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -14,6 +14,8 @@
 
 <spring:url value="/resources/js/jquery-2.2.4.min.js" var="lib"/>
 <script type="text/javascript" src="${lib}"></script>
+
+<spring:url value="/resources/asset/icon/" var="iconPath"/>
 </head>
 <body>
 
@@ -27,42 +29,41 @@
 			<th>Gender</th>
 			<th>In work</th>
 		</tr>
-		<c:set var="index" value="1"/>
+
 		<c:forEach items="${employees}" var="curEmployee">
-			<tr class="employee-row" row="${index}">
+			<tr class="employee-row" data="${curEmployee.id}">
 				<td>${curEmployee.name}</td>
 				<td>${curEmployee.email}</td>
-				<td>${curEmployee.sex}</td>
-				<td>TODO</td>
+				<td>
+				<img src="${iconPath.concat(curEmployee.sex == 'FEMALE' ? 'woman.png' : 'man.png')}" alt="${curEmployee.sex}"/>
+				</td>
+				<td class="status"><img src="${iconPath.concat('no.png')}" alt="NO"/></td>
 			</tr>
 		</c:forEach>		
 	</table>
 	
-	<c:forEach items="${employees}" var="curEmployee">
-	<c:set var="address" value="${curEmployee.address}"/>
-	<c:set var="detail" value="${curEmployee.detail}"/>
+	
 	<div class="detail">
-		<table>
-		
+		<table>		
 			<!-- ADDRESS -->
 			<tr>
 				<td class="category" colspan="2">Address</td>
 			</tr>
 			<tr>
 				<td class="cat-detail">Country:</td>
-				<td class="cat-value">${address.country}</td>
+				<td class="cat-value" data="country">-</td>
 			</tr>
 			<tr>
 				<td class="cat-detail">City:</td>
-				<td class="cat-value">${address.city}</td>
+				<td class="cat-value" data="city">-</td>
 			</tr>
 			<tr>
 				<td class="cat-detail">Street:</td>
-				<td class="cat-value">${address.street}</td>
+				<td class="cat-value" data="street">-</td>
 			</tr>
 			<tr>
 				<td class="cat-detail">Post-code:</td>
-				<td class="cat-value">${address.postCode}</td>
+				<td class="cat-value" data="postcode">-</td>
 			</tr>
 			
 			<!-- EMPLOYMENT DETAIL -->
@@ -71,25 +72,22 @@
 			</tr>
 			<tr>
 				<td class="cat-detail">Position:</td>
-				<td class="cat-value">${detail.position}</td>
+				<td class="cat-value" data="position">-</td>
 			</tr>
 			<tr>
 				<td class="cat-detail">Contract:</td>
-				<td class="cat-value">${detail.contract}</td>
+				<td class="cat-value" data="contract">-</td>
 			</tr>
 			<tr>
-				<td class="cat-detail">Wage:</td>
-				<td class="cat-value">${detail.salary} $</td>
+				<td class="cat-detail">Wage/h:</td>
+				<td class="cat-value" data="salary">-</td>
 			</tr>
 			<tr>
 				<td class="cat-detail">Employed since:</td>
-				<td class="cat-value">${detail.workSince} $</td>
+				<td class="cat-value" data="employed-since">-</td>
 			</tr>
 			
 		</table>
-	</div>	
-	<c:set var="index" value="${index+1}"/>
-	</c:forEach>
-	
+	</div>		
 </body>
 </html>

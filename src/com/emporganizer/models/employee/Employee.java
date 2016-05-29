@@ -122,4 +122,10 @@ public class Employee {
 	public String getName(){
 		return firstName + " " + lastName;
 	}
+
+	@Override
+	public String toString() {
+		return "Employee [firstName=" + firstName + ", lastName=" + lastName + "]";
+	}	
+	
 }
