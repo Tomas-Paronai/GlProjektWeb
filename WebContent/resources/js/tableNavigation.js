@@ -11,7 +11,26 @@ $(document).ready(function(){
 		employeeStatus();
 	},60000);
 	
-});
+	
+	$('.status').hover(function(){
+        // Hover over code
+        var title = $(this).attr('title');
+        $(this).data('tipText', title).removeAttr('title');
+        $('<p class="tooltip"></p>')
+        .text(title)
+        .appendTo('body')
+        .fadeIn('slow');
+		}, function() {
+			// Hover out code
+			$(this).attr('title', $(this).data('tipText'));
+			$('.tooltip').remove();
+		}).mousemove(function(e) {
+			var mousex = e.pageX + 20; //Get X coordinates
+			var mousey = e.pageY + 10; //Get Y coordinates
+			$('.tooltip').css({ top: mousey, left: mousex })
+		});
+	
+	});
 
 function getEmployeeData(val){
 	$.ajax({
@@ -38,18 +57,23 @@ function employeeStatus(){
 			var rows = $(".employee-row");
 			$(rows).find(".status").find("img").attr("src","/EmployeeOrganizer/resources/asset/icon/no.png");
 			$(rows).find(".status").find("img").attr("alt","NO");
+			$(rows).find(".status").find("img").attr("title","not present");
 			$(rows).each(function(index){
 				var rowData = $(this);
 				$(data).each(function(index){
 					if(data[index].id == rowData.attr("data")){
-						$(rowData).find(".status").find("img").attr("src","/EmployeeOrganizer/resources/asset/icon/yes.png");
-						$(rowData).find(".status").find("img").attr("alt","YES");
+						var cell = $(rowData).find(".status").find("img");
+						$(cell).attr("src","/EmployeeOrganizer/resources/asset/icon/yes.png");
+						$(cell).attr("alt","YES");
+						$(cell).attr("title",parseDate(data[index].entered));
 					}
 				});
 			});				
 		}
 	});
 }
+
+
 
 function parseDate(time){
 	var d = new Date(time);
