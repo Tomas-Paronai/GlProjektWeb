@@ -15,6 +15,9 @@
 <spring:url value="/resources/js/jquery-2.2.4.min.js" var="lib"/>
 <script type="text/javascript" src="${lib}"></script>
 
+<spring:url value="/resources/js/jquery-ui.min.js" var="ui"/>
+<script type="text/javascript" src="${ui}"></script>
+
 <spring:url value="/resources/asset/icon/" var="iconPath"/>
 </head>
 <body>
@@ -22,7 +25,7 @@
 	
 	<spring:url value="/resources/js/tableNavigation.js" var="tableScript"/>
 	<script type="text/javascript" src="${tableScript}"></script>
-	<table>
+	<table border="1">
 		<tr>
 			<th>Name</th>
 			<th>Email</th>
@@ -37,14 +40,14 @@
 				<td>
 				<img src="${iconPath.concat(curEmployee.sex == 'FEMALE' ? 'woman.png' : 'man.png')}" alt="${curEmployee.sex}"/>
 				</td>
-				<td class="status"><img src="${iconPath.concat('no.png')}" alt="NO"/></td>
+				<td class="status"><img src="${iconPath.concat('no.png')}" alt="NO" title="not present"/></td>
 			</tr>
 		</c:forEach>		
 	</table>
 	
 	
 	<div class="detail">
-		<table>		
+		<table border="1">		
 			<!-- ADDRESS -->
 			<tr>
 				<td class="category" colspan="2">Address</td>
