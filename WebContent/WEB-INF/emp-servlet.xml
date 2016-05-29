@@ -12,26 +12,40 @@
  
 	<context:component-scan base-package="com.emporganizer.controllers" />
  	
- 	<bean id="stringHttpMessageConverter"
-       class="org.springframework.http.converter.StringHttpMessageConverter"/>
-       <!-- declare beans java clas -->
-    <bean id="loginDao" class="com.emporganizer.dao.LoginDaoImpl" />
- 	
-	<bean id="viewResolver"
+ 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-	
- 
-   <bean id="dataSource" 
+ 	
+ 	<bean id="dataSource" 
       class="org.springframework.jdbc.datasource.DriverManagerDataSource">
       <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
       <property name="url" value="jdbc:mysql://localhost:3306/employees"/>
       <property name="username" value="root"/>
-      <property name="password" value="1234"/>
+      <property name="password" value=""/>
    </bean>
+ 	
+ 	<bean id="stringHttpMessageConverter"
+       class="org.springframework.http.converter.StringHttpMessageConverter"/>
+       
+       <!-- declare beans java clas -->
+    <bean id="loginDao" class="com.emporganizer.dao.login.LoginDaoImpl" />
+ 	
+ 	<bean id="employeeDAO" class="com.emporganizer.dao.employee.EmployeeDAOImpl">
+ 		<property name="dataSource" ref="dataSource"/>
+ 	</bean>
+ 	
+ 	<bean id="shiftDAO" class="com.emporganizer.dao.employee.ShiftDAOImpl">
+ 		<property name="dataSource" ref="dataSource"/>
+ 	</bean>
+ 	
+ 	
+	
+	
+ 
+   
    
    <mvc:resources mapping="/resources/**" location="/resources/" />
    <mvc:annotation-driven />

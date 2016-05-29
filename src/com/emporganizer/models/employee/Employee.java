@@ -119,5 +119,7 @@ public class Employee {
 		this.pastShifts = pastShifts;
 	}	
 	
-	
+	public String getName(){
+		return firstName + " " + lastName;
+	}
 }

@@ -7,11 +7,11 @@ public class Shift {
 	private Timestamp exitTime;
 	private int totalHours;
 	
-	public Shift(Timestamp enterTime, Timestamp exitTime, int totalHours) {
+	public Shift(Timestamp enterTime, Timestamp exitTime) {
 		super();
 		this.enterTime = enterTime;
 		this.exitTime = exitTime;
-		this.totalHours = totalHours;
+		totalHours = (int) (exitTime.getTime() - enterTime.getTime())/3600000;
 	}
 
 	public Timestamp getEnterTime() {

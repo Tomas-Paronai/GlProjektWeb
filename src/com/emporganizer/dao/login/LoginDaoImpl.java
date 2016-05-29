@@ -1,4 +1,4 @@
-package com.emporganizer.dao;
+package com.emporganizer.dao.login;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

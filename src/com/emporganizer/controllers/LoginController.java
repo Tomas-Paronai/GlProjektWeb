@@ -10,15 +10,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.emporganizer.dao.LoginDao;
+import com.emporganizer.dao.employee.EmployeeDAO;
+import com.emporganizer.dao.login.LoginDao;
 import com.emporganizer.models.Login;
 
 
 
 @Controller
 public class LoginController {
+	
 	@Autowired
 	LoginDao loginDao;
+	
+	@Autowired
+	EmployeeDAO employeeDAO;
 	
 	 @RequestMapping(value = "/login", method = RequestMethod.GET)  
 	    public ModelAndView showform(){  
@@ -29,7 +34,8 @@ public class LoginController {
 		System.out.println(login.getPassword() + login.getUserName());
 		boolean isValidUser=loginDao.isValidUser(login);
 		if(isValidUser==true){
-			return "pages/true";
+			model.addAttribute("employees",employeeDAO.getEmployeeList());
+			return "pages/home";
 		}
 		else{
 			return "pages/false";
