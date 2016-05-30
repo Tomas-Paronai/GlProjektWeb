@@ -1,6 +1,6 @@
 $(function(){
-	$(".openDialog").on('click', function(event){
-		$("#dialog").load($(this).attr("data"), initDialog());
+	$(".openDialog").on('click', function(event){ //TODO
+		$("#dialog").load($(this).attr("href"), initDialog());
 	});
 	
 	$(".editButt").click(function(){
@@ -19,19 +19,24 @@ function initDialog(){
 		modal: true,
 		resizable: false,
 		draggable: true,
+		open: function(){
+			console.log("opening");
+		}
 	});
-	console.log("opening");
 	$(template).dialog('open');
+	$(template).focus();
 	console.log(template);
 }
 
 function showEditField(el){
+	console.log("Show: "+el);
 	var parent = $(el).parent();
 	$(parent).hide();
 	$(parent).next().show();
 }
 
 function saveEdit(el){
+	console.log("Hide: "+el);
 	var parent = $(el).parent();
 	$(parent).hide();
 	$(parent).prev().show();

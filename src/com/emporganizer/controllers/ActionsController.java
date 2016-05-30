@@ -35,9 +35,10 @@ public class ActionsController {
 		return "redirect: /pages/home";
 	}
 	
-	@RequestMapping(value = "newData", method = RequestMethod.GET)
+	@RequestMapping(value = "/newData", method = RequestMethod.GET)
 	public ModelAndView getDialogForm(@RequestParam(value = "item", required = true) String name){
-		ModelAndView model = new ModelAndView(name);
+		System.out.println("dialog open controller");
+		ModelAndView model = new ModelAndView("/pages/dialog/newItem");
 		model.addObject("table", name);
 		//model.addObject("formAction","newData?item="+name);
 		model.addObject("dialogTitle","manage "+name+"s");
@@ -45,7 +46,7 @@ public class ActionsController {
 		return model;
 	}
 	
-	@RequestMapping(value = "newData", method = RequestMethod.POST)
+	@RequestMapping(value = "/newData", method = RequestMethod.POST)
 	public String processData(@ModelAttribute("item") Item item, @RequestParam(value = "item", required = true) String name){
 		
 		return "redirect: /pages/home";

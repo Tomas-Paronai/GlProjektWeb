@@ -111,8 +111,8 @@
 	
 	</div>
 	<div id="tab-2" class="tab-content">
-		<button class="openDialog" data="newData?item=position">Position</button>
-		<button class="openDialog" data="newData?item=contract">Contract</button>
+		<a class="openDialog" href="newData?item=position">Position</a>
+		<a class="openDialog" href="newData?item=contract">Contract</a>
 		 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 	</div>
 
