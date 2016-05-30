@@ -24,9 +24,9 @@
  	<bean id="dataSource" 
       class="org.springframework.jdbc.datasource.DriverManagerDataSource">
       <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-      <property name="url" value="jdbc:mysql://localhost:3306/employees"/>
-      <property name="username" value="root"/>
-      <property name="password" value=""/>
+      <property name="url" value="jdbc:mysql://192.168.22.69:3306/employees"/>
+      <property name="username" value="parohy"/>
+      <property name="password" value="banka"/>
    </bean>
  	
  	<bean id="stringHttpMessageConverter"
@@ -43,8 +43,31 @@
  		<property name="dataSource" ref="dataSource"/>
  	</bean>
  	
+ 	<bean id="itemDAO" class="com.emporganizer.dao.items.ItemDAOImpl">
+ 		<property name="dataSource" ref="dataSource"/>
+ 	</bean>
  	
+ 	
+	<!-- Mail beans -->
+   <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="emp.organizer@gmail.com" />
+		<property name="password" value="EmpOrganiz3r" />
+		
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	</bean>
 	
+	<bean id="empMail" class="com.emporganizer.api.EmpMail">
+		<property name="mailSender" ref="mailSender"/>
+	</bean>
 	
  
    

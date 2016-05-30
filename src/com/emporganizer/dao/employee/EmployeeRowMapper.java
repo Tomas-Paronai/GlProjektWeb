@@ -13,8 +13,8 @@ public class EmployeeRowMapper implements RowMapper<Employee>{
 
 	@Override
 	public Employee mapRow(ResultSet rs, int rowNum) throws SQLException {
-		EmploymentDetail detail = new EmploymentDetail(rs.getString("Contract_type"), 
-													   rs.getString("PositionName"), 
+		EmploymentDetail detail = new EmploymentDetail(rs.getString("contract_name"), 
+													   rs.getString("position_name"), 
 													   rs.getFloat("Salary_per_hour"), 
 													   rs.getDate("Start_work"));
 		
