@@ -1,3 +1,8 @@
+$(document).on('click','.employee-shifts',function(){
+		hideOtherShifts();
+		showEmployeeShift(this);
+});
+
 $(document).ready(function(){
 	
 	/*load employee detail*/
@@ -10,6 +15,7 @@ $(document).ready(function(){
 	setInterval(function(){
 		employeeStatus();
 	},60000);
+	
 	
 	
 	$('.status').hover(function(){
@@ -31,6 +37,26 @@ $(document).ready(function(){
 		});
 	
 	});
+
+function hideOtherShifts(){
+	$(".shifts-container").slideToggle('slow',function(){
+		$(this).parent().remove();
+	});
+}
+
+function showEmployeeShift(el){
+	var id = $(el).prev().attr("data");
+	var container = $('<div class="shifts-container" style="display:none"><div>');
+	
+	if(typeof id != 'undefined'){
+		$(container).load("employeeShifts?id="+id);
+		
+		var row = $('<tr></tr>');
+		$(row).append(container);
+		$(el).before(row);
+		$(container).slideToggle('slow');
+	}	
+}
 
 function getEmployeeData(val){
 	$.ajax({

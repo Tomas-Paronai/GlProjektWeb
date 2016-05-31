@@ -1,0 +1,13 @@
+.shifts-container table{
+	text-align:center;
+	border: 1px solid #D8D8D8;
+	width: 400px;
+}
+
+.shifts-container td{
+	width:100px;	
+}
+
+.shifts-container td:last-child{
+	width: 50px;
+}

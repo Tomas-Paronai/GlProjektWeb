@@ -22,7 +22,13 @@ $(document).on('click','.editBut', function(){
 });
 
 $(document).on('click','.cancelBut', function(){
-	hideEditField(this);
+	if(!def){
+		hideEditField(this);
+		def = true;
+	}
+	setTimeout(function(){
+		def = false;
+	},300);		
 });
 
 $(document).on('click','.confirmBut', function(){
@@ -47,7 +53,7 @@ $(document).on('click','.deleteBut', function(){
 
 function initDialog(){
 	var di = $("#dialog").dialog({
-		width: 'auto',
+		width: '400px',
 		height: 'auto',
 		modal: true,
 		open: function(){
@@ -65,8 +71,7 @@ function showEditField(el){
 
 function hideEditField(el){
 	var parent = $(el).parent();
-	var attr = $(el).parent().attr("data");
-	//TODO hide & remove
+	var attr = $(parent).parent().attr("data");
 	if(attr == 'new'){
 		$(el).parent().remove();
 	}
@@ -109,7 +114,10 @@ function deleteItem(el){
 			url: 'deleteItem?i_item='+id+"&table="+table,
 			success: function(){
 				console.log("Delete was successful");
-				//TODO remove line
+				$(parent).parent().remove();
+			},
+			error: function(jqXHR, textStatus, errorThrown){
+				dialogAjaxError(jqXHR, textStatus, errorThrown);
 			}
 		});
 	}
@@ -122,6 +130,9 @@ function updateItem(id,name,table,sibling){
 		success: function(){
 			console.log("Update was successful");
 			$(sibling).find("label").text(name);	
+		},
+		error: function(jqXHR, textStatus, errorThrown){
+			dialogAjaxError(jqXHR, textStatus, errorThrown);
 		}
 	});
 }
@@ -135,10 +146,19 @@ function insertItem(name,table,sibling,parent){
 			$(parent).find("input").attr("data",data.id);
 			$(sibling).find("label").text(data.name);
 			$(parent).parent().removeAttr("data");
+		},
+		error: function(jqXHR, textStatus, errorThrown){
+			dialogAjaxError(jqXHR, textStatus, errorThrown);
 		}
 	});
 }
 
+function dialogAjaxError(jqXHR, textStatus, errorThrown){
+	if(errorThrown == 'Internal Server Error'){
+		alert("Server is unavailable");
+	}
+	//$().toastmessage('showNoticeToast', 'Error: '+errorThrown);
+}
 
 function newItemField(el){
 	var line = $('<li></li>');

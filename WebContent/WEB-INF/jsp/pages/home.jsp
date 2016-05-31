@@ -27,6 +27,15 @@
 <spring:url value="/resources/js/dialogManage.js" var="dialogJs"/>
 <script type="text/javascript" src="${dialogJs}"></script>
 
+<spring:url value="/resources/js/jquery.toastmessage.js" var="toastJs"/>
+<script type="text/javascript" src="${toastJs}"></script>
+
+<spring:url value="/resources/css/jquery.toastmessage.css" var="toastUiStyle"/>
+<link rel="stylesheet" type="text/css" href="${toastUiStyle}" />
+
+<spring:url value="/resources/css/dialog.css" var="pageDialogStyle"/>
+<link rel="stylesheet" type="text/css" href="${pageDialogStyle}" />
+
 <spring:url value="/resources/asset/icon/" var="iconPath"/>
 </head>
 <body>
@@ -57,6 +66,9 @@
 				<img src="${iconPath.concat(curEmployee.sex == 'FEMALE' ? 'woman.png' : 'man.png')}" alt="${curEmployee.sex}"/>
 				</td>
 				<td class="status"><img src="${iconPath.concat('no.png')}" alt="NO"/></td>
+			</tr>
+			<tr class="employee-shifts">
+				<td colspan="4">Shifts....</td>
 			</tr>
 		</c:forEach>		
 	</table>
