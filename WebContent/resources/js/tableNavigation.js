@@ -40,7 +40,7 @@ $(document).ready(function(){
 
 function hideOtherShifts(){
 	$(".shifts-container").slideToggle('slow',function(){
-		$(this).parent().remove();
+		$(this).parent().parent().remove();
 	});
 }
 
@@ -49,12 +49,13 @@ function showEmployeeShift(el){
 	var container = $('<div class="shifts-container" style="display:none"><div>');
 	
 	if(typeof id != 'undefined'){
-		$(container).load("employeeShifts?id="+id);
-		
-		var row = $('<tr></tr>');
-		$(row).append(container);
-		$(el).before(row);
-		$(container).slideToggle('slow');
+		$(container).load("employeeShifts?id="+id, function(){
+			var cell = $('<td colspan="4"></td>');
+			var row = $('<tr></tr>').append(cell);
+			$(cell).append(container);
+			$(el).before(row);
+			$(container).slideToggle('slow');
+		});		
 	}	
 }
 

@@ -65,19 +65,21 @@ function initDialog(){
 
 function showEditField(el){
 	var parent = $(el).parent();
-	$(parent).hide();
-	$(parent).next().show();
+	$(parent).slideUp('fast');
+	$(parent).next().slideDown('fast');
 }
 
 function hideEditField(el){
-	var parent = $(el).parent();
-	var attr = $(parent).parent().attr("data");
+	var parent = $(el).parent().parent();
+	var attr = $(parent).attr("data");
 	if(attr == 'new'){
-		$(el).parent().remove();
+		$(parent).slideUp('fast', function(){
+			$(parent).remove();
+		});		
 	}
 	else{
-		$(parent).hide();
-		$(parent).prev().show();
+		$(parent).slideUp('fast');
+		$(parent).prev().slideDown('fast');
 	}	
 }
 

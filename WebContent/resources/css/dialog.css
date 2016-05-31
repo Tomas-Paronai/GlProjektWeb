@@ -1,7 +1,15 @@
+.shifts-container{
+	width: 100%;
+}
+
+.shifts-container tr{
+	width:100%;
+}
+
 .shifts-container table{
 	text-align:center;
-	border: 1px solid #D8D8D8;
-	width: 400px;
+	border-collapse: initial;
+	width: 100%;
 }
 
 .shifts-container td{

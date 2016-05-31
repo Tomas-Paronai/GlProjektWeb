@@ -27,12 +27,6 @@
 <spring:url value="/resources/js/dialogManage.js" var="dialogJs"/>
 <script type="text/javascript" src="${dialogJs}"></script>
 
-<spring:url value="/resources/js/jquery.toastmessage.js" var="toastJs"/>
-<script type="text/javascript" src="${toastJs}"></script>
-
-<spring:url value="/resources/css/jquery.toastmessage.css" var="toastUiStyle"/>
-<link rel="stylesheet" type="text/css" href="${toastUiStyle}" />
-
 <spring:url value="/resources/css/dialog.css" var="pageDialogStyle"/>
 <link rel="stylesheet" type="text/css" href="${pageDialogStyle}" />
 
@@ -51,7 +45,7 @@
 		<spring:url value="/resources/js/tableNavigation.js" var="tableScript"/>
 	<script type="text/javascript" src="${tableScript}"></script>
 	<table id="employeesTab">
-		<tr>
+		<tr class="employee-head">
 			<th>Name</th>
 			<th>Email</th>
 			<th>Gender</th>
@@ -68,7 +62,7 @@
 				<td class="status"><img src="${iconPath.concat('no.png')}" alt="NO"/></td>
 			</tr>
 			<tr class="employee-shifts">
-				<td colspan="4">Shifts....</td>
+				<td colspan="4"><img src="/EmployeeOrganizer/resources/asset/icon/shifts.png"></td>
 			</tr>
 		</c:forEach>		
 	</table>
