@@ -61,14 +61,14 @@ public class ActionsController {
 	}
 	
 	@RequestMapping(value = "/insertItem", method = RequestMethod.POST)
-	public @ResponseBody DBItem saveItem(@RequestParam(value = "d_item", required = true) String name,
+	public @ResponseBody DBItem insertItem(@RequestParam(value = "d_item", required = true) String name,
 			 							 @RequestParam(value = "table", required = true) String table){		
 		itemDAO.insertItem(name, table);
 		return itemDAO.getLastItem(table);
 	}
 	
 	@RequestMapping(value = "/deleteItem", method = RequestMethod.POST)
-	public @ResponseBody void saveItem(@RequestParam(value = "i_item", required = true) int id,
+	public @ResponseBody void deleteItem(@RequestParam(value = "i_item", required = true) int id,
 			 						     @RequestParam(value = "table", required = true) String table){		
 		itemDAO.deleteItem(id, table);
 	}

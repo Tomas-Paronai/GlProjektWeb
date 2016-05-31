@@ -1,17 +1,24 @@
+var def;
 $(function(){
 	$(".openDialog").on('click', function(event){
 		$('#dialog').empty();
 		$("#dialog").load($(this).attr("data"), initDialog());
 	});
 	
-	$(".newBut").click(function(){
-		newItemField(this);
+	$(".newBut").click(function(){		
+		if(!def){
+			newItemField(this);
+			def = true;
+		}
+		setTimeout(function(){
+			def = false;
+		},300);
 	});
 	
 	
 });
 
-var def;
+
 $(document).on('click','.editBut', function(){
 	showEditField(this);
 });
