@@ -24,8 +24,21 @@ public class ItemDAOImpl implements ItemDAO{
 	}
 
 	@Override
+	public DBItem getItem(String table, int id) {
+		String sql = "SELECT * FROM `" + table + "` WHERE " + table + "ID=?";
+		
+		return jdbc.queryForObject(sql, new Object[]{id}, new ItemRowMapper(table));
+	}
+	
+	@Override
+	public DBItem getLastItem(String table) {
+		String sql = "SELECT * FROM " + table + " ORDER BY " + table + "ID desc LIMIT 1";
+		return jdbc.queryForObject(sql, new ItemRowMapper(table));
+	}
+	
+	@Override
 	public void insertItem(String value, String table) {
-		String sql = "INSERT INTO `" + table + "` (`name`) VALUES (?)";
+		String sql = "INSERT INTO `" + table + "` (`" + table + "_name`) VALUES (?)";
 		jdbc.update(sql, new Object[]{value});
 	}
 
@@ -40,5 +53,9 @@ public class ItemDAOImpl implements ItemDAO{
 		String sql = "DELETE FROM " + table + " WHERE " + table + "ID=?";
 		jdbc.update(sql, new Object[]{id});
 	}
+
+	
+
+	
 
 }

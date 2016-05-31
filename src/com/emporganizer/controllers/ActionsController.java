@@ -2,15 +2,18 @@ package com.emporganizer.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.emporganizer.api.EmpMail;
 import com.emporganizer.dao.items.ItemDAO;
 import com.emporganizer.models.MailFormBean;
+import com.emporganizer.models.items.DBItem;
 import com.emporganizer.models.items.Item;
 
 @Controller
@@ -36,18 +39,37 @@ public class ActionsController {
 	}
 	
 	@RequestMapping(value = "newData", method = RequestMethod.GET)
-	public ModelAndView getDialogForm(@RequestParam(value = "item", required = true) String name){
-		ModelAndView model = new ModelAndView(name);
-		model.addObject("table", name);
+	public String getDialogForm(@RequestParam(value = "item", required = true) String name, ModelMap model){
+		model.addAttribute("table", name);
 		//model.addObject("formAction","newData?item="+name);
-		model.addObject("dialogTitle","manage "+name+"s");
-		model.addObject("items", itemDAO.getItems(name));
-		return model;
+		model.addAttribute("dialogTitle","manage "+name+"s");
+		model.addAttribute("items", itemDAO.getItems(name));
+		return "pages/dialog/newItem";
 	}
 	
 	@RequestMapping(value = "newData", method = RequestMethod.POST)
 	public String processData(@ModelAttribute("item") Item item, @RequestParam(value = "item", required = true) String name){
 		
 		return "redirect: /pages/home";
+	}
+	
+	@RequestMapping(value = "/saveItem", method = RequestMethod.POST)
+	public @ResponseBody void saveItem(@RequestParam(value = "i_item", required = true) int id,
+									   @RequestParam(value = "d_item", required = true) String name,
+									   @RequestParam(value = "table", required = true) String table){
+		itemDAO.updateItem(id, name, table);
+	}
+	
+	@RequestMapping(value = "/insertItem", method = RequestMethod.POST)
+	public @ResponseBody DBItem saveItem(@RequestParam(value = "d_item", required = true) String name,
+			 							 @RequestParam(value = "table", required = true) String table){		
+		itemDAO.insertItem(name, table);
+		return itemDAO.getLastItem(table);
+	}
+	
+	@RequestMapping(value = "/deleteItem", method = RequestMethod.POST)
+	public @ResponseBody void saveItem(@RequestParam(value = "i_item", required = true) int id,
+			 						     @RequestParam(value = "table", required = true) String table){		
+		itemDAO.deleteItem(id, table);
 	}
 }
