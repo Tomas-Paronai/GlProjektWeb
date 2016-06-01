@@ -16,7 +16,7 @@ html {
 
 body {
     display: table-cell;
-    vertical-align: middle;
+    
     width:100%;
 }
 
@@ -169,6 +169,18 @@ ul.tabs li.current{
     display: inline-block;
     float: left;
     margin-left: 100px;
+}
+
+.goup:before,
+.group:after{
+	content: " ";
+	display: table;
+}
+.group:after{
+	clear: both;
+}
+.group{
+	*zoom: 1;
 }
 
 
