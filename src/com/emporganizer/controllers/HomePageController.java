@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.emporganizer.dao.employee.EmployeeDAO;
 import com.emporganizer.dao.employee.ShiftDAO;
+import com.emporganizer.models.Login;
 import com.emporganizer.models.employee.Employee;
 import com.emporganizer.models.employee.EmployeePresent;
 import com.emporganizer.models.employee.Shift;
@@ -62,5 +63,12 @@ public class HomePageController {
 		model.addObject("message", "Request error occured. Please try again later or contact support.");
 		model.addObject("exception", exception);
 		return model;
+	}
+	@RequestMapping(value = "showEmployees", method = RequestMethod.GET)
+	public ModelAndView showEmployeesToExport() {
+		List<Employee> employeeList= employeeDAO.getEmployeeList();
+		ModelAndView model = new ModelAndView("pages/exportEmployees");
+		 model.addObject("employees",employeeList);
+		 return model;
 	}
 }

@@ -1,5 +1,7 @@
 package com.emporganizer.controllers;
 
+import java.sql.SQLException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.emporganizer.api.EmpMail;
+import com.emporganizer.dao.employee.EmployeeDAO;
 import com.emporganizer.dao.items.ItemDAO;
+import com.emporganizer.models.Login;
 import com.emporganizer.models.MailFormBean;
 import com.emporganizer.models.items.DBItem;
 import com.emporganizer.models.items.Item;
@@ -24,6 +28,8 @@ public class ActionsController {
 	
 	@Autowired
 	ItemDAO itemDAO;
+	
+	
 	
 	@RequestMapping(value = "/sendMail", method = RequestMethod.GET)
 	public ModelAndView getMailForm(){
@@ -72,4 +78,7 @@ public class ActionsController {
 			 						     @RequestParam(value = "table", required = true) String table){		
 		itemDAO.deleteItem(id, table);
 	}
+
+
+	
 }
