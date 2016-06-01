@@ -24,6 +24,7 @@
 </head>
 <body>
 	<ul class="items-list" data="${table}">
+	<c:if test="${!empty items}">
 		<c:forEach items="${items}" var="curItem">
 			<li>
 				<div class="item-display">
@@ -38,6 +39,7 @@
 				</div>							
 			</li>
 		</c:forEach>
+		</c:if>
 		<li>
 			<img class="newBut" alt="add" src="/EmployeeOrganizer/resources/asset/icon/add.png">
 		</li>			

@@ -34,7 +34,7 @@
 </head>
 <body>
 
-<div class="group container">
+<div class="page-container">
 
 	<ul class="tabs">
 		<li class="tab-link current" data-tab="tab-1">Employees</li>
@@ -44,29 +44,9 @@
 	<div id="tab-1" class="tab-content current">
 		<spring:url value="/resources/js/tableNavigation.js" var="tableScript"/>
 	<script type="text/javascript" src="${tableScript}"></script>
-	<table id="employeesTab">
-		<tr class="employee-head">
-			<th>Name</th>
-			<th>Email</th>
-			<th>Gender</th>
-			<th>In work</th>
-		</tr>
-
-		<c:forEach items="${employees}" var="curEmployee">
-			<tr class="employee-row" data="${curEmployee.id}">
-				<td>${curEmployee.name}</td>
-				<td>${curEmployee.email}</td>
-				<td>
-				<img src="${iconPath.concat(curEmployee.sex == 'FEMALE' ? 'woman.png' : 'man.png')}" alt="${curEmployee.sex}"/>
-				</td>
-				<td class="status"><img src="${iconPath.concat('no.png')}" alt="NO"/></td>
-			</tr>
-			<tr class="employee-shifts">
-				<td colspan="4"><img src="/EmployeeOrganizer/resources/asset/icon/shifts.png"></td>
-			</tr>
-		</c:forEach>		
-	</table>
 	
+	<!-- Employees list -->
+	<jsp:include page="employeeList.jsp"/>	
 	
 	<div class="detail">
 		<table id="detailInfo">		
