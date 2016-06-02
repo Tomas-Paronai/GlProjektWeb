@@ -22,15 +22,25 @@ import com.emporganizer.models.items.Item;
 
 @Controller
 public class ActionsController {
-	
+		
 	@Autowired
 	EmpMail empMail;
 	
 	@Autowired
+	EmployeeDAO employeeDAO;
+	
+	@Autowired
 	ItemDAO itemDAO;
 	
-	
-	
+	@RequestMapping(value = "checkboxList", method = RequestMethod.GET)
+	public String getCheckBoxList(@RequestParam(value = "for", required = true) String nextPage, ModelMap model){
+		model.addAttribute("employees", employeeDAO.getEmployeeList());
+		model.addAttribute("action", nextPage);
+		model.addAttribute("hint", getHint(nextPage));
+		return "/comp/employeeListCheck";
+	}
+
+
 	@RequestMapping(value = "/sendMail", method = RequestMethod.GET)
 	public ModelAndView getMailForm(){
 		ModelAndView model = new ModelAndView("sendMail");
@@ -79,6 +89,12 @@ public class ActionsController {
 		itemDAO.deleteItem(id, table);
 	}
 
-
+	
+	private String getHint(String nextPage) {
+		if(nextPage.equals("sendMail")){
+			return "Choose employees to send email to.";
+		}
+		return null;
+	}
 	
 }

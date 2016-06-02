@@ -46,7 +46,7 @@
 	<script type="text/javascript" src="${tableScript}"></script>
 	
 	<!-- Employees list -->
-	<jsp:include page="employeeList.jsp"/>	
+	<jsp:include page="../comp/employeeList.jsp"/>	
 	
 	<div class="detail">
 		<table id="detailInfo">		
@@ -99,7 +99,7 @@
 	<div id="tab-2" class="tab-content">
 		<button class="openDialog" data="newData?item=position">Position</button>
 		<button class="openDialog" data="newData?item=contract">Contract</button>
-		<button href="showEmployees">exportEmployees</button>
+		<button class="openDialog" data="checkboxList?for=sendMail">Send email</button>
 		 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 	</div>
 	

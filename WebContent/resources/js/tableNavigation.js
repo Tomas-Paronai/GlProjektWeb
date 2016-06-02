@@ -16,8 +16,6 @@ $(document).ready(function(){
 		employeeStatus();
 	},60000);
 	
-	
-	
 	$('.status').hover(function(){
         // Hover over code
         var title = $(this).attr('title');
@@ -48,7 +46,7 @@ function showEmployeeShift(el){
 	var id = $(el).prev().attr("data");
 	var container = $('<div class="shifts-container" style="display:none"><div>');
 	
-	if(typeof id != 'undefined'){
+	if(typeof id != 'undefined'){		
 		$(container).load("employeeShifts?id="+id, function(){
 			var cell = $('<td colspan="4"></td>');
 			var row = $('<tr></tr>').append(cell);

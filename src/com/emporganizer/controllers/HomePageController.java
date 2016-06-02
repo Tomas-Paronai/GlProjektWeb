@@ -22,6 +22,7 @@ import com.emporganizer.models.Login;
 import com.emporganizer.models.employee.Employee;
 import com.emporganizer.models.employee.EmployeePresent;
 import com.emporganizer.models.employee.Shift;
+import com.mysql.jdbc.exceptions.jdbc4.CommunicationsException;
 
 @Controller
 public class HomePageController {
@@ -49,21 +50,7 @@ public class HomePageController {
 		return "pages/dialog/pastShifts";
 	}
 	
-	@ExceptionHandler({SQLException.class,DataAccessException.class})
-	public ModelAndView getSQLExceptionPage(HttpServletRequest req, Exception exception){
-		ModelAndView model = new ModelAndView("pages/errorPage");
-		model.addObject("message", "Database is currently unavailable. Please try again later or contact support.");
-		model.addObject("exception", exception);
-		return model;
-	}
 	
-	@ExceptionHandler(Exception.class)
-	public ModelAndView getExceptionPage(HttpServletRequest req, Exception exception){
-		ModelAndView model = new ModelAndView("pages/errorPage");
-		model.addObject("message", "Request error occured. Please try again later or contact support.");
-		model.addObject("exception", exception);
-		return model;
-	}
 	@RequestMapping(value = "showEmployees", method = RequestMethod.GET)
 	public ModelAndView showEmployeesToExport() {
 		List<Employee> employeeList= employeeDAO.getEmployeeList();

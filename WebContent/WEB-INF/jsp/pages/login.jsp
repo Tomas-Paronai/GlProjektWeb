@@ -15,6 +15,9 @@
 
 <spring:url value="/resources/js/jquery-2.2.4.min.js" var="lib"/>
 <script type="text/javascript" src="${lib}"></script>
+
+<spring:url value="/resources/js/loading.js" var="loadingJs"/>
+<script type="text/javascript" src="${loadingJs}"></script>
 </head>
 <body>
 	<div class="login-container">
@@ -32,5 +35,6 @@
 			</form:form>	
 		</div>
 	</div>
+	<div class="modal"></div>
 </body>
 </html>

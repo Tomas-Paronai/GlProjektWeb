@@ -51,6 +51,11 @@ $(document).on('click','.deleteBut', function(){
 	},300);	
 });
 
+$(document).on('click','.select-all',function(){
+		
+	
+});
+
 function initDialog(){
 	var di = $("#dialog").dialog({
 		width: '400px',
