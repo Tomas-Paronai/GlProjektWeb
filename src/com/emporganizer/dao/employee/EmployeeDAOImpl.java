@@ -43,6 +43,24 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 	}
 	
 	@Override
+	public List<Employee> getEmployeeByListId(List<Integer> empIds) {
+		String sql = "SELECT * FROM `employee` "
+				+ "INNER JOIN `address` ON employee.EmployeeID=address.EmployeeID "
+				+ "INNER JOIN `contact` ON employee.EmployeeID=contact.EmployeeID "
+				+ "INNER JOIN `employment_detail` ON employee.EmployeeID=employment_detail.EmployeeID "
+				+ "INNER JOIN `position` ON employment_detail.PositionID=position.PositionID "
+				+ "INNER JOIN `contract` ON employment_detail.ContractID=contract.ContractID WHERE ";
+		
+		for(int i = 0; i < empIds.size(); i++){
+			sql += "EmployeeID="+empIds.get(i);
+			if(i + 1 < empIds.size()){
+				sql += " or ";
+			}
+		}
+		return jdbc.query(sql, new EmployeeRowMapper());
+	}
+	
+	@Override
 	public List<EmployeePresent> getPresentEmployees() {
 		String sql = "SELECT `EmployeeID`,`Check_time` FROM work_shift WHERE `Type`='IN'";
 		return jdbc.query(sql, new RowMapper<EmployeePresent>(){
@@ -92,6 +110,5 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 	private void loadShifts(Employee employee){
 		employee.setPastShifts(shiftDAO.getShifts(employee.getId()));
 	}
-
 	
 }

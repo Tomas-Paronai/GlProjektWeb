@@ -17,7 +17,7 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-					<form:input path="recipent" placeholder="Devide recipents with ;"/>
+					<form:input path="recipent" placeholder="Devide recipents with ;" value="${!empty recipents ? recipents : ''}"/>
 				</td>
 				<td></td>
 			</tr>

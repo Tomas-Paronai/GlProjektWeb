@@ -8,6 +8,7 @@ import com.emporganizer.models.employee.EmployeePresent;
 
 public interface EmployeeDAO extends RootDAO{
 	public List<Employee> getEmployeeList();
+	public List<Employee> getEmployeeByListId(List<Integer> empIds);
 	public List<EmployeePresent> getPresentEmployees();
 	public Employee getEmployeeById(int employeeId);
 	public void deleteEmployee(int employeeId);

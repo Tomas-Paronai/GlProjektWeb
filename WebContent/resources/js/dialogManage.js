@@ -14,6 +14,13 @@ $(function(){
 		},300);		
 	});
 	
+	$('.checkbox-form').submit(function(event){	
+		console.log("submitting form");
+		$('#dialog').empty();
+		$("#dialog").load($(this).attr("action"), initDialog());
+		event.preventDefault();
+	});
+	
 });
 
 var def;
@@ -51,15 +58,31 @@ $(document).on('click','.deleteBut', function(){
 	},300);	
 });
 
-$(document).on('click','.select-all',function(){
-		
-	
+$(document).on('click','.select-all',function(event){
+	selectCheckboxes(this);
 });
+
+
+
+function selectCheckboxes(el){
+	if($(el).is(':checked')){
+		$(el).prop('checked',false);
+		$('.list-checkbox').prop('checked',false);
+	}
+	else{
+		$(el).prop('checked',true);
+		$('.list-checkbox').prop('checked',true);
+	}
+	
+	
+	
+}
 
 function initDialog(){
 	var di = $("#dialog").dialog({
-		width: '400px',
+		width: '500px',
 		height: 'auto',
+		resizable: false,
 		modal: true,
 		open: function(){
 			console.log("open");

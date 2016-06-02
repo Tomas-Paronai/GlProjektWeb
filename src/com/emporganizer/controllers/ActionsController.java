@@ -1,6 +1,7 @@
 package com.emporganizer.controllers;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,10 +14,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.emporganizer.api.EmpMail;
+import com.emporganizer.api.beans.SelectedEmp;
 import com.emporganizer.dao.employee.EmployeeDAO;
 import com.emporganizer.dao.items.ItemDAO;
 import com.emporganizer.models.Login;
 import com.emporganizer.models.MailFormBean;
+import com.emporganizer.models.employee.Employee;
 import com.emporganizer.models.items.DBItem;
 import com.emporganizer.models.items.Item;
 
@@ -37,15 +40,27 @@ public class ActionsController {
 		model.addAttribute("employees", employeeDAO.getEmployeeList());
 		model.addAttribute("action", nextPage);
 		model.addAttribute("hint", getHint(nextPage));
+		model.addAttribute("selectedEmp",new SelectedEmp());
 		return "/comp/employeeListCheck";
 	}
 
 
-	@RequestMapping(value = "/sendMail", method = RequestMethod.GET)
-	public ModelAndView getMailForm(){
-		ModelAndView model = new ModelAndView("sendMail");
-		model.addObject("mailFormBean", new MailFormBean());
-		return model;
+	@RequestMapping(value = "/mailForm", method = RequestMethod.POST)
+	public String getMailForm(@ModelAttribute("selectedEmp") SelectedEmp selectedEmp, ModelMap model){
+		model.addAttribute("mailFormBean", new MailFormBean());
+		
+		List<Employee> employees = employeeDAO.getEmployeeByListId(selectedEmp.getEmpIds());
+		StringBuilder sb = new StringBuilder();
+		
+		for(int i = 0; i < employees.size(); i++){
+			sb.append(employees.get(i).getEmail());
+			if(i + 1 < employees.size()){
+				sb.append(";");
+			}
+		}
+		
+		model.addAttribute("recipents", sb.toString());
+		return "pages/dialog/sendMail";
 	}
 	
 	@RequestMapping(value = "/sendMail", method = RequestMethod.POST)
@@ -91,7 +106,7 @@ public class ActionsController {
 
 	
 	private String getHint(String nextPage) {
-		if(nextPage.equals("sendMail")){
+		if(nextPage.equals("mailForm")){
 			return "Choose employees to send email to.";
 		}
 		return null;

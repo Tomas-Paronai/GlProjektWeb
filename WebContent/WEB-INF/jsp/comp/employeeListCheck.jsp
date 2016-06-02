@@ -31,20 +31,27 @@
 			<tr>
 				<th>Name</th>
 				<th>Email</th>
-			</tr>
+			</tr>	
 			
+			
+			<form:form class="checkbox-form" action="${action}" method="POST" modelAttribute="selectedEmp">
 			<c:if test="${!empty employees}">
 			<c:forEach items="${employees}" var="curEmployee">
 				<tr class="checkBoxEmployee">
 					<td>${curEmployee.name}</td>
 					<td>${curEmployee.email}</td>
-					<td><input type="checkbox" name="employeeName" value="${curEmployee.id}"></td>
+					<td><form:checkbox class="list-checkbox" path="empIds" value="${curEmployee.id}"/></td>
 				</tr>
 			</c:forEach>
-				<tr class="select-all">
-					<td><input type="checkbox">All</td> 
+				<tr>
+					<td><input type="submit" value="Continue"></td>
+					<td></td>
+					<td><input class="select-all" type="checkbox">All</td> 
 				</tr>
-			</c:if>
+				</c:if>
+			</form:form>
+			
+			
 					
 		</table>
 	</body>
