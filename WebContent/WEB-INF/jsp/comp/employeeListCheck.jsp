@@ -22,11 +22,7 @@
 <script type="text/javascript" src="${dialogJs}"></script>
 
 </head>
-<body>	
-		<c:if test="${!empty hint}">
-			<h3>${hint}</h3>
-		</c:if>
-		
+<body>			
 		<table>
 			<tr>
 				<th>Name</th>

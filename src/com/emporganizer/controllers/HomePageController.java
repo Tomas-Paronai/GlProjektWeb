@@ -38,7 +38,6 @@ public class HomePageController {
 	public String getCheckBoxList(@RequestParam(value = "for", required = true) String nextPage, ModelMap model){
 		model.addAttribute("employees", employeeDAO.getEmployeeList());
 		model.addAttribute("action", nextPage);
-		model.addAttribute("hint", getHint(nextPage));
 		model.addAttribute("selectedEmp",new SelectedEmp());
 		return "/comp/employeeListCheck";
 	}
@@ -74,12 +73,5 @@ public class HomePageController {
 		ModelAndView model = new ModelAndView("pages/exportEmployees");
 		 model.addObject("employees",employeeList);
 		 return model;
-	}
-	
-	private String getHint(String nextPage) {
-		if(nextPage.equals("mailForm")){
-			return "Choose employees to send email to.";
-		}
-		return null;
 	}
 }
