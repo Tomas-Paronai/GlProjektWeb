@@ -130,11 +130,19 @@ function showEditField(el){
 }
 
 function hideEditField(el){
-	var parent = $(el).parent().parent();
-	var attr = $(parent).attr("data");
-	if(attr == 'new'){
+	var parent = $(el).parent();
+	console.log($('li[class=new]'));
+	if($('li').hasClass('new') === true){
 		$(parent).slideUp('fast', function(){
-			$(parent).remove();
+			
+			var newEl = $('li[class=new]');
+			newEl.each(function(index){
+				if(isDescendant(newEl[index], el)){
+					newEl[index].remove();
+					return;
+				}
+			});
+			
 		});		
 	}
 	else{
@@ -240,6 +248,17 @@ function newItemField(el){
 	$(line).append(inputContainer);
 		
 	console.log("Inserting line");
-	$(line).attr("data","new");
+	$(line).addClass("new");
 	$(el).parent().before(line);
+}
+
+function isDescendant(parent, child) {
+    var node = child.parentNode;
+    while (node != null) {
+        if (node == parent) {
+            return true;
+        }
+        node = node.parentNode;
+    }
+    return false;
 }
