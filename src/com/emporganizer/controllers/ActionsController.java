@@ -3,6 +3,8 @@ package com.emporganizer.controllers;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -50,8 +52,19 @@ public class ActionsController {
 	
 	@RequestMapping(value = "/sendMail", method = RequestMethod.POST)
 	public String sendMail(@ModelAttribute("mailFormBean") MailFormBean mailFormBean){
+		String recipents[] = mailFormBean.getRecipents().split(";");	
 		
-		return "redirect: /pages/home";
+		//TODO toast message about succession & fail
+		try {
+			System.out.println("Sending mails....");
+			empMail.newMessage(mailFormBean.getSubject(), mailFormBean.getMessage(), recipents);
+			System.out.println("Success!");
+		} catch (MessagingException e) {
+			e.printStackTrace();
+			System.out.println("Failed!");
+		}
+		
+		return "redirect:/home";
 	}
 	
 	@RequestMapping(value = "newData", method = RequestMethod.GET)
@@ -61,12 +74,6 @@ public class ActionsController {
 		model.addAttribute("dialogTitle","manage "+name+"s");
 		model.addAttribute("items", itemDAO.getItems(name));
 		return "pages/dialog/newItem";
-	}
-	
-	@RequestMapping(value = "newData", method = RequestMethod.POST)
-	public String processData(@ModelAttribute("item") Item item, @RequestParam(value = "item", required = true) String name){
-		
-		return "redirect: /pages/home";
 	}
 	
 	@RequestMapping(value = "/saveItem", method = RequestMethod.POST)

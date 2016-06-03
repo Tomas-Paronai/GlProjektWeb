@@ -35,7 +35,7 @@ public class LoginController {
 		boolean isValidUser=loginDao.isValidUser(login);
 		if(isValidUser==true){
 			model.addAttribute("employees",employeeDAO.getEmployeeList());
-			return "pages/home";
+			return "redirect:/home";
 		}
 		else{
 			return "pages/false";

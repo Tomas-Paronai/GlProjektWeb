@@ -43,6 +43,13 @@ public class HomePageController {
 		return "/comp/employeeListCheck";
 	}
 	
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	public ModelAndView getHomePage(){
+		ModelAndView model = new ModelAndView("pages/home");
+		model.addObject("employees",employeeDAO.getEmployeeList());
+		return model;
+	}
+	
 	@RequestMapping(value = "/employeeDetail", method = RequestMethod.GET)
 	public @ResponseBody Employee employeeDetail(@RequestParam(value = "id", required = true) int id){
 		Employee tmpEmployee = employeeDAO.getEmployeeById(id);
