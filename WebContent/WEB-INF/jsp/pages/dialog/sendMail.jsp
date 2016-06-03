@@ -8,6 +8,28 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Send mail</title>
+
+<spring:url value="/resources/css/home.css" var="homeStyle"/>
+<link rel="stylesheet" type="text/css" href="${homeStyle}"/>
+
+<spring:url value="/resources/js/jquery-2.2.4.min.js" var="lib"/>
+<script type="text/javascript" src="${lib}"></script>
+
+<spring:url value="/resources/js/jquery-ui.min.js" var="uiLib"/>
+<script type="text/javascript" src="${uiLib}"></script>
+
+<spring:url value="/resources/css/jquery-ui.css" var="dialogUiStyle"/>
+<link rel="stylesheet" type="text/css" href="${dialogUiStyle}" />
+
+<spring:url value="/resources/js/dialogManage.js" var="dialogJs"/>
+<script type="text/javascript" src="${dialogJs}"></script>
+
+<spring:url value="/resources/css/dialog.css" var="pageDialogStyle"/>
+<link rel="stylesheet" type="text/css" href="${pageDialogStyle}" />
+
+<spring:url value="/resources/js/mailForm.js" var="mailJs"/>
+<script type="text/javascript" src="${mailJs}"></script>
+
 </head>
 <body>
 	<form:form action="sendMail" method="POST" modelAttribute="mailFormBean">
@@ -17,9 +39,12 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-					<form:input path="recipent" placeholder="Devide recipents with ;" value="${!empty recipents ? recipents : ''}"/>
+					<form:textarea class="recipents-field" path="recipents" placeholder="Devide recipents with ;"/>
 				</td>
 				<td></td>
+			</tr>
+			<tr class="employees-select">
+				<td colspan="2"><img src="/EmployeeOrganizer/resources/asset/icon/shifts.png" alt="employees"></td>
 			</tr>
 			<tr>
 				<th>Subject</th>

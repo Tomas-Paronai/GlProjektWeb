@@ -35,31 +35,16 @@ public class ActionsController {
 	@Autowired
 	ItemDAO itemDAO;
 	
-	@RequestMapping(value = "checkboxList", method = RequestMethod.GET)
-	public String getCheckBoxList(@RequestParam(value = "for", required = true) String nextPage, ModelMap model){
-		model.addAttribute("employees", employeeDAO.getEmployeeList());
-		model.addAttribute("action", nextPage);
-		model.addAttribute("hint", getHint(nextPage));
-		model.addAttribute("selectedEmp",new SelectedEmp());
-		return "/comp/employeeListCheck";
+	
+	@RequestMapping("getEmployees")
+	public String getEmployees(ModelMap model){
+		model.addAttribute("employeesCheck", employeeDAO.getEmployeeList());
+		return "comp/employeeListCheck";
 	}
 
-
-	@RequestMapping(value = "/mailForm", method = RequestMethod.POST)
-	public String getMailForm(@ModelAttribute("selectedEmp") SelectedEmp selectedEmp, ModelMap model){
-		model.addAttribute("mailFormBean", new MailFormBean());
-		
-		List<Employee> employees = employeeDAO.getEmployeeByListId(selectedEmp.getEmpIds());
-		StringBuilder sb = new StringBuilder();
-		
-		for(int i = 0; i < employees.size(); i++){
-			sb.append(employees.get(i).getEmail());
-			if(i + 1 < employees.size()){
-				sb.append(";");
-			}
-		}
-		
-		model.addAttribute("recipents", sb.toString());
+	@RequestMapping(value = "/mailForm", method = RequestMethod.GET)
+	public String getMailForm(ModelMap model){
+		model.addAttribute("mailFormBean", new MailFormBean());		
 		return "pages/dialog/sendMail";
 	}
 	
@@ -105,11 +90,6 @@ public class ActionsController {
 	}
 
 	
-	private String getHint(String nextPage) {
-		if(nextPage.equals("mailForm")){
-			return "Choose employees to send email to.";
-		}
-		return null;
-	}
+	
 	
 }

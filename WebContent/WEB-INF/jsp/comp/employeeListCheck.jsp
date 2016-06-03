@@ -34,22 +34,19 @@
 			</tr>	
 			
 			
-			<form:form class="checkbox-form" action="${action}" method="POST" modelAttribute="selectedEmp">
-			<c:if test="${!empty employees}">
-			<c:forEach items="${employees}" var="curEmployee">
+			<c:if test="${!empty employeesCheck}">
+			<c:forEach items="${employeesCheck}" var="curEmployee">
 				<tr class="checkBoxEmployee">
-					<td>${curEmployee.name}</td>
-					<td>${curEmployee.email}</td>
-					<td><form:checkbox class="list-checkbox" path="empIds" value="${curEmployee.id}"/></td>
+					<td>${curEmployee.name}<div class="person-mail" hidden>${curEmployee.email}</div></td>
+					<td><input type="checkbox" class="list-checkbox" name="empId" value="${curEmployee.id}"/></td>
 				</tr>
 			</c:forEach>
 				<tr>
-					<td><input type="submit" value="Continue"></td>
+					<td></td>
 					<td></td>
 					<td><input class="select-all" type="checkbox">All</td> 
 				</tr>
 				</c:if>
-			</form:form>
 			
 			
 					

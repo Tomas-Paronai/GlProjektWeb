@@ -19,3 +19,9 @@
 .shifts-container td:last-child{
 	width: 50px;
 }
+
+.employees-select{
+	text-align: center;
+	background:#e8e8ec;
+	border-bottom: 1px solid #C1C3D1;
+}

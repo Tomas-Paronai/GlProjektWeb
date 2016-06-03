@@ -30,6 +30,9 @@
 <spring:url value="/resources/css/dialog.css" var="pageDialogStyle"/>
 <link rel="stylesheet" type="text/css" href="${pageDialogStyle}" />
 
+<spring:url value="/resources/js/mailForm.js" var="mailJs"/>
+<script type="text/javascript" src="${mailJs}"></script>
+
 <spring:url value="/resources/asset/icon/" var="iconPath"/>
 </head>
 <body>
@@ -99,7 +102,7 @@
 	<div id="tab-2" class="tab-content">
 		<button class="openDialog" data="newData?item=position">Position</button>
 		<button class="openDialog" data="newData?item=contract">Contract</button>
-		<button class="openDialog" data="checkboxList?for=mailForm">Send email</button>
+		<button class="openDialog" data="mailForm">Send email</button>
 		 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 	</div>
 	

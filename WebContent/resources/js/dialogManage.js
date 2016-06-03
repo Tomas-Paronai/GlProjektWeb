@@ -14,13 +14,6 @@ $(function(){
 		},300);		
 	});
 	
-	$('.checkbox-form').submit(function(event){	
-		console.log("submitting form");
-		$('#dialog').empty();
-		$("#dialog").load($(this).attr("action"), initDialog());
-		event.preventDefault();
-	});
-	
 });
 
 var def;
@@ -63,6 +56,45 @@ $(document).on('click','.select-all',function(event){
 });
 
 
+$(document).on('click','.employees-select', function(){
+	if(!def){
+		
+		if($('.checkbox-list-container').hasClass('shown')){
+			console.log("hideCheckboxes");
+			hideCheckboxes();			
+		}
+		else{
+			console.log("showCheckboxes");
+			showCheckboxes(this);
+		}
+		
+		def = true;
+	}	
+	setTimeout(function(){
+		def = false;
+	},300);	
+	
+});
+
+function showCheckboxes(el){
+	var container = $('<div class="checkbox-list-container" style="display:none"></div>');
+	
+	$(container).load('getEmployees', function(){
+		var cell = $('<td colspan="2"></td>');
+		var row = $('<tr></tr>').append(cell);
+		$(cell).append(container);
+		$(el).before(row);
+		$(container).slideDown('slow', function(){
+			$(this).addClass('shown');
+		});
+	});
+}
+
+function hideCheckboxes(){
+	$(".checkbox-list-container").slideUp('slow',function(){
+		$(this).parent().parent().remove();
+	});
+}
 
 function selectCheckboxes(el){
 	if($(el).is(':checked')){
