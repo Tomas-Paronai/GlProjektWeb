@@ -8,10 +8,8 @@
 
 
 html {
-   display: block;
-    margin: 0;
-    padding:0;
-    background: url("/EmployeeOrganizer/resources/asset/img/bg.jpg") no-repeat center center;
+  
+    background: url("/EmployeeOrganizer/resources/asset/img/bg1.jpg") no-repeat center center fixed;
     
     background-size: cover;
     
@@ -20,8 +18,7 @@ html {
 
 body { 
   width: 1250px;
-    height: 100vh;
-    display: block;
+  display: block;
 }
 
 /*LOGIN CSS*/
@@ -33,19 +30,19 @@ body {
 }
 
 .login{
-	    position: absolute;
+	 position: absolute;
     top: 25%;
     left: 50%;
-    margin-left: -25%;
+    margin-left: -250px;
     width: 500px;
-    height: 300px;
-    /* margin: 0 auto; */
+    height: 330px;
     padding: 20px;
-    border: 1px solid #518ab5;
+    
     box-shadow: 1px 7px 12px rgba(0, 0, 0, 0.1);
     animation: float 5s infinite;
-    display: inline-block;
-    background-color: #5D92BA;
+    display: block;
+    background:rgba(14, 14, 14, 0.65);
+    );
 }
 
 .login-heading {
@@ -55,12 +52,13 @@ body {
 }
 
 .input-txt {
-  width: 100%;
+  width: 96%;
+  margin-top: 20px;
   padding: 20px 10px;
-  background: #4478a0;
+  background: rgba(250, 250, 250, 0.95);
   border: none;
   font-size: 1em;
-  color: white;
+  color: black;
   border-bottom: 1px dotted rgba(250, 250, 250, 0.4);
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -70,17 +68,21 @@ body {
   -webkit-transition: background-color 0.5s ease-in-out;
   transition: background-color 0.5s ease-in-out;
 }
+input#userName:-webkit-autofill, input#password:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #b7b7b7 inset;
+     -webkit-text-fill-color: white !important; 
+}
 .input-txt:-moz-placeholder {
-  color: #81aac9;
+  color: black;
 }
 .input-txt:-ms-input-placeholder {
-  color: #81aac9;
+  color: black;
 }
 .input-txt::-webkit-input-placeholder {
-  color: #81aac9;
+  color: black;
 }
 .input-txt:focus {
-  background-color: #4478a0;
+  background-color: #c0c0c0;
 }
 
 .login-footer {
@@ -94,7 +96,7 @@ body {
   font-size:20px;
   padding: 15px 150px;
   border: none;
-  background: black;
+  background: rgb(158, 158, 158);
   color: white;
   border-radius: 10px;
 }
@@ -108,9 +110,10 @@ body {
 }
 
 .lnk {
-  font-size: .8em;
-  line-height: 3em;
-  color: black;
+      font-size: 15px;
+    line-height: 3em;
+    color: #FFFFFF;
+    text-decoration: none;
   text-decoration: none;
 }
 
