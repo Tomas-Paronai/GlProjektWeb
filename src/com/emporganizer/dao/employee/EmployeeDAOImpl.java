@@ -52,7 +52,7 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 				+ "INNER JOIN `contract` ON employment_detail.ContractID=contract.ContractID WHERE ";
 		
 		for(int i = 0; i < empIds.size(); i++){
-			sql += "EmployeeID="+empIds.get(i);
+			sql += "employee.EmployeeID="+empIds.get(i);
 			if(i + 1 < empIds.size()){
 				sql += " or ";
 			}

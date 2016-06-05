@@ -51,8 +51,14 @@ $(document).on('click','.deleteBut', function(){
 	},300);	
 });
 
-$(document).on('click','.select-all',function(event){
-	selectCheckboxes(this);
+$(document).on('click','.select-all',function(){
+	if(!def){
+		selectCheckboxes(this);
+		def = true;
+	}
+	setTimeout(function(){
+		def = false;
+	},300);
 });
 
 
@@ -76,6 +82,15 @@ $(document).on('click','.employees-select', function(){
 	
 });
 
+$(document).on('submit','export-form', function(){
+	$.ajax({
+		url: "export",
+		success: function(){
+			console.log("Exporting...");
+		}
+	});
+});
+
 function showCheckboxes(el){
 	var container = $('<div class="checkbox-list-container" style="display:none"></div>');
 	
@@ -97,16 +112,17 @@ function hideCheckboxes(){
 }
 
 function selectCheckboxes(el){
+	console.log($(el).is(':checked'));
 	if($(el).is(':checked')){
+		console.log("unckecking");
 		$(el).prop('checked',false);
 		$('.list-checkbox').prop('checked',false);
 	}
 	else{
+		console.log("checking");
 		$(el).prop('checked',true);
 		$('.list-checkbox').prop('checked',true);
-	}
-	
-	
+	}	
 	
 }
 

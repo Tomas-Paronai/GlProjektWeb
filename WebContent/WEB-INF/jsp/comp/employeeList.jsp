@@ -24,7 +24,7 @@
 				<td class="status"><img src="${iconPath.concat('no.png')}" alt="NO"/></td>
 			</tr>
 			<tr class="employee-shifts">
-				<td colspan="4"><img src="/EmployeeOrganizer/resources/asset/icon/shifts.png" alt="shifts"></td>
+				<td colspan="4"><img src="${iconPath.concat('shifts.png')}" alt="shifts"></td>
 			</tr>
 		</c:forEach>
 		</c:if>		
