@@ -155,7 +155,7 @@ public class XmlHandler {
     		if(xml == null){
                 xml = new XmlIterator();
             }
-    		
+    		xml.setFile(importFile);
     		NodeList nodeList = xml.getDoc().getElementsByTagName(EMPLOYEE);
     		for(int i = 0; i < nodeList.getLength(); i++){
     			if(nodeList.item(i).getNodeType() == Node.ELEMENT_NODE){    				

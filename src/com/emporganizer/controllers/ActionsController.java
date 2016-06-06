@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.emporganizer.api.EmpMail;
@@ -149,8 +150,36 @@ public class ActionsController {
 		return "redirect:/home";
 	}
 	
+	@RequestMapping(value = "/import", method = RequestMethod.GET)
+	public String importForm(){
+		return "pages/dialog/import";
+	}
+	
 	@RequestMapping(value = "/import", method = RequestMethod.POST)
-	public void importFile(){
-		XmlHandler xmlHandler = new XmlHandler();
+	public void importFile(@RequestParam("fileUpload") CommonsMultipartFile fileUpload, HttpServletRequest request){
+		if(fileUpload != null){
+			XmlHandler xmlHandler = new XmlHandler();
+			ServletContext context = request.getServletContext();
+	        String appPath = context.getRealPath("");
+	        File dir = new File(appPath + File.separator + "imports");
+	        if(!dir.exists()){
+	        	dir.mkdir();
+	        }
+			File importedfile = new File(dir.getAbsolutePath()+File.separator+fileUpload.getOriginalFilename());
+			
+			try {
+				if(!importedfile.exists()){
+					importedfile.createNewFile();
+				}
+				System.out.println("Importing file...");
+				fileUpload.transferTo(importedfile);
+				List<Employee> parsedEmployees = xmlHandler.importEmployees(importedfile);
+				employeeDAO.insertEmployee(parsedEmployees);
+				System.out.println("Success!");
+			} catch (IllegalStateException | IOException e) {
+				System.out.println("Fail!");
+				e.printStackTrace();
+			}			
+		}		
 	}
 }

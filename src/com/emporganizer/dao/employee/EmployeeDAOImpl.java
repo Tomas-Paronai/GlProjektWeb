@@ -119,7 +119,7 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 
 	@Override
 	public void insertEmployee(Employee emp) {
-		String mainSql = "INSERT INTO employees (`firstname`,`surname`,`gender`,`birthdate`) VALUES (?,?,?,?)";
+		String mainSql = "INSERT INTO employee (`firstname`,`surname`,`gender`,`birthdate`) VALUES (?,?,?,?)";
 		String contactSql = "INSERT INTO contact VALUES (?,?,?)";
 		String addressSql = "INSERT INTO address VALUES (?,?,?,?,?)";
 		String detailSql = "INSERT INTO employment_detail VALUES (?,?,?,?,?)";

@@ -1,6 +1,7 @@
 package com.emporganizer.api.XML;
 
 import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
 import com.emporganizer.api.XML.errors.XmlParserException;
 
@@ -112,12 +113,14 @@ public abstract class XmlBase {
 
     public void setFile(File file){
         xmlFile = file;
-        setupBuilders();
+        setupBuilders(xmlFile);
+        doc.getDocumentElement().normalize();
     }
 
     public void setFile(String path){
         xmlFile = new File(path);
-        setupBuilders();
+        setupBuilders(xmlFile);
+        doc.getDocumentElement().normalize();
     }
 
     public void saveFile() throws XmlParserException {
@@ -134,17 +137,30 @@ public abstract class XmlBase {
     }
 
     private void setupBuilders(){
-        if(!buildersReady){
             try {
                 dbFactory = DocumentBuilderFactory.newInstance();
                 dBuilder = dbFactory.newDocumentBuilder();
                 doc = dBuilder.newDocument();
-                buildersReady = true;
             } catch (ParserConfigurationException e) {
                 e.printStackTrace();
             }
-        }
     }
+    
+    private void setupBuilders(File file){
+        try {
+            dbFactory = DocumentBuilderFactory.newInstance();
+            dBuilder = dbFactory.newDocumentBuilder();
+            doc = dBuilder.parse(file);
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+}
 
     protected void transform() throws XmlParserException {
         if(xmlFile == null){

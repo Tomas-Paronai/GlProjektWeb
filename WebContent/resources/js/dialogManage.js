@@ -51,7 +51,7 @@ $(document).on('click','.deleteBut', function(){
 	},300);	
 });
 
-$(document).on('click','.select-all',function(){
+$(document).on('change','.select-all',function(){
 	if(!def){
 		selectCheckboxes(this);
 		def = true;
@@ -112,18 +112,13 @@ function hideCheckboxes(){
 }
 
 function selectCheckboxes(el){
-	console.log($(el).is(':checked'));
+	var checkboxes = $('.list-checkbox');
 	if($(el).is(':checked')){
-		console.log("unckecking");
-		$(el).prop('checked',false);
-		$('.list-checkbox').prop('checked',false);
+		checkboxes.prop('checked',true);
 	}
 	else{
-		console.log("checking");
-		$(el).prop('checked',true);
-		$('.list-checkbox').prop('checked',true);
+		checkboxes.prop('checked', false);
 	}	
-	
 }
 
 function initDialog(){

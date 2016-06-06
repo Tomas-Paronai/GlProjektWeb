@@ -125,19 +125,34 @@ public class XmlIterator extends XmlBase{
 
     public void nextSibling(){
         if(currentElement != null){
-            currentElement = (Element) currentElement.getNextSibling();
+        	Node tmpNode = currentElement.getNextSibling();
+        	do{
+        		tmpNode = tmpNode.getNextSibling();
+        	}while(tmpNode.getNodeType() != Node.ELEMENT_NODE);
+            currentElement = (Element) tmpNode;
         }
     }
 
     public void prevSibling(){
-        if(currentElement != null){
-            currentElement = (Element) currentElement.getPreviousSibling();
+    	if(currentElement != null){
+        	Node tmpNode = currentElement.getPreviousSibling();
+        	do{
+        		tmpNode = tmpNode.getPreviousSibling();
+        	}while(tmpNode.getNodeType() != Node.ELEMENT_NODE);
+            currentElement = (Element) tmpNode;
         }
     }
     
     public void firstChild(){
     	if(currentElement != null){
-    		currentElement = (Element) currentElement.getChildNodes().item(0);
+    		NodeList nodeList = currentElement.getChildNodes();
+    		for(int i = 0; i < nodeList.getLength(); i++){
+    			if(nodeList.item(i).getNodeType() == Node.ELEMENT_NODE){
+    				currentElement = (Element) currentElement.getChildNodes().item(i);
+    				return;
+    			}
+    		}
+    		
     	}    	
     }
     
