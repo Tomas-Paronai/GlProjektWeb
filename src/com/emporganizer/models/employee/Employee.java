@@ -1,6 +1,8 @@
 package com.emporganizer.models.employee;
 
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class Employee {
@@ -9,8 +11,7 @@ public class Employee {
 	private String lastName;
 	private Sex sex;
 	private Date dob;
-	private String phone;
-	private String email;
+	private Contact contact;
 	private Address address;
 	private EmploymentDetail detail;
 	private List<Shift> pastShifts;
@@ -19,15 +20,14 @@ public class Employee {
 		
 	}
 	
-	public Employee(int id, String firstName, String lastName, String sex, Date dob, String phone, String email, Address address,
+	public Employee(int id, String firstName, String lastName, String sex, Date dob, Contact contact, Address address,
 			EmploymentDetail detail) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.dob = dob;
-		this.phone = phone;
-		this.email = email;
+		this.contact = contact;
 		this.address = address;
 		this.detail = detail;
 		
@@ -36,6 +36,32 @@ public class Employee {
 		}
 		else{
 			this.sex = Sex.MALE;
+		}
+	}
+	
+	public Employee(int id, String firstName, String lastName, String sex, String dob, Contact contact, Address address,
+			EmploymentDetail detail) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.contact = contact;
+		this.address = address;
+		this.detail = detail;
+		
+		if(sex.equals("Female")){
+			this.sex = Sex.FEMALE;
+		}
+		else{
+			this.sex = Sex.MALE;
+		}
+		
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			this.dob =  new Date(((java.util.Date)df.parse(dob)).getTime());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
@@ -77,22 +103,14 @@ public class Employee {
 
 	public void setDob(Date dob) {
 		this.dob = dob;
+	}	
+
+	public Contact getContact() {
+		return contact;
 	}
 
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
+	public void setContact(Contact contact) {
+		this.contact = contact;
 	}
 
 	public Address getAddress() {

@@ -3,14 +3,14 @@ package com.emporganizer.api.beans;
 import java.util.List;
 
 public class SelectedEmp {
-	private List<Integer> empIds;
+	private List<Integer> empId;
 
-	public List<Integer> getEmpIds() {
-		return empIds;
+	public List<Integer> getEmpId() {
+		return empId;
 	}
 
-	public void setEmpIds(List<Integer> empIds) {
-		this.empIds = empIds;
+	public void setEmpId(List<Integer> empId) {
+		this.empId = empId;
 	}
 	
 	

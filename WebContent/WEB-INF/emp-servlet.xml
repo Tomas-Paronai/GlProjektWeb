@@ -68,9 +68,14 @@
 	<bean id="empMail" class="com.emporganizer.api.EmpMail">
 		<property name="mailSender" ref="mailSender"/>
 	</bean>
-	
- 
    
+    <bean id="TransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" scope="singleton">
+  		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    	<property name="maxUploadSize" value="2000000" />
+	</bean>
    
    <mvc:resources mapping="/resources/**" location="/resources/" />
    <mvc:annotation-driven />

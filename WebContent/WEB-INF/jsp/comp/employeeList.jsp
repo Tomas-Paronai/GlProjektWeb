@@ -17,14 +17,14 @@
 		<c:forEach items="${employees}" var="curEmployee">
 			<tr class="employee-row" data="${curEmployee.id}">
 				<td>${curEmployee.name}</td>
-				<td>${curEmployee.email}</td>
+				<td>${curEmployee.contact.email}</td>
 				<td>
 				<img src="${iconPath.concat(curEmployee.sex == 'FEMALE' ? 'woman.png' : 'man.png')}" alt="${curEmployee.sex}"/>
 				</td>
 				<td class="status"><img src="${iconPath.concat('no.png')}" alt="NO"/></td>
 			</tr>
 			<tr class="employee-shifts">
-				<td colspan="4"><img src="/EmployeeOrganizer/resources/asset/icon/shifts.png" alt="shifts"></td>
+				<td colspan="4"><img src="${iconPath.concat('shifts.png')}" alt="shifts"></td>
 			</tr>
 		</c:forEach>
 		</c:if>		
