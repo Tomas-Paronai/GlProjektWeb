@@ -17,8 +17,11 @@ $(document).on('click','.sort', function(){
 	sortTable(this);
 });
 
-$(document).on('keypress','.search', function(){
+$(document).on('keypress','.search', function(e){
 	searchWord = $(this).val();
+	if(e.which == 13){
+		sortTable(null);
+	}
 	setTimeout(function(){
 		sortTable(null);		
 	},3000);
