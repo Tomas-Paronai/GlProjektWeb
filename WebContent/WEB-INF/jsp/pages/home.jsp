@@ -38,67 +38,71 @@
 <body>
 
 <div class="group page-container">
-
+	<!-- tabs menu -->
+	
 	<ul class="tabs">
 		<li class="tab-link current" data-tab="tab-1">Employees</li>
 		<li class="tab-link" data-tab="tab-2">Actions</li>
 	</ul>
 
+	<!-- content tab1 -->
 	<div id="tab-1" class="tab-content current">
-		<spring:url value="/resources/js/tableNavigation.js" var="tableScript"/>
-	<script type="text/javascript" src="${tableScript}"></script>
-	
-	<!-- Employees list -->
-	<jsp:include page="../comp/employeeList.jsp"/>	
-	
-	<div class="detail">
-		<table id="detailInfo">		
-			<!-- ADDRESS -->
-			<tr>
-				<td class="category" colspan="2">Address</td>
-			</tr>
-			<tr>
-				<td class="cat-detail">Country:</td>
-				<td class="cat-value" data="country">-</td>
-			</tr>
-			<tr>
-				<td class="cat-detail">City:</td>
-				<td class="cat-value" data="city">-</td>
-			</tr>
-			<tr>
-				<td class="cat-detail">Street:</td>
-				<td class="cat-value" data="street">-</td>
-			</tr>
-			<tr>
-				<td class="cat-detail">Post-code:</td>
-				<td class="cat-value" data="postcode">-</td>
-			</tr>
+	<div class="group content-tab1">
+			<spring:url value="/resources/js/tableNavigation.js" var="tableScript"/>
+				<script type="text/javascript" src="${tableScript}"></script>
 			
-			<!-- EMPLOYMENT DETAIL -->
-			<tr>
-				<td class="category" colspan="2">Employment detail</td>
-			</tr>
-			<tr>
-				<td class="cat-detail">Position:</td>
-				<td class="cat-value" data="position">-</td>
-			</tr>
-			<tr>
-				<td class="cat-detail">Contract:</td>
-				<td class="cat-value" data="contract">-</td>
-			</tr>
-			<tr>
-				<td class="cat-detail">Wage/h:</td>
-				<td class="cat-value" data="salary">-</td>
-			</tr>
-			<tr>
-				<td class="cat-detail">Employed since:</td>
-				<td class="cat-value" data="employed-since">-</td>
-			</tr>
+			<!-- Employees list -->
+			<jsp:include page="../comp/employeeList.jsp"/>	
 			
-		</table>
-	</div>		
-	
+			<div class="detail">
+				<table id="detailInfo">		
+					<!-- ADDRESS -->
+					<tr>
+						<td class="category" colspan="2">Address</td>
+					</tr>
+					<tr>
+						<td class="cat-detail">Country:</td>
+						<td class="cat-value" data="country">-</td>
+					</tr>
+					<tr>
+						<td class="cat-detail">City:</td>
+						<td class="cat-value" data="city">-</td>
+					</tr>
+					<tr>
+						<td class="cat-detail">Street:</td>
+						<td class="cat-value" data="street">-</td>
+					</tr>
+					<tr>
+						<td class="cat-detail">Post-code:</td>
+						<td class="cat-value" data="postcode">-</td>
+					</tr>
+					
+					<!-- EMPLOYMENT DETAIL -->
+					<tr>
+						<td class="category" colspan="2">Employment detail</td>
+					</tr>
+					<tr>
+						<td class="cat-detail">Position:</td>
+						<td class="cat-value" data="position">-</td>
+					</tr>
+					<tr>
+						<td class="cat-detail">Contract:</td>
+						<td class="cat-value" data="contract">-</td>
+					</tr>
+					<tr>
+						<td class="cat-detail">Wage/h:</td>
+						<td class="cat-value" data="salary">-</td>
+					</tr>
+					<tr>
+						<td class="cat-detail">Employed since:</td>
+						<td class="cat-value" data="employed-since">-</td>
+					</tr>
+					
+				</table>
+			</div>		
+		</div>
 	</div>
+	<!-- content tab1 -->
 	<div id="tab-2" class="tab-content">
 		<button class="openDialog" data="newData?item=position">Position</button>
 		<button class="openDialog" data="newData?item=contract">Contract</button>

@@ -22,7 +22,7 @@
 <body>
 	<div class="login-container">
 		<div class="login">
-			<h1 class="login-heading">Sing In</h1>
+			<h1 class="login-heading">Sign In</h1>
 			<form:form method="post" action="doLogin" modelAttribute="command" class="loginForm">
 			 	<form:input path="userName" class="input-txt" placeholder="Username"/>
 			 	<form:password path="password" class="input-txt" placeholder="Password"/>
