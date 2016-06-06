@@ -112,15 +112,34 @@ public abstract class XmlBase {
     }
 
     public void setFile(File file){
-        xmlFile = file;
-        setupBuilders(xmlFile);
-        doc.getDocumentElement().normalize();
+        setFile(file, false);
     }
 
     public void setFile(String path){
+    	setFile(path, false);
+    }
+    
+    public void setFile(File file, boolean newFile){
+    	xmlFile = file;
+    	if(newFile){
+    		setupBuilders();
+    	}
+    	else{
+    		setupBuilders(xmlFile);
+    		doc.getDocumentElement().normalize();
+    	}        
+        
+    }
+
+    public void setFile(String path, boolean newFile){
         xmlFile = new File(path);
-        setupBuilders(xmlFile);
-        doc.getDocumentElement().normalize();
+        if(newFile){
+    		setupBuilders();
+    	}
+    	else{
+    		setupBuilders(xmlFile);
+    		doc.getDocumentElement().normalize();
+    	}        
     }
 
     public void saveFile() throws XmlParserException {

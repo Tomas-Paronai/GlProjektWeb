@@ -118,7 +118,13 @@ public class ActionsController {
 	public String exportList(@ModelAttribute("selectBean") SelectedEmp selectedEmp,HttpServletRequest request,HttpServletResponse response){
 		XmlHandler xmlHandler = new XmlHandler();
 		try {
-			File filetoDownlaod = xmlHandler.exportEmployees(employeeDAO.getEmployeeByListId(selectedEmp.getEmpId()));
+	        ServletContext context = request.getServletContext();
+	        String appPath = context.getRealPath("");
+	        File dir = new File(appPath + File.separator + "imports");
+	        if(!dir.exists()){
+	        	dir.mkdir();
+	        }
+			File filetoDownlaod = xmlHandler.exportEmployees(employeeDAO.getEmployeeByListId(selectedEmp.getEmpId()),dir);
 			
 			if(!filetoDownlaod.exists()){
 	            String errorMessage = "Sorry. The file you are looking for does not exist";

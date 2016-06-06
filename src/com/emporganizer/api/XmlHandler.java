@@ -5,6 +5,7 @@ import com.emporganizer.api.XML.XmlOut;
 import com.emporganizer.api.XML.XmlRead;
 import com.emporganizer.api.XML.errors.XmlParserException;
 import com.emporganizer.models.employee.Address;
+import com.emporganizer.models.employee.Contact;
 import com.emporganizer.models.employee.Employee;
 import com.emporganizer.models.employee.EmploymentDetail;
 
@@ -53,21 +54,16 @@ public class XmlHandler {
     //TODO past shifts xml parsng
 
 
-    public File exportEmployees(List<Employee> employees) throws XmlParserException, IOException {        
+    public File exportEmployees(List<Employee> employees, File dir) throws XmlParserException, IOException {        
         if(xml == null){
             xml = new XmlIterator();
-        }
-        String rootPath = System.getProperty("catalina.home");
-        File dir = new File(rootPath + File.separator + "exports");
-        if(!dir.exists()){
-        	dir.mkdir();
-        }
+        }        
         
         File fileResult = new File(dir.getAbsolutePath()+File.separator+"employees.xml");
         if(!fileResult.exists()){
         	fileResult.createNewFile();
         }
-        xml.setFile(fileResult);
+        xml.setFile(fileResult,true);
         xml.createElement(ROOT);
 
         for(Employee tmpEmployee : employees){
@@ -92,12 +88,13 @@ public class XmlHandler {
             xml.parent();
 
             //contact
+            Contact contact = tmpEmployee.getContact();
             xml.append(CONTACT);
             xml.append(PHONE);
-            xml.appendText(tmpEmployee.getPhone());
+            xml.appendText(contact.getPhone());
             xml.parent();
             xml.append(EMAIL);
-            xml.appendText(tmpEmployee.getEmail());
+            xml.appendText(contact.getEmail());
             xml.parent();
             xml.parent();
 
@@ -201,9 +198,10 @@ public class XmlHandler {
     				xml.nextSibling();
     				String employedSince = xml.readValue();
     				
+    				Contact contact = new Contact(phone,email);
     				Address address = new Address(country, city, street, postcode);
     				EmploymentDetail detail = new EmploymentDetail(position, contract, Float.parseFloat(salary), employedSince);
-    				Employee tmpEmployee = new Employee(0,firstName,lastName,sex,dob,phone,email,address,detail);
+    				Employee tmpEmployee = new Employee(0,firstName,lastName,sex,dob,contact,address,detail);
     				result.add(tmpEmployee);
     			}
     		}

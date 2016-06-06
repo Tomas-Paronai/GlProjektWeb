@@ -33,7 +33,7 @@
 			<c:if test="${!empty employeesCheck}">
 			<c:forEach items="${employeesCheck}" var="curEmployee">
 				<tr class="checkBoxEmployee">
-					<td>${curEmployee.name}<div class="person-mail" hidden>${curEmployee.email}</div></td>
+					<td>${curEmployee.name}<div class="person-mail" hidden>${curEmployee.contact.email}</div></td>
 					<td><input type="checkbox" class="list-checkbox" name="empId" value="${curEmployee.id}"/></td>
 				</tr>
 			</c:forEach>

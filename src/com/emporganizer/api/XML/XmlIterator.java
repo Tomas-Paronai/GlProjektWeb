@@ -126,9 +126,9 @@ public class XmlIterator extends XmlBase{
     public void nextSibling(){
         if(currentElement != null){
         	Node tmpNode = currentElement.getNextSibling();
-        	do{
+        	while(tmpNode.getNodeType() != Node.ELEMENT_NODE){
         		tmpNode = tmpNode.getNextSibling();
-        	}while(tmpNode.getNodeType() != Node.ELEMENT_NODE);
+        	}
             currentElement = (Element) tmpNode;
         }
     }

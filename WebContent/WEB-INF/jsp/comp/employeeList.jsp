@@ -17,7 +17,7 @@
 		<c:forEach items="${employees}" var="curEmployee">
 			<tr class="employee-row" data="${curEmployee.id}">
 				<td>${curEmployee.name}</td>
-				<td>${curEmployee.email}</td>
+				<td>${curEmployee.contact.email}</td>
 				<td>
 				<img src="${iconPath.concat(curEmployee.sex == 'FEMALE' ? 'woman.png' : 'man.png')}" alt="${curEmployee.sex}"/>
 				</td>

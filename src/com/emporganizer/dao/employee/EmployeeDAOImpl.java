@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.emporganizer.dao.items.ItemDAO;
 import com.emporganizer.models.employee.Address;
+import com.emporganizer.models.employee.Contact;
 import com.emporganizer.models.employee.Employee;
 import com.emporganizer.models.employee.EmployeePresent;
 import com.emporganizer.models.employee.EmploymentDetail;
@@ -129,7 +130,9 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 		
 		Address address = emp.getAddress();
 		jdbc.update(addressSql, new Object[]{id,address.getCountry(),address.getCity(),address.getStreet(),address.getPostCode()});
-		jdbc.update(contactSql,new Object[]{id,emp.getPhone(),emp.getEmail()});
+		
+		Contact contact = emp.getContact();
+		jdbc.update(contactSql,new Object[]{id,contact.getPhone(),contact.getEmail()});
 		
 		EmploymentDetail detail = emp.getDetail();
 		Position position = (Position) itemDAO.getItem("position", detail.getPosition());
