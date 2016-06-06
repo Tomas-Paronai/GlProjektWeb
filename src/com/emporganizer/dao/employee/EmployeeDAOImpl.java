@@ -52,16 +52,47 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 		return employees;
 	}
 	
+	
+	
 	@Override
-	public List<Employee> getSortedList(String criteria, boolean desc) {
+	public List<Employee> getEmployeeList(String search) {
 		String sql = "SELECT * FROM `employee` "
 				+ "INNER JOIN `address` ON employee.EmployeeID=address.EmployeeID "
 				+ "INNER JOIN `contact` ON employee.EmployeeID=contact.EmployeeID "
 				+ "INNER JOIN `employment_detail` ON employee.EmployeeID=employment_detail.EmployeeID "
 				+ "INNER JOIN `position` ON employment_detail.PositionID=position.PositionID "
-				+ "INNER JOIN `contract` ON employment_detail.ContractID=contract.ContractID "
-				+ "ORDER BY `" + criteria + "`"+ (desc ? " desc" : "");
+				+ "INNER JOIN `contract` ON employment_detail.ContractID=contract.ContractID ";
 		
+		
+		return null;
+	}
+
+	@Override
+	public List<Employee> getSortedList(String criteria, String search, boolean desc) {
+		String sql = "SELECT * FROM `employee` "
+				+ "INNER JOIN `address` ON employee.EmployeeID=address.EmployeeID "
+				+ "INNER JOIN `contact` ON employee.EmployeeID=contact.EmployeeID "
+				+ "INNER JOIN `employment_detail` ON employee.EmployeeID=employment_detail.EmployeeID "
+				+ "INNER JOIN `position` ON employment_detail.PositionID=position.PositionID "
+				+ "INNER JOIN `contract` ON employment_detail.ContractID=contract.ContractID";
+		
+		if(search != null && search != ""){
+			sql += " WHERE";
+			sql += " `firstname` LIKE '%" + search + "%' OR";
+			sql += " `surname` LIKE '%" + search + "%' OR";
+			sql += " `email` LIKE '%" + search + "%' OR";
+			sql += " `phone` LIKE '%" + search + "%' OR";
+			sql += " `city` LIKE '%" + search + "%' OR";
+			sql += " `country` LIKE '%" + search + "%' OR";
+			sql += " `street` LIKE '%" + search + "%' OR";
+			sql += " `postcode` LIKE '%" + search + "%' OR";
+			sql += " `position_name` LIKE '%" + search + "%' OR";
+			sql += " `contract_name` LIKE '%" + search + "%'";
+		}
+		
+		if(criteria != null && !criteria.equals("")){
+			sql+=" ORDER BY `" + criteria + "`"+ (desc ? " desc" : "");
+		}		
 		
 		return jdbc.query(sql, new EmployeeRowMapper());
 	}

@@ -42,6 +42,7 @@
 	<ul class="tabs">
 		<li class="tab-link current" data-tab="tab-1">Employees</li>
 		<li class="tab-link" data-tab="tab-2">Actions</li>
+		<li><input class="search" type="text" size="30"/></li>
 	</ul>
 
 	<div id="tab-1" class="tab-content current">

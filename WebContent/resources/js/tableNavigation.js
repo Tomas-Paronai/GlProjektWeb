@@ -4,6 +4,10 @@ var yesIco = "/EmployeeOrganizer/resources/asset/icon/yes.png";
 var noIco = "/EmployeeOrganizer/resources/asset/icon/no.png";
 var shiftIco = "/EmployeeOrganizer/resources/asset/icon/shifts.png";
 
+var desc = false;
+var searchWord = "";
+var criteria = "";
+
 $(document).on('click','.employee-shifts',function(){
 		hideOtherShifts();
 		showEmployeeShift(this);
@@ -13,12 +17,39 @@ $(document).on('click','.sort', function(){
 	sortTable(this);
 });
 
-$(document).ready(function(){
-	
-	/*load employee detail*/
-	$(".employee-row").click(function(){
-		getEmployeeData($(this).attr("data"));
-	});
+$(document).on('keypress','.search', function(){
+	searchWord = $(this).val();
+	setTimeout(function(){
+		sortTable(null);		
+	},3000);
+});
+
+/*load employee detail*/
+$(document).on('click', '.employee-row', function(){
+	getEmployeeData($(this).attr("data"));
+});
+
+/*status*/
+$(document).on('hover', '.status', function(){
+	var title = $(this).attr('title');
+    $(this).data('tipText', title).removeAttr('title');
+    $('<p class="tooltip"></p>')
+    .text(title)
+    .appendTo('body')
+    .fadeIn('slow');
+}, function(){
+	$(this).attr('title', $(this).data('tipText'));
+	$('.tooltip').remove();
+});
+
+$(document).on('mousemove','.tooltip', function(e){
+	var mousex = e.pageX + 20; //Get X coordinates
+	var mousey = e.pageY + 10; //Get Y coordinates
+	$('.tooltip').css({ top: mousey, left: mousex });
+});
+
+
+$(document).ready(function(){	
 	
 	/*get employee status*/
 	employeeStatus();
@@ -41,17 +72,27 @@ $(document).ready(function(){
 		}).mousemove(function(e) {
 			var mousex = e.pageX + 20; //Get X coordinates
 			var mousey = e.pageY + 10; //Get Y coordinates
-			$('.tooltip').css({ top: mousey, left: mousex })
+			$('.tooltip').css({ top: mousey, left: mousex });
 		});
 	
 	});
 
-var desc = false;
-function sortTable(el){
-	desc = !desc;	
-	var criteria = $(el).text() == 'Name' ? 'SurName' : $(el).text();
+
+function sortTable(el){		
+	if(el != null){
+		if(criteria != $(el).text()){
+			desc = !desc;
+		}
+		criteria = $(el).text() == 'Name' ? 'SurName' : $(el).text();
+	}
+	
+	var urlCall = "sort?sort="+criteria+"&desc="+desc;
+	if(searchWord != ""){
+		urlCall +="&search="+searchWord;
+	}
+	
 	$.ajax({
-		url: "sort?sort="+criteria+"&desc="+desc,
+		url: urlCall,
 		dataType: 'json',
 		success: function(data){
 			parseDataToTable(data);		
@@ -60,7 +101,15 @@ function sortTable(el){
 	});
 }
 
+function searchTable(el){	
+	searchWord = $(el).val();
+	console.log("sreach phrase: "+searchWord);
+	sortTable(null);
+}
 
+function getTableResult(){
+	
+}
 
 
 function parseDataToTable(data){

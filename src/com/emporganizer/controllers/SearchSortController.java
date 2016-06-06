@@ -25,11 +25,16 @@ public class SearchSortController {
 	
 	@RequestMapping("/sort")
 	public @ResponseBody List<Employee> getSortedList(@RequestParam(value = "sort", required = true) String head,
-										@RequestParam(value = "desc", required = true) String desc){
+													  @RequestParam(value = "desc", required = true) String desc,
+													  @RequestParam(value = "search", required = false) String search){
 		
 		boolean descending = (desc.equals("true") ? true : false);
 		if(head.equals("At work")){
-			List<Employee> employees = employeeDAO.getEmployeeList();
+			List<Employee> employees;
+			if(search != null && !search.equals("")){
+				employees = employeeDAO.getEmployeeList(search);
+			}
+			employees = employeeDAO.getEmployeeList();
 			List<EmployeePresent> presentFolk = employeeDAO.getPresentEmployees();
 			
 			List<Employee> present = new ArrayList<>();
@@ -37,11 +42,23 @@ public class SearchSortController {
 				present.add(employeeDAO.getEmployeeById(curPresent.getId()));
 			}
 			
+			List<Employee> remove = new ArrayList<>();
 			for(Employee presentEmp : present){
 				for(Employee tmpEmp : employees){
 					if(presentEmp.getId() == tmpEmp.getId()){
 						employees.remove(tmpEmp);
 						break;
+					}
+				}
+				remove.add(presentEmp);
+			}
+			if(remove.size() > 0){
+				for(Employee tmpRemove : remove){
+					for(Employee presentEmp : present){
+						if(tmpRemove.getId() == presentEmp.getId()){
+							present.remove(presentEmp);
+							break;
+						}
 					}
 				}
 			}
@@ -57,7 +74,7 @@ public class SearchSortController {
 			return result;
 		}
 		
-		return employeeDAO.getSortedList(head, descending);
+		return employeeDAO.getSortedList(head, search, descending);
 	}
 	
 	
