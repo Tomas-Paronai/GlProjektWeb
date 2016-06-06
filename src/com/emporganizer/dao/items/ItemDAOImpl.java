@@ -28,6 +28,16 @@ public class ItemDAOImpl implements ItemDAO{
 		String sql = "SELECT * FROM `" + table + "` WHERE " + table + "ID=?";
 		
 		return jdbc.queryForObject(sql, new Object[]{id}, new ItemRowMapper(table));
+	}	
+
+	@Override
+	public DBItem getItem(String table, String name) {
+		String sql = "SELECT * FROM `" + table + "` WHERE " + table + "_name=?";
+		List<DBItem> result = jdbc.query(sql, new Object[]{name}, new ItemRowMapper(table));
+		if(result.size() >= 1){
+			return result.get(0);
+		}
+		return null;
 	}
 	
 	@Override
@@ -53,6 +63,7 @@ public class ItemDAOImpl implements ItemDAO{
 		String sql = "DELETE FROM " + table + " WHERE " + table + "ID=?";
 		jdbc.update(sql, new Object[]{id});
 	}
+
 
 	
 

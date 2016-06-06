@@ -148,4 +148,9 @@ public class ActionsController {
 		
 		return "redirect:/home";
 	}
+	
+	@RequestMapping(value = "/import", method = RequestMethod.POST)
+	public void importFile(){
+		XmlHandler xmlHandler = new XmlHandler();
+	}
 }

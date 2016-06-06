@@ -10,7 +10,15 @@ import com.emporganizer.models.employee.EmploymentDetail;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.soap.Node;
+
+import org.apache.tomcat.util.http.fileupload.FileUtils;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 /**
  * Created by tomas on 6/4/2016.
@@ -26,6 +34,7 @@ public class XmlHandler {
     public final static String ID = "id";
     public final static String FIRSTNAME = "first-name";
     public final static String LASTNAME = "last-name";
+    public final static String SEX = "sex";
     public final static String DOB = "dob";
     public final static String CONTACT = "contact";
     public final static String PHONE = "phone";
@@ -61,8 +70,8 @@ public class XmlHandler {
         xml.setFile(fileResult);
         xml.createElement(ROOT);
 
-        for(Employee tmpEmloyee : employees){
-            String id = String.valueOf(tmpEmloyee.getId());
+        for(Employee tmpEmployee : employees){
+            String id = String.valueOf(tmpEmployee.getId());
 
             //employee
             xml.append(EMPLOYEE);
@@ -70,27 +79,30 @@ public class XmlHandler {
 
             //basic info
             xml.append(FIRSTNAME);
-            xml.appendText(tmpEmloyee.getFirstName());
+            xml.appendText(tmpEmployee.getFirstName());
             xml.parent();
             xml.append(LASTNAME);
-            xml.appendText(tmpEmloyee.getLastName());
+            xml.appendText(tmpEmployee.getLastName());
+            xml.parent();
+            xml.append(SEX);
+            xml.appendText(tmpEmployee.getSex().getVal());
             xml.parent();
             xml.append(DOB);
-            xml.appendText(tmpEmloyee.getDob().toString());
+            xml.appendText(tmpEmployee.getDob().toString());
             xml.parent();
 
             //contact
             xml.append(CONTACT);
             xml.append(PHONE);
-            xml.appendText(tmpEmloyee.getPhone());
+            xml.appendText(tmpEmployee.getPhone());
             xml.parent();
             xml.append(EMAIL);
-            xml.appendText(tmpEmloyee.getEmail());
+            xml.appendText(tmpEmployee.getEmail());
             xml.parent();
             xml.parent();
 
             //address
-            Address address = tmpEmloyee.getAddress();
+            Address address = tmpEmployee.getAddress();
             xml.append(ADDRESS);
             xml.append(COUNTRY);
             xml.appendText(address.getCountry());
@@ -107,7 +119,7 @@ public class XmlHandler {
             xml.parent();
 
             //detail
-            EmploymentDetail detail = tmpEmloyee.getDetail();
+            EmploymentDetail detail = tmpEmployee.getDetail();
             xml.append(DETAIL);
             xml.append(POSITION);
             xml.appendText(detail.getPosition());
@@ -127,5 +139,79 @@ public class XmlHandler {
             return fileResult;
         }
         return null;
+    }
+    
+    public List<Employee> importEmployees(File importFile){
+    	List<Employee> result = new ArrayList<>();
+    	
+    	String extension = "";
+
+    	int n = importFile.getName().lastIndexOf('.');
+    	if (n > 0) {
+    	    extension = importFile.getName().substring(n+1);
+    	}
+    	
+    	if(extension.equals("xml")){
+    		if(xml == null){
+                xml = new XmlIterator();
+            }
+    		
+    		NodeList nodeList = xml.getDoc().getElementsByTagName(EMPLOYEE);
+    		for(int i = 0; i < nodeList.getLength(); i++){
+    			if(nodeList.item(i).getNodeType() == Node.ELEMENT_NODE){    				
+    				xml.setElement((Element)nodeList.item(i));
+    				
+    				xml.firstChild();
+    				String firstName = xml.readValue();
+    				xml.nextSibling();
+    				String lastName = xml.readValue();
+    				xml.nextSibling();
+    				String sex = xml.readValue();
+    				xml.nextSibling();
+    				String dob = xml.readValue();
+    				
+    				xml.parent();
+    				xml.findElement(CONTACT);
+    				xml.firstChild();
+    				String phone = xml.readValue();
+    				xml.nextSibling();
+    				String email = xml.readValue();
+    				
+    				xml.parent();
+    				xml.parent();
+    				xml.findElement(ADDRESS);
+    				xml.firstChild();
+    				String country = xml.readValue();
+    				xml.nextSibling();
+    				String city = xml.readValue();
+    				xml.nextSibling();
+    				String street = xml.readValue();
+    				xml.nextSibling();
+    				String postcode = xml.readValue();
+    				
+    				xml.parent();
+    				xml.parent();
+    				xml.findElement(DETAIL);
+    				xml.firstChild();
+    				String position = xml.readValue();
+    				xml.nextSibling();
+    				String contract = xml.readValue();
+    				xml.nextSibling();
+    				String salary = xml.readValue();
+    				xml.nextSibling();
+    				String employedSince = xml.readValue();
+    				
+    				Address address = new Address(country, city, street, postcode);
+    				EmploymentDetail detail = new EmploymentDetail(position, contract, Float.parseFloat(salary), employedSince);
+    				Employee tmpEmployee = new Employee(0,firstName,lastName,sex,dob,phone,email,address,detail);
+    				result.add(tmpEmployee);
+    			}
+    		}
+    	}
+    	else{
+    		return null;
+    	}
+    	
+    	return result;
     }
 }

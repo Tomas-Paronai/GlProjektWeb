@@ -70,9 +70,9 @@ public class XmlIterator extends XmlBase{
         return false;
     }
 
-    public void setAttributes(String attName, String attrVal){
+    public void setAttributes(String attrName, String attrVal){
         if(currentElement != null){
-            currentElement.setAttribute(attName,attrVal);
+            currentElement.setAttribute(attrName,attrVal);
         }
     }
 
@@ -108,7 +108,11 @@ public class XmlIterator extends XmlBase{
             currentElement = null;
         }
     }
-
+    
+    public boolean isNull(){
+    	return currentElement == null ? true : false;
+    }
+    
     public void root(){
         currentElement = doc.getDocumentElement();
     }
@@ -130,7 +134,25 @@ public class XmlIterator extends XmlBase{
             currentElement = (Element) currentElement.getPreviousSibling();
         }
     }
-
+    
+    public void firstChild(){
+    	if(currentElement != null){
+    		currentElement = (Element) currentElement.getChildNodes().item(0);
+    	}    	
+    }
+    
+    public String readValue(){
+    	if(currentElement != null){
+    		return currentElement.getTextContent();
+    	}
+    	
+    	return "ERROR";
+    }
+    
+    public void setElement(Element element){
+    	currentElement = element;
+    }
+    
     public boolean build(){
         try {
             transform();

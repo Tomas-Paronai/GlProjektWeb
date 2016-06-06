@@ -104,6 +104,7 @@
 		<button class="openDialog" data="newData?item=contract">Contract</button>
 		<button class="openDialog" data="mailForm">Send email</button>
 		<button class="openDialog" data="export">Export</button>
+		<button class="openDialog" data="import">Import</button>
 		 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 	</div>
 	
