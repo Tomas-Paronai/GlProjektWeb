@@ -7,10 +7,10 @@
 <spring:url value="/resources/asset/icon/" var="iconPath"/>
 <table id="employeesTab">
 		<tr class="employee-head">
-			<th>Name</th>
-			<th>Email</th>
-			<th>Gender</th>
-			<th>In work</th>
+			<th class="sort">Name</th>
+			<th class="sort">Email</th>
+			<th class="sort">Gender</th>
+			<th class="sort">At work</th>
 		</tr>
 		
 		<c:if test="${!empty employees}">

@@ -1,6 +1,16 @@
+var maleIco = "/EmployeeOrganizer/resources/asset/icon/man.png";
+var femaleIco = "/EmployeeOrganizer/resources/asset/icon/woman.png";
+var yesIco = "/EmployeeOrganizer/resources/asset/icon/yes.png";
+var noIco = "/EmployeeOrganizer/resources/asset/icon/no.png";
+var shiftIco = "/EmployeeOrganizer/resources/asset/icon/shifts.png";
+
 $(document).on('click','.employee-shifts',function(){
 		hideOtherShifts();
 		showEmployeeShift(this);
+});
+
+$(document).on('click','.sort', function(){
+	sortTable(this);
 });
 
 $(document).ready(function(){
@@ -35,6 +45,47 @@ $(document).ready(function(){
 		});
 	
 	});
+
+var desc = false;
+function sortTable(el){
+	desc = !desc;	
+	var criteria = $(el).text() == 'Name' ? 'SurName' : $(el).text();
+	$.ajax({
+		url: "sort?sort="+criteria+"&desc="+desc,
+		dataType: 'json',
+		success: function(data){
+			parseDataToTable(data);		
+			employeeStatus();
+		}
+	});
+}
+
+
+
+
+function parseDataToTable(data){
+	var header = $('.employee-head');
+	var table = $('#employeesTab');
+	table.empty();
+	table.append(header);
+	
+	for(var i = 0; i < data.length; i++){
+		var row = $('<tr class="employee-row" data="'+data[i].id+'"></tr>');
+		var cellName = $('<td>'+data[i].name+'</td>');
+		var cellEmail = $('<td>'+data[i].contact.email+'</td>');
+		var cellGender = $('<td><img src="'+(data[i].sex == 'FEMALE' ? femaleIco : maleIco)+'" alt="'+data[i].sex+'"></td>');
+		var cellAtWork = $('<td class="status"><img src="'+noIco+'" alt="NO"></td>');
+		var shiftRow = $('<tr class="employee-shifts"><td colspan="4"><img src="'+shiftIco+'"></td></tr>');
+		
+		row.append(cellName);
+		row.append(cellEmail);
+		row.append(cellGender);
+		row.append(cellAtWork);
+		
+		table.append(row);
+		table.append(shiftRow);
+	}
+}
 
 function hideOtherShifts(){
 	$(".shifts-container").slideToggle('slow',function(){
@@ -80,7 +131,7 @@ function employeeStatus(){
 		dataType: 'json',
 		success: function(data){
 			var rows = $(".employee-row");
-			$(rows).find(".status").find("img").attr("src","/EmployeeOrganizer/resources/asset/icon/no.png");
+			$(rows).find(".status").find("img").attr("src",noIco);
 			$(rows).find(".status").find("img").attr("alt","NO");
 			$(rows).find(".status").find("img").attr("title","not present");
 			$(rows).each(function(index){
@@ -88,7 +139,7 @@ function employeeStatus(){
 				$(data).each(function(index){
 					if(data[index].id == rowData.attr("data")){
 						var cell = $(rowData).find(".status").find("img");
-						$(cell).attr("src","/EmployeeOrganizer/resources/asset/icon/yes.png");
+						$(cell).attr("src",yesIco);
 						$(cell).attr("alt","YES");
 						$(cell).attr("title",parseDate(data[index].entered));
 					}

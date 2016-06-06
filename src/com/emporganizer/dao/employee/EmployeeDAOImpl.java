@@ -53,6 +53,20 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 	}
 	
 	@Override
+	public List<Employee> getSortedList(String criteria, boolean desc) {
+		String sql = "SELECT * FROM `employee` "
+				+ "INNER JOIN `address` ON employee.EmployeeID=address.EmployeeID "
+				+ "INNER JOIN `contact` ON employee.EmployeeID=contact.EmployeeID "
+				+ "INNER JOIN `employment_detail` ON employee.EmployeeID=employment_detail.EmployeeID "
+				+ "INNER JOIN `position` ON employment_detail.PositionID=position.PositionID "
+				+ "INNER JOIN `contract` ON employment_detail.ContractID=contract.ContractID "
+				+ "ORDER BY `" + criteria + "`"+ (desc ? " desc" : "");
+		
+		
+		return jdbc.query(sql, new EmployeeRowMapper());
+	}
+	
+	@Override
 	public List<Employee> getEmployeeByListId(List<Integer> empIds) {
 		String sql = "SELECT * FROM `employee` "
 				+ "INNER JOIN `address` ON employee.EmployeeID=address.EmployeeID "
@@ -168,6 +182,8 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 			insertEmployee(emp);
 		}		
 	}
+
+	
 
 	
 	
