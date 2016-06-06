@@ -283,6 +283,21 @@ ul.tabs li.current{
 .group{
 	*zoom: 1;
 }
+
+/*ACTIONS TAB*/
+.actions{
+	width: 100%;
+	border-spacing: 10px 100px;
+    border-collapse: separate;
+}
+
+.action-bg{
+	width: 30vh;
+	height: 30vh;
+	background: #5D92BA;
+	text-align: center;
+}
+
 /*LOADING ANIMATION RELATED*/
 
 .modal {
