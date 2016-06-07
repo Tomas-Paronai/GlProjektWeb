@@ -20,6 +20,7 @@ import com.emporganizer.models.employee.EmploymentDetail;
 import com.emporganizer.models.items.Contract;
 import com.emporganizer.models.items.Position;
 
+
 public class EmployeeDAOImpl implements EmployeeDAO{
 	
 	private JdbcTemplate jdbc;
@@ -153,8 +154,8 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 
 	@Override
 	public void deleteEmployee(int employeeId) {
-		// TODO Auto-generated method stub
-		
+		String sql = "delete from employee where EmployeeID='"+employeeId+"'";
+		jdbc.update(sql);
 	}
 
 	@Override

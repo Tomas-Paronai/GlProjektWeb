@@ -17,7 +17,7 @@ html {
 }
 
 body { 
-  width: 1250px;
+  width: 1400px;
   display: block;
 }
 
@@ -127,6 +127,7 @@ input#userName:-webkit-autofill, input#password:-webkit-autofill {
 	width:1250px;
 }
 
+
 ul.tabs{
 	margin: 0px;
 	padding: 0px;
@@ -157,26 +158,64 @@ ul.tabs li.current{
 
 .tab-content.current{
 	display: inherit;
+	padding:0;
 }
 
+/*Employees table*/
+#table-menu >li{
+	display:inline-block;	
+}
+#table-menu >li:nth-child(1){
+	margin-left:52px;
+}
+#table-menu >li:nth-child(2){
+	margin-left:162px;
+}
+#table-menu >li:nth-child(3){
+	margin-left:140px;
+}
+#table-menu >li:nth-child(4){
+	margin-left:60px;
+}
 #employeesTab th, #employeesTab td{
 	text-align: center;
+	min-width: 110px;
 }
 
 #employeesTab {
   background: white;
   border-radius:3px;
   border-collapse: collapse;
-  margin: auto;
+  
   padding:5px;
   width: auto;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   animation: float 5s infinite;
   display: inline-block;
-  float: left;
-  owerflow-y: scroll;
-  height:90wh; 
+  
+  overflow-y:scroll; 
+  overflow-x:hidden; 
+  height:613px;
 }
+
+#tableWrapper{
+	display:inline-block;
+	margin-top:80px;
+	float:left;
+}
+#table-menu{
+	color:#D5DDE5;
+  background:#1b1e24;
+  border-bottom:4px solid #9ea7af;
+  border-right: 1px solid #343a45;
+  font-size:20px;
+  font-weight: 100;
+  padding:15px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  vertical-align:middle;
+  margin:0;
+}
+
 
 .employee-head th {
   color:#D5DDE5;
@@ -188,6 +227,15 @@ ul.tabs li.current{
   padding:15px;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
   vertical-align:middle;
+   
+}
+
+.detail{
+	display: inline-block; 
+    float: left;
+    background: white;
+    margin-top: 145px;
+   
 }
 
 .employee-shifts{

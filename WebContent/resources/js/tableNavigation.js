@@ -3,6 +3,7 @@ var femaleIco = "/EmployeeOrganizer/resources/asset/icon/woman.png";
 var yesIco = "/EmployeeOrganizer/resources/asset/icon/yes.png";
 var noIco = "/EmployeeOrganizer/resources/asset/icon/no.png";
 var shiftIco = "/EmployeeOrganizer/resources/asset/icon/shifts.png";
+var delIco = "/EmployeeOrganizer/resources/asset/icon/deleteEmployee.png";
 
 var desc = false;
 var searchWord = "";
@@ -25,6 +26,10 @@ $(document).on('keypress','.search', function(e){
 	setTimeout(function(){
 		sortTable(null);		
 	},3000);
+});
+
+$(document).on('click','.delete-emp', function(){
+	deleteEmployee(this);
 });
 
 /*load employee detail*/
@@ -80,6 +85,23 @@ $(document).ready(function(){
 	
 	});
 
+function deleteEmployee(el){
+	var id = $(el).parent().parent().attr('data');
+	console.log("delete: "+id);
+	$.ajax({
+		url: "deleteEmployee?id="+id,
+		success: function(){
+			deleteRow(id);
+		}
+	});
+}
+
+function deleteRow(el){
+	var row = $('.employee-row[data='+el+']');
+	var shiftRow = row.next();
+	row.remove();
+	shiftRow.remove();
+}
 
 function sortTable(el){	
 	console.log(searchWord);
@@ -117,10 +139,10 @@ function getTableResult(){
 
 
 function parseDataToTable(data){
-	var header = $('.employee-head');
+	
 	var table = $('#employeesTab');
 	table.empty();
-	table.append(header);
+	
 	
 	for(var i = 0; i < data.length; i++){
 		var row = $('<tr class="employee-row" data="'+data[i].id+'"></tr>');
@@ -128,12 +150,14 @@ function parseDataToTable(data){
 		var cellEmail = $('<td>'+data[i].contact.email+'</td>');
 		var cellGender = $('<td><img src="'+(data[i].sex == 'FEMALE' ? femaleIco : maleIco)+'" alt="'+data[i].sex+'"></td>');
 		var cellAtWork = $('<td class="status"><img src="'+noIco+'" alt="NO"></td>');
+		var cellDelete = $('<td><img class="delete-emp" src="'+delIco+'" alt="delete"></td>');
 		var shiftRow = $('<tr class="employee-shifts"><td colspan="4"><img src="'+shiftIco+'"></td></tr>');
 		
 		row.append(cellName);
 		row.append(cellEmail);
 		row.append(cellGender);
 		row.append(cellAtWork);
+		row.append(cellDelete);
 		
 		table.append(row);
 		table.append(shiftRow);

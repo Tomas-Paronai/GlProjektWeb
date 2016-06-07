@@ -5,27 +5,35 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <spring:url value="/resources/asset/icon/" var="iconPath"/>
-<table id="employeesTab">
-		<tr class="employee-head">
-			<th class="sort">Name</th>
-			<th class="sort">Email</th>
-			<th class="sort">Gender</th>
-			<th class="sort">At work</th>
-		</tr>
-		
-		<c:if test="${!empty employees}">
-		<c:forEach items="${employees}" var="curEmployee">
-			<tr class="employee-row" data="${curEmployee.id}">
-				<td>${curEmployee.name}</td>
-				<td>${curEmployee.contact.email}</td>
-				<td>
-				<img src="${iconPath.concat(curEmployee.sex == 'FEMALE' ? 'woman.png' : 'man.png')}" alt="${curEmployee.sex}"/>
-				</td>
-				<td class="status"><img src="${iconPath.concat('no.png')}" alt="NO"/></td>
-			</tr>
-			<tr class="employee-shifts">
-				<td colspan="4"><img src="${iconPath.concat('shifts.png')}" alt="shifts"></td>
-			</tr>
-		</c:forEach>
-		</c:if>		
-	</table>
+
+<div id="tableWrapper">
+	<ul id="table-menu">
+	<li class="sort">Name</li>
+	<li class="sort">Email</li>
+	<li class="sort">Gender</li>
+	<li class="sort">At work</li>
+	</ul>
+	
+			<table id="employeesTab">
+				
+				
+				<c:if test="${!empty employees}">
+				<c:forEach items="${employees}" var="curEmployee">
+					<tr class="employee-row" data="${curEmployee.id}">
+						<td>${curEmployee.name}</td>
+						<td>${curEmployee.contact.email}</td>
+						<td>
+							<img src="${iconPath.concat(curEmployee.sex == 'FEMALE' ? 'woman.png' : 'man.png')}" alt="${curEmployee.sex}"/>
+						</td>
+						<td class="status"><img src="${iconPath.concat('no.png')}" alt="NO"/></td>
+						<td>
+							<img class="delete-emp" src="/EmployeeOrganizer/resources/asset/icon/deleteEmployee.png" alt="delete">
+						</td>
+					</tr>
+					<tr class="employee-shifts">
+						<td colspan="5"><img src="/EmployeeOrganizer/resources/asset/icon/shifts.png" alt="shifts"></td>
+					</tr>
+				</c:forEach>
+				</c:if>		
+			</table>
+</div>	
