@@ -81,9 +81,10 @@ $(document).ready(function(){
 	});
 
 
-function sortTable(el){		
+function sortTable(el){	
+	console.log(searchWord);
 	if(el != null){
-		if(criteria != $(el).text()){
+		if(criteria == $(el).text()){
 			desc = !desc;
 		}
 		criteria = $(el).text() == 'Name' ? 'SurName' : $(el).text();
