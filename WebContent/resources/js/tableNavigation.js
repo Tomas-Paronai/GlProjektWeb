@@ -8,6 +8,8 @@ var delIco = "/EmployeeOrganizer/resources/asset/icon/deleteEmployee.png";
 var desc = false;
 var searchWord = "";
 var criteria = "";
+var del = false;
+var def = false;
 
 $(document).on('click','.employee-shifts',function(){
 		hideOtherShifts();
@@ -29,12 +31,25 @@ $(document).on('keypress','.search', function(e){
 });
 
 $(document).on('click','.delete-emp', function(){
-	deleteEmployee(this);
+	if(!def){
+		deleteEmployee(this);
+		del = true;
+		def = true;
+	}
+	setTimeout(function(){
+		def = false;
+	},300);
+	
 });
 
 /*load employee detail*/
 $(document).on('click', '.employee-row', function(){
-	getEmployeeData($(this).attr("data"));
+	if(!del){
+		getEmployeeData($(this).attr("data"));
+	}
+	setTimeout(function(){
+		del = false;
+	},500);
 });
 
 /*status*/
@@ -65,28 +80,10 @@ $(document).ready(function(){
 		employeeStatus();
 	},60000);
 	
-	$('.status').hover(function(){
-        // Hover over code
-        var title = $(this).attr('title');
-        $(this).data('tipText', title).removeAttr('title');
-        $('<p class="tooltip"></p>')
-        .text(title)
-        .appendTo('body')
-        .fadeIn('slow');
-		}, function() {
-			// Hover out code
-			$(this).attr('title', $(this).data('tipText'));
-			$('.tooltip').remove();
-		}).mousemove(function(e) {
-			var mousex = e.pageX + 20; //Get X coordinates
-			var mousey = e.pageY + 10; //Get Y coordinates
-			$('.tooltip').css({ top: mousey, left: mousex });
-		});
-	
 	});
 
 function deleteEmployee(el){
-	var id = $(el).parent().parent().attr('data');
+	var id = $(el).parent().attr('data');
 	console.log("delete: "+id);
 	$.ajax({
 		url: "deleteEmployee?id="+id,
@@ -99,6 +96,7 @@ function deleteEmployee(el){
 function deleteRow(el){
 	var row = $('.employee-row[data='+el+']');
 	var shiftRow = row.next();
+	console.log("deleting "+row+" "+shiftRow);
 	row.remove();
 	shiftRow.remove();
 }

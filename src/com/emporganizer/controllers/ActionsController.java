@@ -162,7 +162,7 @@ public class ActionsController {
 	}
 	
 	@RequestMapping(value = "/import", method = RequestMethod.POST)
-	public void importFile(@RequestParam("fileUpload") CommonsMultipartFile fileUpload, HttpServletRequest request){
+	public String importFile(@RequestParam("fileUpload") CommonsMultipartFile fileUpload, HttpServletRequest request){
 		if(fileUpload != null){
 			XmlHandler xmlHandler = new XmlHandler();
 			ServletContext context = request.getServletContext();
@@ -185,7 +185,9 @@ public class ActionsController {
 			} catch (IllegalStateException | IOException e) {
 				System.out.println("Fail!");
 				e.printStackTrace();
-			}			
-		}		
+			}
+		}	
+		
+		return "redirect: /home";
 	}
 }

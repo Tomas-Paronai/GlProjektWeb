@@ -53,9 +53,10 @@ public class EmployeeRowMapper implements RowMapper<Employee>{
 	public static boolean hasColumn(ResultSet rs, String columnName) throws SQLException {
 	    ResultSetMetaData rsmd = rs.getMetaData();
 	    int columns = rsmd.getColumnCount();
+	    columnName = columnName.toLowerCase();
 	    for (int x = 1; x <= columns; x++) {
-	    	String name = rsmd.getColumnName(x);
-	        if (columnName.equals(rsmd.getColumnName(x))) {
+	    	String name = rsmd.getColumnName(x).toLowerCase();
+	        if (columnName.equals(name)) {
 	            return true;
 	        }
 	    }
