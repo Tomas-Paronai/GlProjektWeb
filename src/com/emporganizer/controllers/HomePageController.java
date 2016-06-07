@@ -76,7 +76,7 @@ public class HomePageController {
 		 return model;
 	}
 	@RequestMapping(value = "/deleteEmployee", method = RequestMethod.GET)
-	public void deleteEmployee(@RequestParam(value = "id", required = true) int id) {
+	public @ResponseBody void deleteEmployee(@RequestParam(value = "id", required = true) int id) {
 		System.out.println(id);
 		employeeDAO.deleteEmployee(id);
 	}

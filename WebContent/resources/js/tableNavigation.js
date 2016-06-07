@@ -33,7 +33,6 @@ $(document).on('keypress','.search', function(e){
 $(document).on('click','.delete-emp', function(){
 	if(!def){
 		deleteEmployee(this);
-		del = true;
 		def = true;
 	}
 	setTimeout(function(){
@@ -81,12 +80,15 @@ $(document).ready(function(){
 	},60000);
 	
 	});
-
+ 
 function deleteEmployee(el){
 	var id = $(el).parent().attr('data');
 	console.log("delete: "+id);
 	$.ajax({
 		url: "deleteEmployee?id="+id,
+		dataType : 'text',
+        processData : false,
+        contentType : false,
 		success: function(){
 			deleteRow(id);
 		}
