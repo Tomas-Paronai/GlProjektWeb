@@ -33,15 +33,6 @@
 <spring:url value="/resources/js/mailForm.js" var="mailJs"/>
 <script type="text/javascript" src="${mailJs}"></script>
 
-<spring:url value="/resources/css/bootstrap.css" var="bootstrap"/>
-<link rel="stylesheet" type="text/css" href="${bootstrap}" />
-
-<spring:url value="/resources/css/bootstrap-theme.css" var="bootstrapTheme"/>
-<link rel="stylesheet" type="text/css" href="${bootstrapTheme}" />
-
-<spring:url value="/resources/js/bootstrap.js" var="bootstrapJS"/>
-<script type="text/javascript" src="${bootstrapJS}"></script>
-
 <spring:url value="/resources/asset/icon/" var="iconPath"/>
 </head>
 <body>

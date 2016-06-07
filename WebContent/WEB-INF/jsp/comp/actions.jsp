@@ -15,32 +15,32 @@
 			<td>
 			<div class="action-bg">
 				<img src="">
-				<button class="openDialog btn btn-info btn-lg" data="newData?item=position">Position</button>
+				<button class="openDialog" data="newData?item=position">Position</button>
 			</div>
 			</td>
 			<td>
 			<div class="action-bg">
 				<img src="">
-				<button class="openDialog btn btn-info btn-lg" data="newData?item=contract">Contract</button>
+				<button class="openDialog" data="newData?item=contract">Contract</button>
 			</div>
 			</td>
 			<td>
 			<div class="action-bg">
 				<img src="">
-				<button class="openDialog btn btn-info btn-lg" data="mailForm">Send email</button>
+				<button class="openDialog" data="mailForm">Send email</button>
 			</div></td>
 		</tr>
 		<tr>
 			<td>
 			<div class="action-bg">
 				<img src="">
-				<button class="openDialog btn btn-info btn-lg" data="export">Export</button>
+				<button class="openDialog" data="export">Export</button>
 			</div>
 			</td>
 			<td>
 			<div class="action-bg">
 				<img src="">
-				<button class="openDialog btn btn-info btn-lg" data="import">Import</button>
+				<button class="openDialog" data="import">Import</button>
 			</div>
 			</td>
 			<td>
