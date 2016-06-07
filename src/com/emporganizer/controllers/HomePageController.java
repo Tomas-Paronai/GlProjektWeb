@@ -80,4 +80,10 @@ public class HomePageController {
 		System.out.print(id);
 		employeeDAO.deleteEmployee(id);
 	}
+	
+	@RequestMapping(value = "/updatePage", method = RequestMethod.GET)
+	public ModelAndView getdialog(@RequestParam(value = "id", required = true) int id){
+		ModelAndView model = new ModelAndView("pages/dialog/updatePage");
+		return model;
+	}
 }

@@ -29,6 +29,8 @@
 						<td>
 							<img class="delete-emp" src="/EmployeeOrganizer/resources/asset/icon/deleteEmployee.png" alt="delete">
 						</td>
+						<td><div class="openDialog" data="updatePage?id=${curEmployee.id}">asad</div>
+						</td>
 					</tr>
 					<tr class="employee-shifts">
 						<td colspan="5"><img src="/EmployeeOrganizer/resources/asset/icon/shifts.png" alt="shifts"></td>
