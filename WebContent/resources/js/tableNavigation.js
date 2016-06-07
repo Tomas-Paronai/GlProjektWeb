@@ -1,14 +1,63 @@
+var maleIco = "/EmployeeOrganizer/resources/asset/icon/man.png";
+var femaleIco = "/EmployeeOrganizer/resources/asset/icon/woman.png";
+var yesIco = "/EmployeeOrganizer/resources/asset/icon/yes.png";
+var noIco = "/EmployeeOrganizer/resources/asset/icon/no.png";
+var shiftIco = "/EmployeeOrganizer/resources/asset/icon/shifts.png";
+var delIco = "/EmployeeOrganizer/resources/asset/icon/deleteEmployee.png";
+
+var desc = false;
+var searchWord = "";
+var criteria = "";
+
 $(document).on('click','.employee-shifts',function(){
 		hideOtherShifts();
 		showEmployeeShift(this);
 });
 
-$(document).ready(function(){
-	
-	/*load employee detail*/
-	$(".employee-row").click(function(){
-		getEmployeeData($(this).attr("data"));
-	});
+$(document).on('click','.sort', function(){
+	sortTable(this);
+});
+
+$(document).on('keypress','.search', function(e){
+	searchWord = $(this).val();
+	if(e.which == 13){
+		sortTable(null);
+	}
+	setTimeout(function(){
+		sortTable(null);		
+	},3000);
+});
+
+$(document).on('click','.delete-emp', function(){
+	deleteEmployee(this);
+});
+
+/*load employee detail*/
+$(document).on('click', '.employee-row', function(){
+	getEmployeeData($(this).attr("data"));
+});
+
+/*status*/
+$(document).on('hover', '.status', function(){
+	var title = $(this).attr('title');
+    $(this).data('tipText', title).removeAttr('title');
+    $('<p class="tooltip"></p>')
+    .text(title)
+    .appendTo('body')
+    .fadeIn('slow');
+}, function(){
+	$(this).attr('title', $(this).data('tipText'));
+	$('.tooltip').remove();
+});
+
+$(document).on('mousemove','.tooltip', function(e){
+	var mousex = e.pageX + 20; //Get X coordinates
+	var mousey = e.pageY + 10; //Get Y coordinates
+	$('.tooltip').css({ top: mousey, left: mousex });
+});
+
+
+$(document).ready(function(){	
 	
 	/*get employee status*/
 	employeeStatus();
@@ -31,10 +80,88 @@ $(document).ready(function(){
 		}).mousemove(function(e) {
 			var mousex = e.pageX + 20; //Get X coordinates
 			var mousey = e.pageY + 10; //Get Y coordinates
-			$('.tooltip').css({ top: mousey, left: mousex })
+			$('.tooltip').css({ top: mousey, left: mousex });
 		});
 	
 	});
+
+function deleteEmployee(el){
+	var id = $(el).parent().parent().attr('data');
+	console.log("delete: "+id);
+	$.ajax({
+		url: "deleteEmployee?id="+id,
+		success: function(){
+			deleteRow(id);
+		}
+	});
+}
+
+function deleteRow(el){
+	var row = $('.employee-row[data='+el+']');
+	var shiftRow = row.next();
+	row.remove();
+	shiftRow.remove();
+}
+
+function sortTable(el){		
+	if(el != null){
+		if(criteria != $(el).text()){
+			desc = !desc;
+		}
+		criteria = $(el).text() == 'Name' ? 'SurName' : $(el).text();
+	}
+	
+	var urlCall = "sort?sort="+criteria+"&desc="+desc;
+	if(searchWord != ""){
+		urlCall +="&search="+searchWord;
+	}
+	
+	$.ajax({
+		url: urlCall,
+		dataType: 'json',
+		success: function(data){
+			parseDataToTable(data);		
+			employeeStatus();
+		}
+	});
+}
+
+function searchTable(el){	
+	searchWord = $(el).val();
+	console.log("sreach phrase: "+searchWord);
+	sortTable(null);
+}
+
+function getTableResult(){
+	
+}
+
+
+function parseDataToTable(data){
+	
+	var table = $('#employeesTab');
+	table.empty();
+	
+	
+	for(var i = 0; i < data.length; i++){
+		var row = $('<tr class="employee-row" data="'+data[i].id+'"></tr>');
+		var cellName = $('<td>'+data[i].name+'</td>');
+		var cellEmail = $('<td>'+data[i].contact.email+'</td>');
+		var cellGender = $('<td><img src="'+(data[i].sex == 'FEMALE' ? femaleIco : maleIco)+'" alt="'+data[i].sex+'"></td>');
+		var cellAtWork = $('<td class="status"><img src="'+noIco+'" alt="NO"></td>');
+		var cellDelete = $('<td><img class="delete-emp" src="'+delIco+'" alt="delete"></td>');
+		var shiftRow = $('<tr class="employee-shifts"><td colspan="4"><img src="'+shiftIco+'"></td></tr>');
+		
+		row.append(cellName);
+		row.append(cellEmail);
+		row.append(cellGender);
+		row.append(cellAtWork);
+		row.append(cellDelete);
+		
+		table.append(row);
+		table.append(shiftRow);
+	}
+}
 
 function hideOtherShifts(){
 	$(".shifts-container").slideToggle('slow',function(){
@@ -80,7 +207,7 @@ function employeeStatus(){
 		dataType: 'json',
 		success: function(data){
 			var rows = $(".employee-row");
-			$(rows).find(".status").find("img").attr("src","/EmployeeOrganizer/resources/asset/icon/no.png");
+			$(rows).find(".status").find("img").attr("src",noIco);
 			$(rows).find(".status").find("img").attr("alt","NO");
 			$(rows).find(".status").find("img").attr("title","not present");
 			$(rows).each(function(index){
@@ -88,7 +215,7 @@ function employeeStatus(){
 				$(data).each(function(index){
 					if(data[index].id == rowData.attr("data")){
 						var cell = $(rowData).find(".status").find("img");
-						$(cell).attr("src","/EmployeeOrganizer/resources/asset/icon/yes.png");
+						$(cell).attr("src",yesIco);
 						$(cell).attr("alt","YES");
 						$(cell).attr("title",parseDate(data[index].entered));
 					}

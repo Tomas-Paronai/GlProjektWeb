@@ -76,11 +76,8 @@ public class HomePageController {
 		 return model;
 	}
 	@RequestMapping("/deleteEmployee")
-	public ModelAndView deleteEmployee(@RequestParam int id) {
+	public void deleteEmployee(@RequestParam(value = "id", required = true) int id) {
 		System.out.print(id);
 		employeeDAO.deleteEmployee(id);
-		ModelAndView model = new ModelAndView("pages/home");
-		model.addObject("employees",employeeDAO.getEmployeeList());
-		return model;
 	}
 }

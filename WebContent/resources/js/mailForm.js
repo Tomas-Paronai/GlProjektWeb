@@ -1,7 +1,7 @@
 var recipents = new Array();;
 
 var def;
-$(document).on('click', '.list-checkbox', function(){
+$(document).on('change', '.list-checkbox', function(){
 	if(!def){
 		updateRecipents(this);
 		def = true;

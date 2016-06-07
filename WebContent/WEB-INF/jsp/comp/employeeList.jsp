@@ -8,10 +8,10 @@
 
 <div id="tableWrapper">
 	<ul id="table-menu">
-	<li>Name</li>
-	<li>Email</li>
-	<li>Gender</li>
-	<li>In work</li>
+	<li class="sort">Name</li>
+	<li class="sort">Email</li>
+	<li class="sort">Gender</li>
+	<li class="sort">At work</li>
 	</ul>
 	
 			<table id="employeesTab">
@@ -21,15 +21,13 @@
 				<c:forEach items="${employees}" var="curEmployee">
 					<tr class="employee-row" data="${curEmployee.id}">
 						<td>${curEmployee.name}</td>
-						<td>${curEmployee.email}</td>
+						<td>${curEmployee.contact.email}</td>
 						<td>
 							<img src="${iconPath.concat(curEmployee.sex == 'FEMALE' ? 'woman.png' : 'man.png')}" alt="${curEmployee.sex}"/>
 						</td>
 						<td class="status"><img src="${iconPath.concat('no.png')}" alt="NO"/></td>
 						<td>
-							<a href="deleteEmployee?id=${curEmployee.id}">
-								<img src="/EmployeeOrganizer/resources/asset/icon/deleteEmployee.png" alt="delete">
-							</a>
+							<img class="delete-emp" src="/EmployeeOrganizer/resources/asset/icon/deleteEmployee.png" alt="delete">
 						</td>
 					</tr>
 					<tr class="employee-shifts">
