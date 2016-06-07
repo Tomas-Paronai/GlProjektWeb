@@ -23,6 +23,7 @@ import com.emporganizer.models.Login;
 import com.emporganizer.models.employee.Employee;
 import com.emporganizer.models.employee.EmployeePresent;
 import com.emporganizer.models.employee.Shift;
+
 import com.mysql.jdbc.exceptions.jdbc4.CommunicationsException;
  
 @Controller
@@ -73,5 +74,13 @@ public class HomePageController {
 		ModelAndView model = new ModelAndView("pages/exportEmployees");
 		 model.addObject("employees",employeeList);
 		 return model;
+	}
+	@RequestMapping("/deleteEmployee")
+	public ModelAndView deleteEmployee(@RequestParam int id) {
+		System.out.print(id);
+		employeeDAO.deleteEmployee(id);
+		ModelAndView model = new ModelAndView("pages/home");
+		model.addObject("employees",employeeDAO.getEmployeeList());
+		return model;
 	}
 }

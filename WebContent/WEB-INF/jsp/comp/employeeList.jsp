@@ -23,12 +23,17 @@
 						<td>${curEmployee.name}</td>
 						<td>${curEmployee.email}</td>
 						<td>
-						<img src="${iconPath.concat(curEmployee.sex == 'FEMALE' ? 'woman.png' : 'man.png')}" alt="${curEmployee.sex}"/>
+							<img src="${iconPath.concat(curEmployee.sex == 'FEMALE' ? 'woman.png' : 'man.png')}" alt="${curEmployee.sex}"/>
 						</td>
 						<td class="status"><img src="${iconPath.concat('no.png')}" alt="NO"/></td>
+						<td>
+							<a href="deleteEmployee?id=${curEmployee.id}">
+								<img src="/EmployeeOrganizer/resources/asset/icon/deleteEmployee.png" alt="delete">
+							</a>
+						</td>
 					</tr>
 					<tr class="employee-shifts">
-						<td colspan="4"><img src="/EmployeeOrganizer/resources/asset/icon/shifts.png" alt="shifts"></td>
+						<td colspan="5"><img src="/EmployeeOrganizer/resources/asset/icon/shifts.png" alt="shifts"></td>
 					</tr>
 				</c:forEach>
 				</c:if>		
