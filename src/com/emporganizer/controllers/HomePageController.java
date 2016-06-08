@@ -63,8 +63,18 @@ public class HomePageController {
 	
 	@RequestMapping(value = "employeeShifts", method = RequestMethod.GET)
 	public String getEmployeeShifts(@RequestParam(value = "id", required = true) int id, ModelMap model){
+		
 		model.addAttribute("shifts", shiftDAO.getShifts(id));
 		return "pages/dialog/pastShifts";
+	}
+	
+	@RequestMapping(value = "employeeShiftsPeriod", method = RequestMethod.GET)
+	public @ResponseBody List<Shift> getEmployeeShifts(@RequestParam(value = "id", required = true) int id,
+								    				   @RequestParam(value = "period", required = true) int period ,ModelMap model){
+		
+		System.out.println(id);
+		System.out.println(period);
+		return shiftDAO.getShifts(id,period);
 	}
 	
 	

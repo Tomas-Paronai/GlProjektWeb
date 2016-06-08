@@ -346,6 +346,10 @@ ul.tabs li.current{
 	text-align: center;
 }
 
+.salary-details{
+	background: #5D92BA;
+}
+
 /*LOADING ANIMATION RELATED*/
 
 .modal {
