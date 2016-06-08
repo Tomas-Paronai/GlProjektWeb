@@ -10,6 +10,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +21,7 @@ import com.emporganizer.api.beans.SelectedEmp;
 import com.emporganizer.dao.employee.EmployeeDAO;
 import com.emporganizer.dao.employee.ShiftDAO;
 import com.emporganizer.models.Login;
+import com.emporganizer.models.employee.Address;
 import com.emporganizer.models.employee.Employee;
 import com.emporganizer.models.employee.EmployeePresent;
 import com.emporganizer.models.employee.Shift;
@@ -83,7 +85,14 @@ public class HomePageController {
 	
 	@RequestMapping(value = "/updatePage", method = RequestMethod.GET)
 	public ModelAndView getdialog(@RequestParam(value = "id", required = true) int id){
+
+		Employee employee = employeeDAO.getEmployeeById(id);
 		ModelAndView model = new ModelAndView("pages/dialog/updatePage");
+		model.addObject("employee", employee);
+		model.addObject("address", new Address());
+		
 		return model;
+		
 	}
+	
 }

@@ -23,7 +23,7 @@ public class EmployeeRowMapper implements RowMapper<Employee>{
 					                      rs.getFloat("Salary_per_hour"), 
 					                      rs.getDate("Start_work"));
 		}
-		
+		 
 		Address address  = null;
 		if(hasColumn(rs, "Country") && hasColumn(rs, "City") && hasColumn(rs, "Street") && hasColumn(rs, "PostCode")){
 			address = new Address(rs.getString("Country"),

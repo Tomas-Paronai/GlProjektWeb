@@ -27,9 +27,11 @@
 						</td>
 						<td class="status"><img src="${iconPath.concat('no.png')}" alt="NO"/></td>
 						<td>
-							<img class="delete-emp" src="/EmployeeOrganizer/resources/asset/icon/deleteEmployee.png" alt="delete">
+							<img class="delete-emp" src="/EmployeeOrganizer/resources/asset/icon/rubbish-bin.png" alt="delete">
 						</td>
-						<td><div class="openDialog" data="updatePage?id=${curEmployee.id}">asad</div>
+						<td><div class="openDialog" data="updatePage?id=${curEmployee.id}">
+								<img src="/EmployeeOrganizer/resources/asset/icon/edit-icon.png" alt="edit">
+							</div>
 						</td>
 					</tr>
 					<tr class="employee-shifts">

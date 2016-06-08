@@ -3,7 +3,7 @@ var femaleIco = "/EmployeeOrganizer/resources/asset/icon/woman.png";
 var yesIco = "/EmployeeOrganizer/resources/asset/icon/yes.png";
 var noIco = "/EmployeeOrganizer/resources/asset/icon/no.png";
 var shiftIco = "/EmployeeOrganizer/resources/asset/icon/shifts.png";
-var delIco = "/EmployeeOrganizer/resources/asset/icon/deleteEmployee.png";
+var delIco = "/EmployeeOrganizer/resources/asset/icon/rubbish-bin.png";
 
 var desc = false;
 var searchWord = "";
