@@ -30,10 +30,14 @@
 						<td class="delete-emp">
 							<div><img src="/EmployeeOrganizer/resources/asset/icon/deleteEmployee.png" alt="delete"></div>
 						</td>
+						<td class="openDialog" data='updatePage?id=${curEmployee.id}'>
+							<div><img src="/EmployeeOrganizer/resources/asset/icon/edit.png" alt="update"></div>
+						</td>
 					</tr>
 					<tr class="employee-shifts">
 						<td colspan="5"><img src="/EmployeeOrganizer/resources/asset/icon/shifts.png" alt="shifts"></td>
 					</tr>
+					
 				</c:forEach>
 				</c:if>		
 			</table>

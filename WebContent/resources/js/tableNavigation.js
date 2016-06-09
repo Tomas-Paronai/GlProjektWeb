@@ -4,6 +4,7 @@ var yesIco = "/EmployeeOrganizer/resources/asset/icon/yes.png";
 var noIco = "/EmployeeOrganizer/resources/asset/icon/no.png";
 var shiftIco = "/EmployeeOrganizer/resources/asset/icon/shifts.png";
 var delIco = "/EmployeeOrganizer/resources/asset/icon/deleteEmployee.png";
+var upIco = "/EmployeeOrganizer/resources/asset/icon/edit.png";
 
 var desc = false;
 var searchWord = "";
@@ -80,7 +81,7 @@ $(document).ready(function(){
 	},60000);
 	
 	});
- 
+
 function deleteEmployee(el){
 	var id = $(el).parent().attr('data');
 	console.log("delete: "+id);
@@ -149,6 +150,7 @@ function parseDataToTable(data){
 		var cellGender = $('<td><div><img src="'+(data[i].sex == 'FEMALE' ? femaleIco : maleIco)+'" alt="'+data[i].sex+'"></div></td>');
 		var cellAtWork = $('<td class="status"><div><img src="'+noIco+'" alt="NO"></div></td>');
 		var cellDelete = $('<td class="delete-emp"><div><img src="'+delIco+'" alt="delete"></div></td>');
+		var cellEdit = $('<td class="openDialog" data="updatePage?id='+data[i].id+'"><div><img src="'+upIco+'" alt="update"></div></td>');
 		var shiftRow = $('<tr class="employee-shifts"><td colspan="5"><img src="'+shiftIco+'"></td></tr>');
 		
 		row.append(cellName);
@@ -156,6 +158,7 @@ function parseDataToTable(data){
 		row.append(cellGender);
 		row.append(cellAtWork);
 		row.append(cellDelete);
+		row.append(cellEdit);
 		
 		table.append(row);
 		table.append(shiftRow);

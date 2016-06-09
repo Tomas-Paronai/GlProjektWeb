@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.emporganizer.api.beans.SelectedEmp;
 import com.emporganizer.dao.employee.EmployeeDAO;
 import com.emporganizer.dao.employee.ShiftDAO;
+import com.emporganizer.dao.items.ItemDAO;
 import com.emporganizer.models.Login;
 import com.emporganizer.models.employee.Address;
 import com.emporganizer.models.employee.Contact;
@@ -41,6 +42,9 @@ public class HomePageController {
 	
 	@Autowired
 	EmployeeDAO employeeDAO;
+	
+	@Autowired
+	ItemDAO itemDAO;
 	
 	@Autowired
 	ShiftDAO shiftDAO;
@@ -96,24 +100,17 @@ public class HomePageController {
 	
 	
 	@RequestMapping(value = "/updatePage", method = RequestMethod.GET)
-	public ModelAndView showUpdate(@RequestParam(value = "id", required = true) int id){
-		List<ContractType> contractList= employeeDAO.getListOfContracts();
-		List<PositionType> positionList= employeeDAO.getListOfPositions();
-		@SuppressWarnings("rawtypes")
-		Map<String, List> map = new HashMap<String, List>();
-		map.put("positionList", positionList);
-		
-		map.put("contractList",contractList);
-		
+	public String showUpdate(@RequestParam(value = "id", required = true) int id, ModelMap model){		
 		Employee employee = new Employee();
 		employee = employeeDAO.getEmployeeById(id);
 		EmployeeHelper employeeHelper= new EmployeeHelper(employee);
-		ModelAndView model = new ModelAndView("pages/dialog/updatePage");
-		model.addObject("employeeHelper", employeeHelper);
-		model.addObject("map", map);
+		model.addAttribute("employeeHelper", employeeHelper);
+		model.addAttribute("positions", itemDAO.getItems("position"));
+		model.addAttribute("contracts", itemDAO.getItems("contract"));
+
 		
 		
-		return model;
+		return "pages/dialog/updatePage";
 		
 	}
 	@RequestMapping(value = "/updateEmployee", method = RequestMethod.POST)

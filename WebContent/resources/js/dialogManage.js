@@ -1,22 +1,19 @@
-$(function(){
-	$(".openDialog").on('click', function(event){
-		$('#dialog').empty();
-		$("#dialog").load($(this).attr("data"), initDialog());
-	});
-	
-	$(".newBut").click(function(){
-		if(!def){
-			newItemField(this);
-			def = true;
-		}
-		setTimeout(function(){
-			def = false;
-		},300);		
-	});
-	
+var def;
+$(document).on('click','.openDialog',function(){
+	$('#dialog').empty();
+	$("#dialog").load($(this).attr("data"), initDialog());
 });
 
-var def;
+$(document).on('click','.newBut',function(){
+	if(!def){
+		newItemField(this);
+		def = true;
+	}
+	setTimeout(function(){
+		def = false;
+	},300);
+});
+
 $(document).on('click','.editBut', function(){
 	showEditField(this);
 });
