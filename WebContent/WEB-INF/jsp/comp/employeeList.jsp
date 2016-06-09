@@ -26,12 +26,8 @@
 							<img src="${iconPath.concat(curEmployee.sex == 'FEMALE' ? 'woman.png' : 'man.png')}" alt="${curEmployee.sex}"/>
 						</td>
 						<td class="status"><img src="${iconPath.concat('no.png')}" alt="NO"/></td>
-						<td>
-							<img class="delete-emp" src="/EmployeeOrganizer/resources/asset/icon/rubbish-bin.png" alt="delete">
-						</td>
-						<td><div class="openDialog" data="updatePage?id=${curEmployee.id}">
-								<img src="/EmployeeOrganizer/resources/asset/icon/edit-icon.png" alt="edit">
-							</div>
+						<td class="delete-emp">
+							<img src="/EmployeeOrganizer/resources/asset/icon/deleteEmployee.png" alt="delete">
 						</td>
 					</tr>
 					<tr class="employee-shifts">

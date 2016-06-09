@@ -8,6 +8,8 @@ var delIco = "/EmployeeOrganizer/resources/asset/icon/rubbish-bin.png";
 var desc = false;
 var searchWord = "";
 var criteria = "";
+var del = false;
+var def = false;
 
 $(document).on('click','.employee-shifts',function(){
 		hideOtherShifts();
@@ -29,12 +31,24 @@ $(document).on('keypress','.search', function(e){
 });
 
 $(document).on('click','.delete-emp', function(){
-	deleteEmployee(this);
+	if(!def){
+		deleteEmployee(this);
+		def = true;
+	}
+	setTimeout(function(){
+		def = false;
+	},300);
+	
 });
 
 /*load employee detail*/
 $(document).on('click', '.employee-row', function(){
-	getEmployeeData($(this).attr("data"));
+	if(!del){
+		getEmployeeData($(this).attr("data"));
+	}
+	setTimeout(function(){
+		del = false;
+	},500);
 });
 
 /*status*/
@@ -65,31 +79,16 @@ $(document).ready(function(){
 		employeeStatus();
 	},60000);
 	
-	$('.status').hover(function(){
-        // Hover over code
-        var title = $(this).attr('title');
-        $(this).data('tipText', title).removeAttr('title');
-        $('<p class="tooltip"></p>')
-        .text(title)
-        .appendTo('body')
-        .fadeIn('slow');
-		}, function() {
-			// Hover out code
-			$(this).attr('title', $(this).data('tipText'));
-			$('.tooltip').remove();
-		}).mousemove(function(e) {
-			var mousex = e.pageX + 20; //Get X coordinates
-			var mousey = e.pageY + 10; //Get Y coordinates
-			$('.tooltip').css({ top: mousey, left: mousex });
-		});
-	
 	});
-
+ 
 function deleteEmployee(el){
-	var id = $(el).parent().parent().attr('data');
+	var id = $(el).parent().attr('data');
 	console.log("delete: "+id);
 	$.ajax({
 		url: "deleteEmployee?id="+id,
+		dataType : 'text',
+        processData : false,
+        contentType : false,
 		success: function(){
 			deleteRow(id);
 		}
@@ -99,13 +98,17 @@ function deleteEmployee(el){
 function deleteRow(el){
 	var row = $('.employee-row[data='+el+']');
 	var shiftRow = row.next();
-	row.remove();
-	shiftRow.remove();
+	console.log("deleting "+row+" "+shiftRow);
+	row.slideUp('slow',function(){
+		row.remove();
+		shiftRow.remove();
+	});	
 }
 
-function sortTable(el){		
+function sortTable(el){	
+	console.log(searchWord);
 	if(el != null){
-		if(criteria != $(el).text()){
+		if(criteria == $(el).text()){
 			desc = !desc;
 		}
 		criteria = $(el).text() == 'Name' ? 'SurName' : $(el).text();
@@ -131,11 +134,6 @@ function searchTable(el){
 	console.log("sreach phrase: "+searchWord);
 	sortTable(null);
 }
-
-function getTableResult(){
-	
-}
-
 
 function parseDataToTable(data){
 	
@@ -175,7 +173,7 @@ function showEmployeeShift(el){
 	
 	if(typeof id != 'undefined'){		
 		$(container).load("employeeShifts?id="+id, function(){
-			var cell = $('<td colspan="4"></td>');
+			var cell = $('<td colspan="5"></td>');
 			var row = $('<tr></tr>').append(cell);
 			$(cell).append(container);
 			$(el).before(row);
@@ -185,20 +183,32 @@ function showEmployeeShift(el){
 }
 
 function getEmployeeData(val){
-	$.ajax({
-		url: "employeeDetail?id="+val,
-		dataType: 'json',
-		success: function(data){
-			$(".cat-value[data=country]").text(data.address.country);
-			$(".cat-value[data=city]").text(data.address.city);
-			$(".cat-value[data=street]").text(data.address.street);
-			$(".cat-value[data=postcode]").text(data.address.postCode);
-			$(".cat-value[data=contract]").text(data.detail.contract);
-			$(".cat-value[data=position]").text(data.detail.position);
-			$(".cat-value[data=salary]").text(data.detail.salary + " $");
-			$(".cat-value[data=employed-since]").text(data.detail.workSince);
-		}
-	});
+	if(val == null){
+		$(".cat-value[data=country]").text('-');
+		$(".cat-value[data=city]").text('-');
+		$(".cat-value[data=street]").text('-');
+		$(".cat-value[data=postcode]").text('-');
+		$(".cat-value[data=contract]").text('-');
+		$(".cat-value[data=position]").text('-');
+		$(".cat-value[data=salary]").text('-' + " $");
+		$(".cat-value[data=employed-since]").text('-');
+	}
+	else{
+		$.ajax({
+			url: "employeeDetail?id="+val,
+			dataType: 'json',
+			success: function(data){
+				$(".cat-value[data=country]").text(data.address.country);
+				$(".cat-value[data=city]").text(data.address.city);
+				$(".cat-value[data=street]").text(data.address.street);
+				$(".cat-value[data=postcode]").text(data.address.postCode);
+				$(".cat-value[data=contract]").text(data.detail.contract);
+				$(".cat-value[data=position]").text(data.detail.position);
+				$(".cat-value[data=salary]").text(data.detail.salary + " $");
+				$(".cat-value[data=employed-since]").text(data.detail.workSince);
+			}
+		});
+	}	
 }
 
 function employeeStatus(){

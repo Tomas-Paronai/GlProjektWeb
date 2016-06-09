@@ -33,6 +33,7 @@
 <spring:url value="/resources/js/mailForm.js" var="mailJs"/>
 <script type="text/javascript" src="${mailJs}"></script>
 
+
 <spring:url value="/resources/asset/icon/" var="iconPath"/>
 </head>
 <body>
@@ -56,6 +57,7 @@
 			<jsp:include page="../comp/employeeList.jsp"/>	
 			
 			<div class="detail">
+				<h2>Detail info</h2>
 				<table id="detailInfo">		
 					<!-- ADDRESS -->
 					<tr>
@@ -92,7 +94,7 @@
 					</tr>
 					<tr>
 						<td class="cat-detail">Wage/h:</td>
-						<td class="cat-value" data="salary">-</td>
+						<td class="cat-value" data="salary">- $</td>
 					</tr>
 					<tr>
 						<td class="cat-detail">Employed since:</td>
@@ -105,12 +107,8 @@
 	</div>
 	<!-- content tab1 -->
 	<div id="tab-2" class="tab-content">
-		<button class="openDialog" data="newData?item=position">Position</button>
-		<button class="openDialog" data="newData?item=contract">Contract</button>
-		<button class="openDialog" data="mailForm">Send email</button>
-		<button class="openDialog" data="export">Export</button>
-		<button class="openDialog" data="import">Import</button>
-		 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		<!-- ACTIONS PAGE -->
+		<jsp:include page="../comp/actions.jsp"/>
 	</div>
 	
 </div><!-- container -->

@@ -24,9 +24,9 @@
  	<bean id="dataSource" 
       class="org.springframework.jdbc.datasource.DriverManagerDataSource">
       <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-      <property name="url" value="jdbc:mysql://localhost:3306/employees"/>
-      <property name="username" value="root"/>
-      <property name="password" value="1234"/>
+      <property name="url" value="jdbc:mysql://192.168.22.69:3306/employees"/>
+      <property name="username" value="parohy"/>
+      <property name="password" value="banka"/>
    </bean>
  	
  	<bean id="stringHttpMessageConverter"
@@ -52,8 +52,8 @@
    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com" />
 		<property name="port" value="587" />
-		<property name="username" value="emp.organizer@gmail.com" />
-		<property name="password" value="EmpOrganiz3r" />
+		<property name="username" value="sovybank@gmail.com" />
+		<property name="password" value="ITbank14" />
 		
 		<property name="javaMailProperties">
 			<props>
