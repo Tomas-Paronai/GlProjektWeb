@@ -5,7 +5,13 @@
 .detail:FIRST-CHILD {
 	display: block;
 }*/
-
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
 
 html {
   
@@ -14,11 +20,13 @@ html {
     background-size: cover;
     
     font-family: "Tenor Sans", sans-serif;
+    
 }
 
 body { 
   width: 1400px;
   display: block;
+  margin: 0;
 }
 
 /*LOGIN CSS*/
@@ -169,13 +177,17 @@ ul.tabs li.current{
 	margin-left:52px;
 }
 #table-menu >li:nth-child(2){
-	margin-left:162px;
+	margin-left:100px;
 }
 #table-menu >li:nth-child(3){
-	margin-left:140px;
+	margin-left:120px;
 }
 #table-menu >li:nth-child(4){
-	margin-left:60px;
+	margin-left:40px;
+}
+
+#table-menu >li:nth-child(5){
+	margin-left:40px;
 }
 #employeesTab th, #employeesTab td{
 	text-align: center;
@@ -183,25 +195,26 @@ ul.tabs li.current{
 }
 
 #employeesTab {
-  background: white;
+  background: rgba(93, 146, 186, 0.66);
   border-radius:3px;
   border-collapse: collapse;
-  
-  padding:5px;
   width: auto;
+  min-width: 700px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   animation: float 5s infinite;
   display: inline-block;
   
   overflow-y:scroll; 
   overflow-x:hidden; 
-  height:613px;
+  height:700px;
+  cursor: default;
 }
 
 #tableWrapper{
 	display:inline-block;
 	margin-top:80px;
 	float:left;
+	margin-left: 20px;	
 }
 #table-menu{
 	color:#D5DDE5;
@@ -214,6 +227,7 @@ ul.tabs li.current{
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
   vertical-align:middle;
   margin:0;
+  cursor: default;
 }
 
 
@@ -234,19 +248,79 @@ ul.tabs li.current{
 	display: inline-block; 
     float: left;
     background: white;
-    margin-top: 145px;
-   
+    margin-top: 80px;   
+    margin-left: 30px;
+    background-color:#dddddd;
 }
 
-.employee-shifts{
+.detail h2{
+	text-align: center;
+	color:#D5DDE5;
+  	background:#1b1e24;
+  	border-bottom:2px solid #9ea7af;
+  	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.detail h3{
+	text-align: center;
+	color:#D5DDE5;
+	background:#646f84;	
+	margin-bottom: 5px;
+}
+
+.detail h3:last-child{
+	margin-top: 5px;
+}
+
+.detailInfo{
+	width: 400px;
+    display: inline-block;
+    float: left;
+    font-size: 18px;	
+    background-color:#dddddd;	
+    
+    
+    border-left: 1px solid #646f84;
+    border-right: 1px solid #646f84;
+}
+
+.detailInfo:last-child{
+	border-bottom: 1px solid #646f84;
+}
+
+.detailInfo td{
+	padding-left: 10px;
+}
+
+.display:hover{
+	cursor: default;
+	background:#9d9fb5;
+  	color:#FFFFFF;
+}
+
+.employee-shifts{	
+	cursor:pointer;
 	background:#e8e8ec;
 	border-bottom: 1px solid #C1C3D1;
+}
+
+.shifts-container{
+	background-color: #dddddd;
 }
 
 .shifts-container th{
 	color:#D5DDE5;
 	background:#1b1e24;
 	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.shift-table{
+	text-align: center;
+	width:100%;
+}
+
+.shift-table td{
+	width:100%;
 }
 
 #employeesTab th:first-child {
@@ -258,17 +332,26 @@ ul.tabs li.current{
   border-right:none;
 }
 
-.employee-row tr {
+tbody{
+	padding: 0;
+	margin: 0;
+}
+
+.employee-row{
   border-top: 1px solid #C1C3D1;
   border-bottom-: 1px solid #C1C3D1;
-  color:#666B85;
+  color:#000000;
   font-size:16px;
   font-weight:normal;
   text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
 }
 
-.employee-row tr:hover td {
-  background:#4E5066;
+.employee-row div{
+	width: inherit;
+}
+
+.employee-row:hover td {
+  background:#9d9fb5;
   color:#FFFFFF;
   border-top: 1px solid #22262e;
   border-bottom: 1px solid #22262e;
@@ -299,7 +382,7 @@ ul.tabs li.current{
 }
 
 .employee-row td {
-  background:#FFFFFF;
+  background:#dddddd;
   padding: 6px;
   text-align:left;
   vertical-align:middle;
@@ -313,12 +396,11 @@ ul.tabs li.current{
   border-right: 0px;
 }
 
-#detailInfo{
-	width: 400px;
-    display: inline-block;
-    float: left;
-    margin-left: 100px;
+.delete-emp{
+	cursor: pointer;
 }
+
+
 
 .goup:before,
 .group:after{
@@ -331,6 +413,9 @@ ul.tabs li.current{
 .group{
 	*zoom: 1;
 }
+
+
+
 /*LOADING ANIMATION RELATED*/
 
 .modal {

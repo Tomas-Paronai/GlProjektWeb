@@ -30,8 +30,12 @@
 <spring:url value="/resources/css/dialog.css" var="pageDialogStyle"/>
 <link rel="stylesheet" type="text/css" href="${pageDialogStyle}" />
 
+<spring:url value="/resources/css/actions.css" var="actionsStyle"/>
+<link rel="stylesheet" type="text/css" href="${actionsStyle}" />
+
 <spring:url value="/resources/js/mailForm.js" var="mailJs"/>
 <script type="text/javascript" src="${mailJs}"></script>
+
 
 <spring:url value="/resources/asset/icon/" var="iconPath"/>
 </head>
@@ -56,11 +60,10 @@
 			<jsp:include page="../comp/employeeList.jsp"/>	
 			
 			<div class="detail">
-				<table id="detailInfo">		
-					<!-- ADDRESS -->
-					<tr>
-						<td class="category" colspan="2">Address</td>
-					</tr>
+				<h2>Detail info</h2>
+				<h3>Address</h3>
+				<!-- ADDRESS -->
+				<table class="detailInfo">										
 					<tr>
 						<td class="cat-detail">Country:</td>
 						<td class="cat-value" data="country">-</td>
@@ -77,10 +80,12 @@
 						<td class="cat-detail">Post-code:</td>
 						<td class="cat-value" data="postcode">-</td>
 					</tr>
-					
+					</table>
+					<h3>Employment detail</h3>
 					<!-- EMPLOYMENT DETAIL -->
+					<table class="detailInfo">
 					<tr>
-						<td class="category" colspan="2">Employment detail</td>
+						<td class="category" colspan="2"></td>
 					</tr>
 					<tr>
 						<td class="cat-detail">Position:</td>
@@ -92,7 +97,7 @@
 					</tr>
 					<tr>
 						<td class="cat-detail">Wage/h:</td>
-						<td class="cat-value" data="salary">-</td>
+						<td class="cat-value" data="salary">- $</td>
 					</tr>
 					<tr>
 						<td class="cat-detail">Employed since:</td>
@@ -105,12 +110,8 @@
 	</div>
 	<!-- content tab1 -->
 	<div id="tab-2" class="tab-content">
-		<button class="openDialog" data="newData?item=position">Position</button>
-		<button class="openDialog" data="newData?item=contract">Contract</button>
-		<button class="openDialog" data="mailForm">Send email</button>
-		<button class="openDialog" data="export">Export</button>
-		<button class="openDialog" data="import">Import</button>
-		 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		<!-- ACTIONS PAGE -->
+		<jsp:include page="../comp/actions.jsp"/>
 	</div>
 	
 </div><!-- container -->

@@ -143,17 +143,22 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 					+ "INNER JOIN `contract` ON employment_detail.ContractID=contract.ContractID "
 					+ "WHERE employee.EmployeeID=?";
 		
-		Employee tmpEmployee = jdbc.queryForObject(sql, new Object[]{employeeId}, new EmployeeRowMapper());
-		loadShifts(tmpEmployee);
-		
-		return tmpEmployee;
+		List<Employee> result = jdbc.query(sql, new Object[]{employeeId}, new EmployeeRowMapper());
+		if(result.size() > 0){
+			loadShifts(result.get(0));			
+			return result.get(0);
+		}
+		return null;
 	}	
 
 	@Override
 	public Employee getLastEmployee() {
 		String sql = "SELECT * FROM employee ORDER BY EmployeeID desc LIMIT 1";
-		Employee tmpEmployee = jdbc.queryForObject(sql, new EmployeeRowMapper());
-		return tmpEmployee;
+		List<Employee> result = jdbc.query(sql, new EmployeeRowMapper());
+		if(result.size() > 0){		
+			return result.get(0);
+		}
+		return null;
 	}
 
 	@Override
