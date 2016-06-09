@@ -82,7 +82,7 @@ $(document).ready(function(){
 	});
  
 function deleteEmployee(el){
-	var id = $(el).parent().attr('data');
+	var id = $(el).parent().parent().attr('data');
 	console.log("delete: "+id);
 	$.ajax({
 		url: "deleteEmployee?id="+id,

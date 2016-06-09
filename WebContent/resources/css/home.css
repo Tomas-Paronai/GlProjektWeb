@@ -177,10 +177,10 @@ ul.tabs li.current{
 	margin-left:52px;
 }
 #table-menu >li:nth-child(2){
-	margin-left:100px;
+	margin-left:160px;
 }
 #table-menu >li:nth-child(3){
-	margin-left:120px;
+	margin-left:130px;
 }
 #table-menu >li:nth-child(4){
 	margin-left:40px;
@@ -230,6 +230,17 @@ ul.tabs li.current{
   cursor: default;
 }
 
+.edit-delete div{
+	display: inline-block;
+}
+
+.delete-emp{
+	float: right;
+}
+
+.edit-emp{
+	float: left;
+}
 
 .employee-head th {
   color:#D5DDE5;

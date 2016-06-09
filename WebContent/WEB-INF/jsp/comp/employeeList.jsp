@@ -27,8 +27,9 @@
 							<div><img src="${iconPath.concat(curEmployee.sex == 'FEMALE' ? 'woman.png' : 'man.png')}" alt="${curEmployee.sex}"/></div>
 						</td>
 						<td class="status"><div><img src="${iconPath.concat('no.png')}" alt="NO"/></div></td>
-						<td class="delete-emp">
-							<div><img src="/EmployeeOrganizer/resources/asset/icon/deleteEmployee.png" alt="delete"></div>
+						<td class="edit-delete">
+							<div class="delete-emp"><img src="/EmployeeOrganizer/resources/asset/icon/deleteEmployee.png" alt="delete"></div>
+							<div class="edit-emp"><img src="/EmployeeOrganizer/resources/asset/icon/edit-icon.png" alt="edit"></div>
 						</td>
 					</tr>
 					<tr class="employee-shifts">

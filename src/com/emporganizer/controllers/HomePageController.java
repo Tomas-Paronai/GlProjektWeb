@@ -82,18 +82,6 @@ public class HomePageController {
 	public @ResponseBody void deleteEmployee(@RequestParam(value = "id", required = true) int id) {
 		System.out.println(id);
 		employeeDAO.deleteEmployee(id);
-	}
-	
-	@RequestMapping(value = "/updatePage", method = RequestMethod.GET)
-	public ModelAndView getdialog(@RequestParam(value = "id", required = true) int id){
-
-		Employee employee = employeeDAO.getEmployeeById(id);
-		ModelAndView model = new ModelAndView("pages/dialog/updatePage");
-		model.addObject("employee", employee);
-		model.addObject("address", new Address());
-		
-		return model;
-		
-	}
+	}	
 	
 }
