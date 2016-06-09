@@ -228,10 +228,6 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 		for(Employee emp : employees){
 			insertEmployee(emp);
 		}		
-	}
-
-	
-
-	
+	}	
 	
 }

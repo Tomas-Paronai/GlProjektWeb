@@ -12,8 +12,7 @@
 	<li class="sort">Email</li>
 	<li class="sort">Gender</li>
 	<li class="sort">At work</li>
-	<li>Delete</li>
-	<li>Update</li>
+	<li>Manage</li>
 	</ul>
 	
 			<table id="employeesTab">
@@ -49,12 +48,9 @@
 							<div class="delete-emp"><img src="/EmployeeOrganizer/resources/asset/icon/deleteEmployee.png" alt="delete"></div>
 							<div class="edit-emp"><img src="/EmployeeOrganizer/resources/asset/icon/edit-icon.png" alt="edit"></div>
 						</td>
-						<td class="openDialog" data='updatePage?id=${curEmployee.id}'>
-							<div><img src="/EmployeeOrganizer/resources/asset/icon/edit.png" alt="update"></div>
-						</td>
 					</tr>
 					<tr class="employee-shifts">
-						<td colspan="6"><img src="/EmployeeOrganizer/resources/asset/icon/shifts.png" alt="shifts"></td>
+						<td colspan="5"><img src="/EmployeeOrganizer/resources/asset/icon/shifts.png" alt="shifts"></td>
 					</tr>
 					
 				</c:forEach>
