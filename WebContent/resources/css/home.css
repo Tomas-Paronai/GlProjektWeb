@@ -20,11 +20,13 @@ html {
     background-size: cover;
     
     font-family: "Tenor Sans", sans-serif;
+    
 }
 
 body { 
   width: 1400px;
   display: block;
+  margin: 0;
 }
 
 /*LOGIN CSS*/
@@ -175,13 +177,17 @@ ul.tabs li.current{
 	margin-left:52px;
 }
 #table-menu >li:nth-child(2){
-	margin-left:162px;
+	margin-left:100px;
 }
 #table-menu >li:nth-child(3){
-	margin-left:140px;
+	margin-left:120px;
 }
 #table-menu >li:nth-child(4){
-	margin-left:60px;
+	margin-left:40px;
+}
+
+#table-menu >li:nth-child(5){
+	margin-left:40px;
 }
 #employeesTab th, #employeesTab td{
 	text-align: center;
@@ -193,6 +199,7 @@ ul.tabs li.current{
   border-radius:3px;
   border-collapse: collapse;
   width: auto;
+  min-width: 700px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   animation: float 5s infinite;
   display: inline-block;
@@ -207,6 +214,7 @@ ul.tabs li.current{
 	display:inline-block;
 	margin-top:80px;
 	float:left;
+	margin-left: 20px;	
 }
 #table-menu{
 	color:#D5DDE5;
@@ -241,11 +249,47 @@ ul.tabs li.current{
     float: left;
     background: white;
     margin-top: 80px;   
+    margin-left: 30px;
+    background-color:#dddddd;
 }
 
 .detail h2{
 	text-align: center;
-	
+	color:#D5DDE5;
+  	background:#1b1e24;
+  	border-bottom:2px solid #9ea7af;
+  	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.detail h3{
+	text-align: center;
+	color:#D5DDE5;
+	background:#646f84;	
+	margin-bottom: 5px;
+}
+
+.detail h3:last-child{
+	margin-top: 5px;
+}
+
+.detailInfo{
+	width: 400px;
+    display: inline-block;
+    float: left;
+    font-size: 18px;	
+    background-color:#dddddd;	
+    
+    
+    border-left: 1px solid #646f84;
+    border-right: 1px solid #646f84;
+}
+
+.detailInfo:last-child{
+	border-bottom: 1px solid #646f84;
+}
+
+.detailInfo td{
+	padding-left: 10px;
 }
 
 .display:hover{
@@ -302,6 +346,10 @@ tbody{
   text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
 }
 
+.employee-row div{
+	width: inherit;
+}
+
 .employee-row:hover td {
   background:#9d9fb5;
   color:#FFFFFF;
@@ -352,12 +400,7 @@ tbody{
 	cursor: pointer;
 }
 
-#detailInfo{
-	width: 400px;
-    display: inline-block;
-    float: left;
-    margin-left: 100px;
-}
+
 
 .goup:before,
 .group:after{
@@ -371,23 +414,7 @@ tbody{
 	*zoom: 1;
 }
 
-/*ACTIONS TAB*/
-.actions{
-	width: 100%;
-	border-spacing: 10px 100px;
-    border-collapse: separate;
-}
 
-.action-bg{
-	width: 30vh;
-	height: 30vh;
-	background: #5D92BA;
-	text-align: center;
-}
-
-.salary-details{
-	background: #5D92BA;
-}
 
 /*LOADING ANIMATION RELATED*/
 

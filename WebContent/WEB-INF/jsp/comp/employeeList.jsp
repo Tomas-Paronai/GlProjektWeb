@@ -12,6 +12,7 @@
 	<li class="sort">Email</li>
 	<li class="sort">Gender</li>
 	<li class="sort">At work</li>
+	<li>Delete</li>
 	</ul>
 	
 			<table id="employeesTab">
@@ -20,14 +21,14 @@
 				<c:if test="${!empty employees}">
 				<c:forEach items="${employees}" var="curEmployee">
 					<tr class="employee-row" data="${curEmployee.id}">
-						<td>${curEmployee.name}</td>
-						<td>${curEmployee.contact.email}</td>
+						<td><div>${curEmployee.name}</div></td>
+						<td><div>${curEmployee.contact.email}</div></td>
 						<td>
-							<img src="${iconPath.concat(curEmployee.sex == 'FEMALE' ? 'woman.png' : 'man.png')}" alt="${curEmployee.sex}"/>
+							<div><img src="${iconPath.concat(curEmployee.sex == 'FEMALE' ? 'woman.png' : 'man.png')}" alt="${curEmployee.sex}"/></div>
 						</td>
-						<td class="status"><img src="${iconPath.concat('no.png')}" alt="NO"/></td>
+						<td class="status"><div><img src="${iconPath.concat('no.png')}" alt="NO"/></div></td>
 						<td class="delete-emp">
-							<img src="/EmployeeOrganizer/resources/asset/icon/deleteEmployee.png" alt="delete">
+							<div><img src="/EmployeeOrganizer/resources/asset/icon/deleteEmployee.png" alt="delete"></div>
 						</td>
 					</tr>
 					<tr class="employee-shifts">

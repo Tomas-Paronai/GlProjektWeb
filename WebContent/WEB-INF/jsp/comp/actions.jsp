@@ -14,32 +14,32 @@
 		<tr>
 			<td>
 			<div class="action-bg">
-				<img src="">
+				<img src="/EmployeeOrganizer/resources/asset/img/actions/positions.jpg">
 				<button class="openDialog" data="newData?item=position">Position</button>
 			</div>
 			</td>
 			<td>
 			<div class="action-bg">
-				<img src="">
+				<img src="/EmployeeOrganizer/resources/asset/img/actions/contract.jpg">
 				<button class="openDialog" data="newData?item=contract">Contract</button>
 			</div>
 			</td>
 			<td>
 			<div class="action-bg">
-				<img src="">
+				<img src="/EmployeeOrganizer/resources/asset/img/actions/email.jpg">
 				<button class="openDialog" data="mailForm">Send email</button>
 			</div></td>
 		</tr>
 		<tr>
 			<td>
 			<div class="action-bg">
-				<img src="">
+				<img src="/EmployeeOrganizer/resources/asset/img/actions/export.jpg">
 				<button class="openDialog" data="export">Export</button>
 			</div>
 			</td>
 			<td>
 			<div class="action-bg">
-				<img src="">
+				<img src="/EmployeeOrganizer/resources/asset/img/actions/import.jpg">
 				<button class="openDialog" data="import">Import</button>
 			</div>
 			</td>

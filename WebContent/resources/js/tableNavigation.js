@@ -3,7 +3,7 @@ var femaleIco = "/EmployeeOrganizer/resources/asset/icon/woman.png";
 var yesIco = "/EmployeeOrganizer/resources/asset/icon/yes.png";
 var noIco = "/EmployeeOrganizer/resources/asset/icon/no.png";
 var shiftIco = "/EmployeeOrganizer/resources/asset/icon/shifts.png";
-var delIco = "/EmployeeOrganizer/resources/asset/icon/rubbish-bin.png";
+var delIco = "/EmployeeOrganizer/resources/asset/icon/deleteEmployee.png";
 
 var desc = false;
 var searchWord = "";
@@ -99,10 +99,11 @@ function deleteRow(el){
 	var row = $('.employee-row[data='+el+']');
 	var shiftRow = row.next();
 	console.log("deleting "+row+" "+shiftRow);
-	row.slideUp('slow',function(){
+	row.find("div").slideUp('slow',function(){
 		row.remove();
 		shiftRow.remove();
 	});	
+	getEmployeeData(null);
 }
 
 function sortTable(el){	
@@ -143,12 +144,12 @@ function parseDataToTable(data){
 	
 	for(var i = 0; i < data.length; i++){
 		var row = $('<tr class="employee-row" data="'+data[i].id+'"></tr>');
-		var cellName = $('<td>'+data[i].name+'</td>');
-		var cellEmail = $('<td>'+data[i].contact.email+'</td>');
-		var cellGender = $('<td><img src="'+(data[i].sex == 'FEMALE' ? femaleIco : maleIco)+'" alt="'+data[i].sex+'"></td>');
-		var cellAtWork = $('<td class="status"><img src="'+noIco+'" alt="NO"></td>');
-		var cellDelete = $('<td><img class="delete-emp" src="'+delIco+'" alt="delete"></td>');
-		var shiftRow = $('<tr class="employee-shifts"><td colspan="4"><img src="'+shiftIco+'"></td></tr>');
+		var cellName = $('<td><div>'+data[i].name+'</div></td>');
+		var cellEmail = $('<td><div>'+data[i].contact.email+'</div></td>');
+		var cellGender = $('<td><div><img src="'+(data[i].sex == 'FEMALE' ? femaleIco : maleIco)+'" alt="'+data[i].sex+'"></div></td>');
+		var cellAtWork = $('<td class="status"><div><img src="'+noIco+'" alt="NO"></div></td>');
+		var cellDelete = $('<td class="delete-emp"><div><img src="'+delIco+'" alt="delete"></div></td>');
+		var shiftRow = $('<tr class="employee-shifts"><td colspan="5"><img src="'+shiftIco+'"></td></tr>');
 		
 		row.append(cellName);
 		row.append(cellEmail);
@@ -178,6 +179,7 @@ function showEmployeeShift(el){
 			$(cell).append(container);
 			$(el).before(row);
 			$(container).slideToggle('slow');
+			getEmployeeData(id);
 		});		
 	}	
 }

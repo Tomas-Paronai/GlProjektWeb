@@ -30,6 +30,9 @@
 <spring:url value="/resources/css/dialog.css" var="pageDialogStyle"/>
 <link rel="stylesheet" type="text/css" href="${pageDialogStyle}" />
 
+<spring:url value="/resources/css/actions.css" var="actionsStyle"/>
+<link rel="stylesheet" type="text/css" href="${actionsStyle}" />
+
 <spring:url value="/resources/js/mailForm.js" var="mailJs"/>
 <script type="text/javascript" src="${mailJs}"></script>
 
@@ -58,11 +61,9 @@
 			
 			<div class="detail">
 				<h2>Detail info</h2>
-				<table id="detailInfo">		
-					<!-- ADDRESS -->
-					<tr>
-						<td class="category" colspan="2">Address</td>
-					</tr>
+				<h3>Address</h3>
+				<!-- ADDRESS -->
+				<table class="detailInfo">										
 					<tr>
 						<td class="cat-detail">Country:</td>
 						<td class="cat-value" data="country">-</td>
@@ -79,10 +80,12 @@
 						<td class="cat-detail">Post-code:</td>
 						<td class="cat-value" data="postcode">-</td>
 					</tr>
-					
+					</table>
+					<h3>Employment detail</h3>
 					<!-- EMPLOYMENT DETAIL -->
+					<table class="detailInfo">
 					<tr>
-						<td class="category" colspan="2">Employment detail</td>
+						<td class="category" colspan="2"></td>
 					</tr>
 					<tr>
 						<td class="cat-detail">Position:</td>
