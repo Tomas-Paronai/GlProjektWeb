@@ -38,7 +38,10 @@
 
 
 <spring:url value="/resources/asset/icon/" var="iconPath"/>
+		
+
 </head>
+
 <body>
 
 <div class="group page-container">

@@ -507,8 +507,9 @@ button.ui-button::-moz-focus-inner {
 	position: relative;
 	border: 0;
 	padding: .5em 1em;
-	background: none;
+	background:#727272;
 	overflow: auto;
+	color: white;
 }
 .ui-dialog .ui-dialog-buttonpane {
 	text-align: left;
@@ -533,6 +534,7 @@ button.ui-button::-moz-focus-inner {
 }
 .ui-draggable .ui-dialog-titlebar {
 	cursor: move;
+	background: #00796B;
 }
 .ui-menu {
 	list-style: none;
@@ -1211,8 +1213,8 @@ body .ui-tooltip {
 
 /* Overlays */
 .ui-widget-overlay {
-	background: #aaaaaa;
-	opacity: .3;
+	background: #2E2B29;
+	opacity: 0.85;
 	filter: Alpha(Opacity=30); /* support: IE8 */
 }
 .ui-widget-shadow {

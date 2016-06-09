@@ -13,6 +13,7 @@
 	<li class="sort">Gender</li>
 	<li class="sort">At work</li>
 	<li>Delete</li>
+	<li>Update</li>
 	</ul>
 	
 			<table id="employeesTab">
@@ -35,7 +36,7 @@
 						</td>
 					</tr>
 					<tr class="employee-shifts">
-						<td colspan="5"><img src="/EmployeeOrganizer/resources/asset/icon/shifts.png" alt="shifts"></td>
+						<td colspan="6"><img src="/EmployeeOrganizer/resources/asset/icon/shifts.png" alt="shifts"></td>
 					</tr>
 					
 				</c:forEach>
