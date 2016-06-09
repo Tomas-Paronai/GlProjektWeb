@@ -11,15 +11,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.emporganizer.api.beans.EmployeeBean;
 import com.emporganizer.api.beans.SelectedEmp;
 import com.emporganizer.dao.employee.EmployeeDAO;
 import com.emporganizer.dao.employee.ShiftDAO;
+import com.emporganizer.dao.items.ItemDAO;
 import com.emporganizer.models.Login;
 import com.emporganizer.models.employee.Address;
 import com.emporganizer.models.employee.Employee;
@@ -33,6 +36,9 @@ public class HomePageController {
 	
 	@Autowired
 	EmployeeDAO employeeDAO;
+	
+	@Autowired
+	ItemDAO itemDAO;
 	
 	@Autowired
 	ShiftDAO shiftDAO;
@@ -49,6 +55,9 @@ public class HomePageController {
 	public ModelAndView getHomePage(){
 		ModelAndView model = new ModelAndView("pages/home");
 		model.addObject("employees",employeeDAO.getEmployeeList());
+		model.addObject("positions",itemDAO.getItems("position"));
+		model.addObject("contracts",itemDAO.getItems("contract"));
+		model.addObject("employeeBean",new EmployeeBean());
 		return model;
 	}
 	
@@ -83,5 +92,10 @@ public class HomePageController {
 		System.out.println(id);
 		employeeDAO.deleteEmployee(id);
 	}	
+	
+	@RequestMapping(value = "updateEmployee", method = RequestMethod.POST)
+	public @ResponseBody void updateEmployee(@RequestBody EmployeeBean employeeBean){
+		employeeDAO.updateEmployee(Employee.parseEmployee(employeeBean));
+	}
 	
 }

@@ -5,6 +5,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import com.emporganizer.api.beans.EmployeeBean;
+
 public class Employee {
 	private int id;
 	private String firstName;
@@ -15,6 +17,14 @@ public class Employee {
 	private Address address;
 	private EmploymentDetail detail;
 	private List<Shift> pastShifts;
+	
+	public static Employee parseEmployee(EmployeeBean bean){
+		Address address = new Address(bean.getCountry(),bean.getCity(),bean.getStreet(),bean.getPostcode());
+		Contact contact = new Contact(bean.getPhone(),bean.getEmail());
+		EmploymentDetail detail = new EmploymentDetail(bean.getPosition(),bean.getContract(),bean.getSalary(),bean.getEmployedsince());
+		Employee emp = new Employee(bean.getId(),bean.getFirtsName(),bean.getLastName(),bean.getSex(),bean.getDob(),contact,address,detail);
+		return emp;
+	}
 	
 	public Employee(){
 		

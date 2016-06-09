@@ -163,10 +163,20 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 		jdbc.update(sql);
 	}
 
+	@Transactional
 	@Override
-	public void updateEmployee(Employee upEmployee) {
-		// TODO Auto-generated method stub
+	public void updateEmployee(Employee emp) {
+		String mainSql = "UPDATE employee SET firstname=?,surname=?,gender=? WHERE employeeid=?";
+		String contactSql = "UPDATE contact SET phone=?, email=? WHERE employeeid=?";
+		String addressSql = "UPDATE address SET country=?,city=?,street=?,postcode=? WHERE employeeid=?";
+		String detailSql = "UPDATE employment_detail SET positionid=?, contractid=?, salary_per_hour=?, start_work=? WHERE employeeid=?";
 		
+		jdbc.update(mainSql, new Object[]{emp.getFirstName(),emp.getLastName(),emp.getSex().getVal(),emp.getId()});
+		jdbc.update(contactSql, new Object[]{emp.getContact().getPhone(),emp.getContact().getEmail(),emp.getId()});
+		jdbc.update(addressSql, new Object[]{emp.getAddress().getCountry(),emp.getAddress().getCity(),emp.getAddress().getStreet(),emp.getAddress().getPostCode()});
+		int posId = itemDAO.getItem("position", emp.getDetail().getPosition()).getId();
+		int conId = itemDAO.getItem("contract", emp.getDetail().getContract()).getId();
+		jdbc.update(detailSql, new Object[]{posId, conId, emp.getDetail().getSalary(), emp.getDetail().getWorkSince(), emp.getId()});
 	}
 
 	@Override

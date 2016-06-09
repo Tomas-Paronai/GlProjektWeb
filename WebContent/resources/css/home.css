@@ -174,10 +174,10 @@ ul.tabs li.current{
 	display:inline-block;	
 }
 #table-menu >li:nth-child(1){
-	margin-left:52px;
+	margin-left:30px;
 }
 #table-menu >li:nth-child(2){
-	margin-left:160px;
+	margin-left:180px;
 }
 #table-menu >li:nth-child(3){
 	margin-left:130px;
@@ -253,6 +253,22 @@ ul.tabs li.current{
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
   vertical-align:middle;
    
+}
+
+.edit-table select{
+
+}
+
+.edit-table,.female{
+	width:64px;
+}
+
+.male{
+	background-image: url(/EmployeeOrganizer/resources/asset/icon/man.pnx) no-repeat;
+}
+
+.female{
+	background-image: url(/EmployeeOrganizer/resources/asset/icon/woman.pnx) no-repeat;
 }
 
 .detail{
