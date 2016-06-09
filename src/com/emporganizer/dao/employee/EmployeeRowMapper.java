@@ -21,7 +21,8 @@ public class EmployeeRowMapper implements RowMapper<Employee>{
 			detail = new EmploymentDetail(rs.getString("Position_name"), 
 					   					  rs.getString("Contract_name"), 
 					                      rs.getFloat("Salary_per_hour"), 
-					                      rs.getDate("Start_work"));
+					                      rs.getDate("Start_work")
+					                      );
 		}
 		 
 		Address address  = null;

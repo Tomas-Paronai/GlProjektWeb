@@ -63,14 +63,13 @@
 								
 								</tr>
 								
-								  <tr>	
+								<tr>	
 									<td>Position:</td>
 									<td>
 										<form:input type="text" path="position" name="position" required="true"/>
 									</td>
 								
 								</tr>
-								<tr>							
 								<tr>	
 									<td>Salary:</td>
 									<td>

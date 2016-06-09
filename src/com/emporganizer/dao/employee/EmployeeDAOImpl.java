@@ -14,11 +14,15 @@ import org.springframework.transaction.annotation.Transactional;
 import com.emporganizer.dao.items.ItemDAO;
 import com.emporganizer.models.employee.Address;
 import com.emporganizer.models.employee.Contact;
+import com.emporganizer.models.employee.ContractType;
 import com.emporganizer.models.employee.Employee;
+import com.emporganizer.models.employee.EmployeeHelper;
 import com.emporganizer.models.employee.EmployeePresent;
 import com.emporganizer.models.employee.EmploymentDetail;
+import com.emporganizer.models.employee.PositionType;
 import com.emporganizer.models.items.Contract;
 import com.emporganizer.models.items.Position;
+
 
 
 public class EmployeeDAOImpl implements EmployeeDAO{
@@ -158,11 +162,7 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 		jdbc.update(sql);
 	}
 
-	@Override
-	public void updateEmployee(Employee upEmployee) {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 	@Override
 	public void insertEmployee(Employee emp) {
@@ -215,6 +215,61 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 		}		
 	}
 
+	@Override
+	public void updateAddress(EmployeeHelper employee) {
+		String sql ="Update address SET Country=?,"
+					+ "City=?,"
+					+ "Street=?,"
+					+ "PostCode=?"
+					+ "where employeeID=?";
+		jdbc.update(sql,new Object[]{employee.getCountry(),employee.getCity(),
+					employee.getStreet(),employee.getPostCode(),employee.getId()});
+	}
+
+	@Override
+	public void updateContact(EmployeeHelper employee) {
+		String sql ="Update Contact SET phone=?,"
+				+ "Email=?"
+				+ "where employeeID=?";	
+		jdbc.update(sql, new Object[]{employee.getPhone(),employee.getEmail(),employee.getId()});
+	}
+
+	@Override
+	public void updateDetail(EmployeeHelper employee) {
+		String sql="UPDATE employment_detail SET positionID=?,"
+				+ "contractID=?,"
+				+ "salary_per_hour=?,"
+				+ "start_work=? "
+				+ "where employeeID=?";
+				jdbc.update(sql,new Object[]{employee.getPositionID(),employee.getContractID(),
+						employee.getSalary(),employee.getWorkSince(),employee.getId()});
+		
+		
+	}
+	@Override
+	public void updateEmployee(EmployeeHelper employee) {
+		String sql ="Update Employee SET FirstName=?,"
+				  + "SurName=?,"
+				  + "BirthDate=? "
+				  + "where EmployeeID=?";
+		jdbc.update(sql, new Object[]{employee.getFirstName(),employee.getLastName(),employee.getDob(),employee.getId()});
+	}
+
+	@Override
+	public List<ContractType> getListOfContracts() {
+		String sql = "SELECT * FROM employees.contract";
+		List<ContractType> list = jdbc.query(sql, new ContractMapper());	
+		return list;
+	}
+
+	@Override
+	public List<PositionType> getListOfPositions() {
+		String sql = "SELECT * FROM employees.position";
+		List<PositionType> list = jdbc.query(sql, new PositionMapper());	
+		return list;
+	}
+
+	
 	
 
 	

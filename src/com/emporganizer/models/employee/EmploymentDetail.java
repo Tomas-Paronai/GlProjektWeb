@@ -7,16 +7,28 @@ import java.text.SimpleDateFormat;
 
 public class EmploymentDetail {
 	private String position;
+	private int positionID;
 	private String contract;
+	private int contractID;
 	private float salary;
 	private Date workSince;
 	
+	
+	
+	/**
+	 * 
+	 */
+	public EmploymentDetail() {
+		
+	}
+
 	public EmploymentDetail(String position, String contract, float salary, Date workSince) {
 		super();
 		this.position = position;
 		this.contract = contract;
 		this.salary = salary;
 		this.workSince = workSince;
+		
 	}
 	
 	public EmploymentDetail(String position, String contract, float salary, String workSince) {
@@ -32,6 +44,7 @@ public class EmploymentDetail {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
 
 	public String getPosition() {
@@ -64,6 +77,23 @@ public class EmploymentDetail {
 
 	public void setWorkSince(Date workSince) {
 		this.workSince = workSince;
+	}
+
+	public int getPositionID() {
+		return positionID;
+	}
+
+	public void setPositionID(int positionID) {
+		this.positionID = positionID;
+	}
+
+	public int getContractID() {
+		return contractID;
+	}
+
+	public void setContractID(int contractID) {
+		this.contractID = contractID;
 	}	
+	
 	
 }
