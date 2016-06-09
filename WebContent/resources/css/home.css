@@ -22,14 +22,11 @@ html {
     font-family: "Tenor Sans", sans-serif;
     
 }
-html ul{
-	list-style:none;
-}
 
 body { 
   width: 1400px;
   display: block;
-  margin: 0 auto;
+  margin: 0;
 }
 
 /*LOGIN CSS*/
@@ -132,11 +129,10 @@ input#userName:-webkit-autofill, input#password:-webkit-autofill {
 
 .page-container{	
 	margin: 0 auto;	
-	margin-top:20px;
 }
 
 .tab-content{
-	width:1400px;
+	width:1250px;
 }
 
 
@@ -178,22 +174,19 @@ ul.tabs li.current{
 	display:inline-block;	
 }
 #table-menu >li:nth-child(1){
-	margin-left:52px;
+	margin-left:30px;
 }
 #table-menu >li:nth-child(2){
-	margin-left:150px;
+	margin-left:180px;
 }
 #table-menu >li:nth-child(3){
-	margin-left:140px;
+	margin-left:130px;
 }
 #table-menu >li:nth-child(4){
 	margin-left:40px;
 }
 
 #table-menu >li:nth-child(5){
-	margin-left:40px;
-}
-#table-menu >li:nth-child(6){
 	margin-left:40px;
 }
 #employeesTab th, #employeesTab td{
@@ -206,7 +199,7 @@ ul.tabs li.current{
   border-radius:3px;
   border-collapse: collapse;
   width: auto;
-  min-width: 880px;
+  min-width: 700px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   animation: float 5s infinite;
   display: inline-block;
@@ -221,7 +214,7 @@ ul.tabs li.current{
 	display:inline-block;
 	margin-top:80px;
 	float:left;
-		
+	margin-left: 20px;	
 }
 #table-menu{
 	color:#D5DDE5;
@@ -237,6 +230,17 @@ ul.tabs li.current{
   cursor: default;
 }
 
+.edit-delete div{
+	display: inline-block;
+}
+
+.delete-emp{
+	float: right;
+}
+
+.edit-emp{
+	float: left;
+}
 
 .employee-head th {
   color:#D5DDE5;
@@ -251,9 +255,25 @@ ul.tabs li.current{
    
 }
 
+.edit-table select{
+
+}
+
+.edit-table,.female{
+	width:64px;
+}
+
+.male{
+	background-image: url(/EmployeeOrganizer/resources/asset/icon/man.pnx) no-repeat;
+}
+
+.female{
+	background-image: url(/EmployeeOrganizer/resources/asset/icon/woman.pnx) no-repeat;
+}
+
 .detail{
 	display: inline-block; 
-    float: right;
+    float: left;
     background: white;
     margin-top: 80px;   
     margin-left: 30px;
@@ -419,11 +439,6 @@ tbody{
 }
 .group{
 	*zoom: 1;
-}
-/* position item*/
-.possItem{
-	display:inline-block;
-	width:265px;
 }
 
 

@@ -1,17 +1,28 @@
-var def;
-$(document).on('click','.openDialog',function(){
+$(document).on('click','.openDialog', function(){
 	$('#dialog').empty();
 	$("#dialog").load($(this).attr("data"), initDialog());
 });
 
-$(document).on('click','.newBut',function(){
+$(document).on('submit','',function(){
+	var patt = new Regex('^[1-9]{4}[-][0-1][0-9][-][0-1][0-9]$');
+	var dob = $(this).find('input[name=dob]').val();
+	var start = $(this).find('input[name=employedsince]').val();
+	
+	if(patt.test(dob) == true && patt.test(start) == true){
+		return true;
+	}
+	return false;
+});
+
+var def;
+$(document).on('click','.newBut', function(){
 	if(!def){
 		newItemField(this);
 		def = true;
 	}
 	setTimeout(function(){
 		def = false;
-	},300);
+	},300);	
 });
 
 $(document).on('click','.editBut', function(){

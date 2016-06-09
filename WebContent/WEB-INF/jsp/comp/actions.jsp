@@ -46,6 +46,7 @@
 			<td>
 			<div class="action-bg">
 				<img src="">
+				<button class="openDialog" data="insert">New employee</button>
 			</div>
 			</td>
 		</tr>
