@@ -99,8 +99,10 @@ function deleteRow(el){
 	var row = $('.employee-row[data='+el+']');
 	var shiftRow = row.next();
 	console.log("deleting "+row+" "+shiftRow);
-	row.remove();
-	shiftRow.remove();
+	row.slideUp('slow',function(){
+		row.remove();
+		shiftRow.remove();
+	});	
 }
 
 function sortTable(el){	
@@ -132,11 +134,6 @@ function searchTable(el){
 	console.log("sreach phrase: "+searchWord);
 	sortTable(null);
 }
-
-function getTableResult(){
-	
-}
-
 
 function parseDataToTable(data){
 	
@@ -176,7 +173,7 @@ function showEmployeeShift(el){
 	
 	if(typeof id != 'undefined'){		
 		$(container).load("employeeShifts?id="+id, function(){
-			var cell = $('<td colspan="4"></td>');
+			var cell = $('<td colspan="5"></td>');
 			var row = $('<tr></tr>').append(cell);
 			$(cell).append(container);
 			$(el).before(row);
@@ -186,20 +183,32 @@ function showEmployeeShift(el){
 }
 
 function getEmployeeData(val){
-	$.ajax({
-		url: "employeeDetail?id="+val,
-		dataType: 'json',
-		success: function(data){
-			$(".cat-value[data=country]").text(data.address.country);
-			$(".cat-value[data=city]").text(data.address.city);
-			$(".cat-value[data=street]").text(data.address.street);
-			$(".cat-value[data=postcode]").text(data.address.postCode);
-			$(".cat-value[data=contract]").text(data.detail.contract);
-			$(".cat-value[data=position]").text(data.detail.position);
-			$(".cat-value[data=salary]").text(data.detail.salary + " $");
-			$(".cat-value[data=employed-since]").text(data.detail.workSince);
-		}
-	});
+	if(val == null){
+		$(".cat-value[data=country]").text('-');
+		$(".cat-value[data=city]").text('-');
+		$(".cat-value[data=street]").text('-');
+		$(".cat-value[data=postcode]").text('-');
+		$(".cat-value[data=contract]").text('-');
+		$(".cat-value[data=position]").text('-');
+		$(".cat-value[data=salary]").text('-' + " $");
+		$(".cat-value[data=employed-since]").text('-');
+	}
+	else{
+		$.ajax({
+			url: "employeeDetail?id="+val,
+			dataType: 'json',
+			success: function(data){
+				$(".cat-value[data=country]").text(data.address.country);
+				$(".cat-value[data=city]").text(data.address.city);
+				$(".cat-value[data=street]").text(data.address.street);
+				$(".cat-value[data=postcode]").text(data.address.postCode);
+				$(".cat-value[data=contract]").text(data.detail.contract);
+				$(".cat-value[data=position]").text(data.detail.position);
+				$(".cat-value[data=salary]").text(data.detail.salary + " $");
+				$(".cat-value[data=employed-since]").text(data.detail.workSince);
+			}
+		});
+	}	
 }
 
 function employeeStatus(){

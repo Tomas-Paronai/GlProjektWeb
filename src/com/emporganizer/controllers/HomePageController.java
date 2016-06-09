@@ -68,22 +68,13 @@ public class HomePageController {
 		return "pages/dialog/pastShifts";
 	}
 	
-	@RequestMapping(value = "employeeShiftsPeriod", method = RequestMethod.GET)
-	public @ResponseBody List<Shift> getEmployeeShifts(@RequestParam(value = "id", required = true) int id,
-								    				   @RequestParam(value = "period", required = true) int period ,ModelMap model){
-		
-		System.out.println(id);
-		System.out.println(period);
-		return shiftDAO.getShifts(id,period);
-	}
-	
 	
 	@RequestMapping(value = "showEmployees", method = RequestMethod.GET)
 	public ModelAndView showEmployeesToExport() {
 		List<Employee> employeeList= employeeDAO.getEmployeeList();
 		ModelAndView model = new ModelAndView("pages/exportEmployees");
-		 model.addObject("employees",employeeList);
-		 return model;
+		model.addObject("employees",employeeList);
+		return model;
 	}
 	@RequestMapping(value = "/deleteEmployee", method = RequestMethod.GET)
 	public @ResponseBody void deleteEmployee(@RequestParam(value = "id", required = true) int id) {

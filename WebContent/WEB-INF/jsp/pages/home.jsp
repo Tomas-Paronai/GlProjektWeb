@@ -33,8 +33,6 @@
 <spring:url value="/resources/js/mailForm.js" var="mailJs"/>
 <script type="text/javascript" src="${mailJs}"></script>
 
-<spring:url value="/resources/js/salary.js" var="salaryJs"/>
-<script type="text/javascript" src="${salaryJs}"></script>
 
 <spring:url value="/resources/asset/icon/" var="iconPath"/>
 </head>
@@ -46,7 +44,6 @@
 	<ul class="tabs">
 		<li class="tab-link current" data-tab="tab-1">Employees</li>
 		<li class="tab-link" data-tab="tab-2">Actions</li>
-		<li class="tab-link" data-tab="tab-3">Salary management</li>
 		<li><input class="search" type="text" size="30"/></li>
 	</ul>
 
@@ -60,6 +57,7 @@
 			<jsp:include page="../comp/employeeList.jsp"/>	
 			
 			<div class="detail">
+				<h2>Detail info</h2>
 				<table id="detailInfo">		
 					<!-- ADDRESS -->
 					<tr>
@@ -96,7 +94,7 @@
 					</tr>
 					<tr>
 						<td class="cat-detail">Wage/h:</td>
-						<td class="cat-value" data="salary">-</td>
+						<td class="cat-value" data="salary">- $</td>
 					</tr>
 					<tr>
 						<td class="cat-detail">Employed since:</td>
@@ -111,11 +109,6 @@
 	<div id="tab-2" class="tab-content">
 		<!-- ACTIONS PAGE -->
 		<jsp:include page="../comp/actions.jsp"/>
-	</div>
-	
-	<div id="tab-3" class="tab-content">
-		<!-- ACTIONS PAGE -->
-		<jsp:include page="../comp/salaryManagement.jsp"/>
 	</div>
 	
 </div><!-- container -->

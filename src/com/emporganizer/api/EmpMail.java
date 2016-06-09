@@ -34,7 +34,7 @@ public class EmpMail {
 		mimeMessage.setContent(htmlMessage, "text/html");
 		helper.setTo(address);
 		helper.setSubject(subject);
-		helper.setFrom("mail.gl.ke@gmail.com");
+		helper.setFrom("sovybank@gmail.com");
 		mailSender.send(mimeMessage);
 	}
 	
@@ -60,7 +60,7 @@ public class EmpMail {
 		if(subject != null){
 			this.subject = subject;
 		}				
-		helper.setFrom("emp.organizer@gmail.com");
+		helper.setFrom("sovybank@gmail.com");
 	}
 	
 	public void addAddress(String... address){
