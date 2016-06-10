@@ -26,7 +26,7 @@ html {
 body { 
   width: 1400px;
   display: block;
-  margin: 0;
+  margin: 0 auto;
 }
 
 /*LOGIN CSS*/
@@ -276,7 +276,7 @@ ul.tabs li.current{
     float: left;
     background: white;
     margin-top: 80px;   
-    margin-left: 30px;
+    margin-left: 10px;
     background-color:#dddddd;
 }
 
