@@ -12,7 +12,7 @@
 	<li class="sort">Email</li>
 	<li class="sort">Gender</li>
 	<li class="sort">At work</li>
-	<li>Delete</li>
+	<li>Manage</li>
 	</ul>
 	
 			<table id="employeesTab">
@@ -21,17 +21,32 @@
 				<c:if test="${!empty employees}">
 				<c:forEach items="${employees}" var="curEmployee">
 					<tr class="employee-row" data="${curEmployee.id}">
-						<td><div>${curEmployee.name}</div></td>
-						<td><div>${curEmployee.contact.email}</div></td>
 						<td>
-							<div><img src="${iconPath.concat(curEmployee.sex == 'FEMALE' ? 'woman.png' : 'man.png')}" alt="${curEmployee.sex}"/></div>
+							<div class="view-table">${curEmployee.name}</div>
+							<div class="edit-table" hidden>
+								<input name="firstname" value="${curEmployee.firstName}" size="10"/>
+								<input name="lastname" value="${curEmployee.lastName}" size="10"/>
+							</div>
+						</td>
+						<td>
+							<div class="view-table">${curEmployee.contact.email}</div>								
+							<div class="edit-table" hidden>
+								<input name="email" value="${curEmployee.contact.email}"/>
+							</div>
+						</td>
+						<td>
+							<div class="view-table"><img src="${iconPath.concat(curEmployee.sex == 'FEMALE' ? 'woman.png' : 'man.png')}" alt="${curEmployee.sex}"/></div>
+							<div class="edit-table" hidden>
+								<select name="sex">
+									<option class="female" value="Female" ${curEmployee.sex == 'FEMALE' ? 'selected' : ''} >FEMALE</option>
+									<option class="male" value="Male" ${curEmployee.sex == 'MALE' ? 'selected' : ''} >MALE</option>
+								</select>
+							</div>
 						</td>
 						<td class="status"><div><img src="${iconPath.concat('no.png')}" alt="NO"/></div></td>
-						<td class="delete-emp">
-							<div><img src="/EmployeeOrganizer/resources/asset/icon/deleteEmployee.png" alt="delete"></div>
-						</td>
-						<td class="openDialog" data='updatePage?id=${curEmployee.id}'>
-							<div><img src="/EmployeeOrganizer/resources/asset/icon/edit.png" alt="update"></div>
+						<td class="edit-delete">
+							<div class="delete-emp"><img src="/EmployeeOrganizer/resources/asset/icon/deleteEmployee.png" alt="delete"></div>
+							<div class="edit-emp"><img src="/EmployeeOrganizer/resources/asset/icon/edit-icon.png" alt="edit"></div>
 						</td>
 					</tr>
 					<tr class="employee-shifts">

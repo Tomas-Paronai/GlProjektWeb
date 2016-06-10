@@ -21,6 +21,8 @@
 <spring:url value="/resources/js/dialogManage.js" var="dialogJs"/>
 <script type="text/javascript" src="${dialogJs}"></script>
 
+
+
 </head>
 <body>
 	<ul class="items-list" data="${table}">
@@ -28,7 +30,7 @@
 		<c:forEach items="${items}" var="curItem">
 			<li>
 				<div class="item-display">
-					<label>${curItem.name}</label>
+					<label class="possItem">${curItem.name}</label>
 					<img class="editBut" alt="edit" src="/EmployeeOrganizer/resources/asset/icon/edit.png">
 					<img class="deleteBut" alt="delete" src="/EmployeeOrganizer/resources/asset/icon/delete.svg">
 				</div>

@@ -38,7 +38,10 @@
 
 
 <spring:url value="/resources/asset/icon/" var="iconPath"/>
+		
+
 </head>
+
 <body>
 
 <div class="group page-container">
@@ -63,48 +66,12 @@
 				<h2>Detail info</h2>
 				<h3>Address</h3>
 				<!-- ADDRESS -->
-				<table class="detailInfo">										
-					<tr>
-						<td class="cat-detail">Country:</td>
-						<td class="cat-value" data="country">-</td>
-					</tr>
-					<tr>
-						<td class="cat-detail">City:</td>
-						<td class="cat-value" data="city">-</td>
-					</tr>
-					<tr>
-						<td class="cat-detail">Street:</td>
-						<td class="cat-value" data="street">-</td>
-					</tr>
-					<tr>
-						<td class="cat-detail">Post-code:</td>
-						<td class="cat-value" data="postcode">-</td>
-					</tr>
-					</table>
-					<h3>Employment detail</h3>
-					<!-- EMPLOYMENT DETAIL -->
-					<table class="detailInfo">
-					<tr>
-						<td class="category" colspan="2"></td>
-					</tr>
-					<tr>
-						<td class="cat-detail">Position:</td>
-						<td class="cat-value" data="position">-</td>
-					</tr>
-					<tr>
-						<td class="cat-detail">Contract:</td>
-						<td class="cat-value" data="contract">-</td>
-					</tr>
-					<tr>
-						<td class="cat-detail">Wage/h:</td>
-						<td class="cat-value" data="salary">- $</td>
-					</tr>
-					<tr>
-						<td class="cat-detail">Employed since:</td>
-						<td class="cat-value" data="employed-since">-</td>
-					</tr>
-					
-				</table>
+				<div class="view">
+					<jsp:include page="../comp/info_display.jsp"/>
+				</div>
+				<div class="edit" hidden>					
+					<jsp:include page="../comp/info_edit.jsp"/>
+				</div>
 			</div>		
 		</div>
 	</div>

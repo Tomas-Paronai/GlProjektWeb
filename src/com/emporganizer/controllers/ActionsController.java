@@ -27,6 +27,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.emporganizer.api.EmpMail;
+import com.emporganizer.api.beans.EmployeeBean;
 import com.emporganizer.api.beans.SelectedEmp;
 import com.emporganizer.dao.employee.EmployeeDAO;
 import com.emporganizer.dao.items.ItemDAO;
@@ -68,7 +69,7 @@ public class ActionsController {
 		//TODO toast message about succession & fail
 		try {
 			System.out.println("Sending mails....");
-			empMail.newMessage(mailFormBean.getSubject(), mailFormBean.getMessage(), recipents);
+			empMail.sendMail(mailFormBean.getSubject(), mailFormBean.getMessage(), recipents);
 			System.out.println("Success!");
 		} catch (MessagingException e) {
 			e.printStackTrace();
@@ -188,6 +189,20 @@ public class ActionsController {
 			}
 		}	
 		
-		return "redirect: /home";
+		return "redirect:/home";
 	}
+	
+	@RequestMapping(value = "/insert", method = RequestMethod.GET)
+	public String insertEmployee(ModelMap model){
+		model.addAttribute("positions", itemDAO.getItems("position"));
+		model.addAttribute("contracts", itemDAO.getItems("contract"));
+		model.addAttribute("employeeBean", new EmployeeBean());
+		return "pages/dialog/insert";
+	}
+	
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
+	public String insertEmployee(@ModelAttribute("employeeBean") EmployeeBean employeeBean){
+		employeeDAO.insertEmployee(Employee.parseEmployee(employeeBean));
+		return "redirect:/home";
+	} 
 }
