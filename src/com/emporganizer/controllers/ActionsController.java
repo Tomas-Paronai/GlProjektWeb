@@ -121,7 +121,7 @@ public class ActionsController {
 		try {
 	        ServletContext context = request.getServletContext();
 	        String appPath = context.getRealPath("");
-	        File dir = new File(appPath + File.separator + "imports");
+	        File dir = new File(appPath + File.separator + "exports");
 	        if(!dir.exists()){
 	        	dir.mkdir();
 	        }
