@@ -45,8 +45,8 @@
 			</td>
 			<td>
 			<div class="action-bg">
-				<img src="">
-				<button class="openDialog" data="insert">New employee</button>
+				<img src="/EmployeeOrganizer/resources/asset/img/actions/insert.jpg">
+				<button class="openDialog" data="insert">Insert</button>
 			</div>
 			</td>
 		</tr>
